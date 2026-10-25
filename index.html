@@ -3,27 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dream Interiors & Traders | Luxury Construction & Interiors in Telangana</title>
-  <meta name="description" content="Turnkey construction, 3D architectural plans, and luxury uPVC modular interiors across Telangana.">
+  <title>Dream Interiors & Traders | Construction & Interior Designers in Karimnagar, Telangana</title>
+  <meta name="description" content="From planning and design to construction and uPVC interiors, Dream Interiors & Traders delivers complete projects across Telangana.">
   
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Spline 3D Interactive WebGL Engine -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"></script>
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brandDark: '#0e0620',
-            brandDarker: '#070212',
-            brandCard: 'rgba(20, 9, 44, 0.7)',
+            brandDark: '#0b0416',
+            brandDarker: '#06020c',
+            brandCard: 'rgba(23, 10, 48, 0.75)',
             brandGold: '#fdb813',
             brandGoldHover: '#e5a50b',
-            brandPurple: '#23104e',
+            brandPurple: '#220e4b',
             brandBorder: 'rgba(253, 184, 19, 0.25)'
           },
           fontFamily: {
@@ -37,74 +40,49 @@
 
   <style>
     body {
-      background-color: #070212;
+      background-color: #06020c;
       color: #f1f1f7;
-      overflow-x: hidden;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
     }
     .glass-card {
-      background: rgba(18, 8, 38, 0.72);
+      background: rgba(20, 8, 42, 0.75);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(253, 184, 19, 0.18);
+      border: 1px solid rgba(253, 184, 19, 0.2);
     }
     .glass-card:hover {
       border-color: rgba(253, 184, 19, 0.6);
-      box-shadow: 0 10px 30px -10px rgba(253, 184, 19, 0.25);
+      box-shadow: 0 12px 35px -10px rgba(253, 184, 19, 0.3);
     }
     .gold-glow {
-      box-shadow: 0 0 25px rgba(253, 184, 19, 0.35);
+      box-shadow: 0 0 25px rgba(253, 184, 19, 0.4);
     }
     .text-glow {
-      text-shadow: 0 0 20px rgba(253, 184, 19, 0.4);
+      text-shadow: 0 0 20px rgba(253, 184, 19, 0.45);
     }
     .page-section {
       display: none;
-      animation: fadeIn 0.4s ease-out forwards;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     .page-section.active {
       display: block;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* 3D Viewport Styling */
-    #canvas3d-wrapper {
-      position: relative;
+    spline-viewer {
       width: 100%;
-      height: 520px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid rgba(253, 184, 19, 0.3);
-      background: radial-gradient(circle at 50% 40%, #200f45 0%, #080315 80%);
-    }
-    #webgl-canvas {
-      width: 100% !important;
-      height: 100% !important;
+      height: 100%;
       outline: none;
-      cursor: grab;
     }
-    #webgl-canvas:active {
-      cursor: grabbing;
-    }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #070212; }
-    ::-webkit-scrollbar-thumb { background: #23104e; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #fdb813; }
   </style>
-
-  <!-- Three.js + GLTFLoader + OrbitControls + RoomEnvironment -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 
 <body class="selection:bg-brandGold selection:text-brandDark">
 
-  <!-- TOP BAR -->
+  <!-- TOP STRIP -->
   <div class="bg-brandDarker border-b border-white/10 text-xs py-2 px-4 relative z-50">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
       <div class="flex items-center space-x-6 text-gray-300">
@@ -123,11 +101,10 @@
   </div>
 
   <!-- NAVIGATION -->
-  <nav class="sticky top-0 z-40 bg-brandDark/90 backdrop-blur-md border-b border-brandGold/20">
+  <nav class="sticky top-0 z-40 bg-brandDark/95 backdrop-blur-md border-b border-brandGold/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
-        <!-- Logo -->
         <a href="#" onclick="switchPage('home')" class="flex items-center gap-3">
           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brandPurple to-brandDark border border-brandGold flex items-center justify-center shadow-lg">
             <span class="text-2xl font-black text-brandGold font-display">D</span>
@@ -142,7 +119,6 @@
           </div>
         </a>
 
-        <!-- Desktop Links -->
         <div class="hidden lg:flex items-center space-x-1">
           <button onclick="switchPage('home')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-brandGold font-bold" data-page="home">Home</button>
           <button onclick="switchPage('about')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="about">About Us</button>
@@ -166,7 +142,6 @@
       </div>
     </div>
 
-    <!-- Mobile Nav -->
     <div id="mobile-menu" class="hidden lg:hidden bg-brandDarker border-b border-brandGold/30 px-4 pt-2 pb-6 space-y-2">
       <button onclick="switchPage('home')" class="block w-full text-left px-3 py-2 text-base font-medium text-white hover:bg-brandPurple rounded-lg">Home</button>
       <button onclick="switchPage('about')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:bg-brandPurple rounded-lg">About Us</button>
@@ -184,11 +159,11 @@
     <!-- ================= PAGE 1: HOME ================= -->
     <section id="page-home" class="page-section active">
       
-      <!-- HERO -->
-      <div class="pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- HERO WITH REALISTIC 3D SPLINE SCENE -->
+      <div class="pt-10 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          <!-- Text Col -->
+          <!-- Content Left -->
           <div class="lg:col-span-6 space-y-6">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brandGold/40 bg-brandDark/80">
               <span class="w-2 h-2 rounded-full bg-brandGold animate-pulse"></span>
@@ -199,7 +174,7 @@
               From Planning to <span class="text-brandGold text-glow">Construction</span> to Interior Complete Project
             </h1>
 
-            <p class="text-lg text-gray-300 font-normal leading-relaxed">
+            <p class="text-base sm:text-lg text-gray-300 font-normal leading-relaxed">
               We design, plan and build beautiful and functional spaces for homes and commercial spaces across Telangana.
             </p>
 
@@ -213,38 +188,27 @@
             </div>
 
             <div class="pt-4 flex flex-wrap items-center gap-6 text-sm text-gray-400">
-              <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-brandGold"></i> Single Turnkey Team</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-brandGold"></i> Complete Turnkey</div>
               <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-brandGold"></i> 100% uPVC Mastery</div>
               <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-brandGold"></i> Clear Pricing</div>
             </div>
           </div>
 
-          <!-- REALISTIC 3D VIEWPORT -->
+          <!-- REALISTIC 3D ARCHITECTURAL ROOM (INTERACTIVE SPLINE) -->
           <div class="lg:col-span-6">
-            <div id="canvas3d-wrapper" class="relative shadow-2xl">
+            <div class="relative w-full h-[520px] rounded-3xl overflow-hidden border-2 border-brandGold/40 shadow-2xl bg-gradient-to-br from-[#1b0a3d] to-[#080214]">
               
-              <!-- WebGL Canvas -->
-              <canvas id="webgl-canvas"></canvas>
+              <!-- Real 3D Spline Interactive Room -->
+              <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
 
-              <!-- Loading Indicator -->
-              <div id="model-loader" class="absolute inset-0 bg-brandDark/90 flex flex-col items-center justify-center gap-3 z-20 transition-opacity duration-500">
-                <div class="w-12 h-12 border-4 border-brandGold/30 border-t-brandGold rounded-full animate-spin"></div>
-                <span class="text-xs font-semibold text-brandGold tracking-wider uppercase font-mono">Loading Realistic 3D Furniture...</span>
-              </div>
-
-              <!-- Interactive Floating Guide Tag -->
-              <div class="absolute top-4 left-4 z-10 glass-card px-3 py-1.5 rounded-full flex items-center gap-2 border border-brandGold/30 text-xs">
+              <!-- Floating Control Helper Tag -->
+              <div class="absolute top-4 left-4 pointer-events-none glass-card px-3.5 py-1.5 rounded-full flex items-center gap-2 border border-brandGold/40 text-xs">
                 <i class="fa-solid fa-hand-pointer text-brandGold animate-bounce"></i>
-                <span class="text-gray-200 font-medium">360° Drag & Zoom Model</span>
+                <span class="text-white font-semibold">Interactive 3D Room • Drag & Rotate</span>
               </div>
 
-              <div class="absolute bottom-4 right-4 z-10 flex gap-2">
-                <button onclick="resetCameraView()" class="px-3 py-1.5 bg-black/60 hover:bg-black/80 text-white rounded-lg border border-white/20 text-xs font-semibold backdrop-blur-md transition">
-                  <i class="fa-solid fa-rotate-left mr-1"></i> Reset View
-                </button>
-                <button onclick="toggleAutoRotate()" id="rotate-toggle-btn" class="px-3 py-1.5 bg-brandGold text-brandDark rounded-lg font-bold text-xs shadow-md transition">
-                  <i class="fa-solid fa-pause mr-1"></i> Auto-Rotate
-                </button>
+              <div class="absolute bottom-4 right-4 pointer-events-none glass-card px-3 py-1 rounded-lg border border-white/10 text-[11px] text-gray-300">
+                <i class="fa-solid fa-cube text-brandGold mr-1"></i> Photorealistic WebGL 3D
               </div>
 
             </div>
@@ -263,7 +227,7 @@
             </div>
             <div class="flex-1 p-2 border-r border-white/10">
               <span class="block text-brandGold font-bold text-sm">3D Design</span>
-              <span class="text-xs text-gray-400">Photorealistic Visuals</span>
+              <span class="text-xs text-gray-400">Realistic Visuals</span>
             </div>
             <div class="flex-1 p-2 border-r border-white/10">
               <span class="block text-brandGold font-bold text-sm">Elevations</span>
@@ -359,49 +323,13 @@
               <div class="glass-card p-8 rounded-3xl border border-brandGold/40">
                 <i class="fa-solid fa-kitchen-set text-5xl text-brandGold mb-4 block"></i>
                 <h3 class="text-xl font-bold font-display mb-2">Modern Modular Living</h3>
-                <p class="text-xs text-gray-300 mb-6">జీవితాంతం చెదలు, నీటి తేమ సమస్య లేకుండా సరికొత్త లుక్ ఇచ్చే ప్రీమియం uPVC ఇంటీరియర్స్.</p>
+                <p class="text-xs text-gray-300 mb-6">జీవితాంతం చెదలు, తేమ సమస్య లేకుండా సరికొత్త లుక్ ఇచ్చే ప్రీమియం uPVC ఇంటీరియర్స్.</p>
                 <button onclick="openEnquiryModal('uPVC Modular Solutions')" class="w-full py-3.5 bg-brandGold text-brandDark font-bold rounded-xl text-sm gold-glow">
                   Enquire About uPVC
                 </button>
               </div>
             </div>
 
-          </div>
-        </div>
-      </div>
-
-      <!-- RECENT PROJECTS PREVIEW -->
-      <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-end mb-12">
-          <div>
-            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Our Portfolio</span>
-            <h2 class="text-3xl font-extrabold font-display mt-2">Recent Projects</h2>
-          </div>
-          <button onclick="switchPage('projects')" class="text-brandGold hover:underline text-sm font-semibold">
-            View All <i class="fa-solid fa-arrow-right ml-1"></i>
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="glass-card rounded-2xl overflow-hidden p-5">
-            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Hyderabad</span>
-            <h4 class="font-bold text-lg mt-3">Modern Villa</h4>
-            <p class="text-xs text-gray-400 mt-1">Full civil construction and modern 3D exterior elevation.</p>
-          </div>
-          <div class="glass-card rounded-2xl overflow-hidden p-5">
-            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Karimnagar</span>
-            <h4 class="font-bold text-lg mt-3">Modular Kitchen</h4>
-            <p class="text-xs text-gray-400 mt-1">Complete waterproof uPVC cabinetry with quartz counter.</p>
-          </div>
-          <div class="glass-card rounded-2xl overflow-hidden p-5">
-            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Sircilla</span>
-            <h4 class="font-bold text-lg mt-3">Bedroom Interior</h4>
-            <p class="text-xs text-gray-400 mt-1">Floor-to-ceiling sliding wardrobe and warm LED lighting.</p>
-          </div>
-          <div class="glass-card rounded-2xl overflow-hidden p-5">
-            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Hyderabad</span>
-            <h4 class="font-bold text-lg mt-3">Luxury TV Unit</h4>
-            <p class="text-xs text-gray-400 mt-1">Acoustic louvers with backlit marble composite backboard.</p>
           </div>
         </div>
       </div>
@@ -662,129 +590,8 @@
     <p class="mt-1">Karimnagar | Gangadhara | Sircilla | Hyderabad</p>
   </footer>
 
-  <!-- ================= REALISTIC 3D ENGINE (GLTF + PBR LIGHTING + ORBIT CONTROLS) ================= -->
+  <!-- SCRIPT -->
   <script>
-    let scene, camera, renderer, controls, modelGroup;
-    let autoRotate = true;
-
-    function initRealistic3D() {
-      const container = document.getElementById('canvas3d-wrapper');
-      const canvas = document.getElementById('webgl-canvas');
-
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-
-      // 1. Scene Setup
-      scene = new THREE.Scene();
-
-      // 2. Camera Setup
-      camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 50);
-      camera.position.set(2.2, 1.4, 2.5);
-
-      // 3. Renderer with Tone Mapping & Physical Accurate Lighting
-      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.25;
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-      // 4. Photorealistic Environment Generator (Room Environment for Reflections)
-      const pmremGenerator = new THREE.PMREMGenerator(renderer);
-      scene.environment = pmremGenerator.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
-
-      // 5. Studio Directional & Spotlight (Matching your Brand Gold Spotlight!)
-      const goldSpot = new THREE.SpotLight(0xfdb813, 2.5);
-      goldSpot.position.set(0, 4, 1);
-      goldSpot.angle = Math.PI / 4;
-      goldSpot.penumbra = 0.8;
-      goldSpot.castShadow = true;
-      scene.add(goldSpot);
-
-      const softFill = new THREE.DirectionalLight(0x9d71ff, 1.2);
-      softFill.position.set(-3, 2, -2);
-      scene.add(softFill);
-
-      // 6. Realistic Orbit Controls (Customer can orbit around 360, pinch zoom, pan)
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.05;
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 1.8;
-      controls.maxPolarAngle = Math.PI / 2 + 0.05; // don't go below floor
-      controls.minDistance = 1.2;
-      controls.maxDistance = 5;
-
-      // 7. Load Real Photorealistic Furniture Model (Khronos Sheen Luxury Chair .GLB)
-      const loader = new THREE.GLTFLoader();
-      const modelUrl = 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SheenChair/glTF-Binary/SheenChair.glb';
-
-      loader.load(
-        modelUrl,
-        function (gltf) {
-          modelGroup = gltf.scene;
-          modelGroup.scale.set(2.2, 2.2, 2.2);
-          modelGroup.position.set(0, -0.65, 0);
-
-          modelGroup.traverse(child => {
-            if (child.isMesh) {
-              child.castShadow = true;
-              child.receiveShadow = true;
-            }
-          });
-
-          scene.add(modelGroup);
-
-          // Hide Loader once model is loaded
-          const loaderElem = document.getElementById('model-loader');
-          if (loaderElem) {
-            loaderElem.style.opacity = '0';
-            setTimeout(() => loaderElem.remove(), 500);
-          }
-        },
-        undefined,
-        function (error) {
-          console.error("Error loading model, fallback rendering:", error);
-          document.getElementById('model-loader').innerHTML = '<span class="text-xs text-red-400">Loading Error. Please refresh.</span>';
-        }
-      );
-
-      // Resize event
-      window.addEventListener('resize', onWindowResize);
-
-      // Render Loop
-      function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-      }
-      animate();
-    }
-
-    function onWindowResize() {
-      const container = document.getElementById('canvas3d-wrapper');
-      if (!container) return;
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-    }
-
-    function toggleAutoRotate() {
-      autoRotate = !autoRotate;
-      controls.autoRotate = autoRotate;
-      const btn = document.getElementById('rotate-toggle-btn');
-      btn.innerHTML = autoRotate ? '<i class="fa-solid fa-pause mr-1"></i> Auto-Rotate' : '<i class="fa-solid fa-play mr-1"></i> Auto-Rotate';
-    }
-
-    function resetCameraView() {
-      gsap.to(camera.position, { x: 2.2, y: 1.4, z: 2.5, duration: 1 });
-      controls.target.set(0, 0, 0);
-    }
-
-    // Navigation & Forms
     function switchPage(pageId) {
       document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
       const activeP = document.getElementById(`page-${pageId}`);
@@ -823,8 +630,6 @@
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
-
-    window.addEventListener('DOMContentLoaded', initRealistic3D);
   </script>
 </body>
 </html>
