@@ -1,19 +1,16 @@
-
-```html
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dream Interiors & Traders | Construction & Interior Designers in Karimnagar, Telangana</title>
-  <meta name="description" content="From planning and design to construction and uPVC interiors, Dream Interiors & Traders delivers complete projects across Telangana. Book a free site visit today.">
+  <title>Dream Interiors & Traders | Luxury Construction & Interiors in Telangana</title>
+  <meta name="description" content="Turnkey construction, 3D architectural plans, and luxury uPVC modular interiors across Telangana.">
   
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
@@ -21,12 +18,12 @@
       theme: {
         extend: {
           colors: {
-            brandDark: '#12092b',
-            brandDarker: '#0a0418',
-            brandCard: 'rgba(26, 14, 58, 0.75)',
+            brandDark: '#0e0620',
+            brandDarker: '#070212',
+            brandCard: 'rgba(20, 9, 44, 0.7)',
             brandGold: '#fdb813',
             brandGoldHover: '#e5a50b',
-            brandPurple: '#24124e',
+            brandPurple: '#23104e',
             brandBorder: 'rgba(253, 184, 19, 0.25)'
           },
           fontFamily: {
@@ -40,15 +37,15 @@
 
   <style>
     body {
-      background-color: #0d0520;
+      background-color: #070212;
       color: #f1f1f7;
       overflow-x: hidden;
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .glass-card {
-      background: rgba(22, 10, 48, 0.65);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(18, 8, 38, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(253, 184, 19, 0.18);
     }
     .glass-card:hover {
@@ -56,81 +53,98 @@
       box-shadow: 0 10px 30px -10px rgba(253, 184, 19, 0.25);
     }
     .gold-glow {
-      box-shadow: 0 0 25px rgba(253, 184, 19, 0.45);
+      box-shadow: 0 0 25px rgba(253, 184, 19, 0.35);
     }
     .text-glow {
       text-shadow: 0 0 20px rgba(253, 184, 19, 0.4);
     }
-    #three-canvas-container canvas {
-      pointer-events: auto;
-      touch-action: none;
-    }
     .page-section {
       display: none;
-      animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.4s ease-out forwards;
     }
     .page-section.active {
       display: block;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* Custom Scrollbar */
+    /* 3D Viewport Styling */
+    #canvas3d-wrapper {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(253, 184, 19, 0.3);
+      background: radial-gradient(circle at 50% 40%, #200f45 0%, #080315 80%);
+    }
+    #webgl-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      outline: none;
+      cursor: grab;
+    }
+    #webgl-canvas:active {
+      cursor: grabbing;
+    }
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0c051f; }
-    ::-webkit-scrollbar-thumb { background: #2f1766; border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: #070212; }
+    ::-webkit-scrollbar-thumb { background: #23104e; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #fdb813; }
   </style>
 
-  <!-- Three.js & GSAP -->
+  <!-- Three.js + GLTFLoader + OrbitControls + RoomEnvironment -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 
 <body class="selection:bg-brandGold selection:text-brandDark">
 
-  <!-- ================= TOP CONTACT BAR ================= -->
+  <!-- TOP BAR -->
   <div class="bg-brandDarker border-b border-white/10 text-xs py-2 px-4 relative z-50">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
       <div class="flex items-center space-x-6 text-gray-300">
         <span><i class="fa-solid fa-location-dot text-brandGold mr-2"></i>Karimnagar | Gangadhara | Sircilla | Hyderabad</span>
-        <span class="hidden md:inline"><i class="fa-solid fa-clock text-brandGold mr-2"></i>Mon - Sun (Free Site Visit across Telangana)</span>
+        <span class="hidden md:inline"><i class="fa-solid fa-clock text-brandGold mr-2"></i>Free Site Visit across Telangana</span>
       </div>
       <div class="flex items-center space-x-4">
         <a href="tel:9603219786" class="text-white hover:text-brandGold transition font-semibold flex items-center gap-1">
           <i class="fa-solid fa-phone text-brandGold"></i> 96032 19786
         </a>
-        <a href="https://wa.me/919603219786" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-2.5 py-0.5 rounded-full flex items-center gap-1 font-medium text-[11px] transition">
+        <a href="https://wa.me/919603219786" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-3 py-0.5 rounded-full flex items-center gap-1 font-medium text-[11px] transition">
           <i class="fa-brands fa-whatsapp"></i> Chat Now
         </a>
       </div>
     </div>
   </div>
 
-  <!-- ================= NAVIGATION ================= -->
-  <nav class="sticky top-0 z-40 bg-brandDark/90 backdrop-blur-md border-b border-brandGold/20 transition-all duration-300">
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-40 bg-brandDark/90 backdrop-blur-md border-b border-brandGold/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
-        <!-- Logo Area with Brand Identity -->
-        <a href="#" onclick="switchPage('home')" class="flex items-center gap-3 group">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brandPurple to-brandDarker border border-brandGold flex items-center justify-center shadow-lg group-hover:scale-105 transition transform">
+        <!-- Logo -->
+        <a href="#" onclick="switchPage('home')" class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brandPurple to-brandDark border border-brandGold flex items-center justify-center shadow-lg">
             <span class="text-2xl font-black text-brandGold font-display">D</span>
             <i class="fa-solid fa-couch text-white text-xs -ml-1"></i>
           </div>
           <div>
             <div class="flex items-baseline">
               <span class="text-2xl font-black tracking-tight font-display text-white">Dream</span>
-              <span class="text-xs uppercase ml-1.5 px-1.5 py-0.5 rounded bg-brandGold text-brandDark font-extrabold tracking-wider">3D Real</span>
+              <span class="text-[10px] uppercase ml-2 px-1.5 py-0.5 rounded bg-brandGold text-brandDark font-extrabold tracking-wider">3D Realistic</span>
             </div>
             <p class="text-[10px] uppercase tracking-widest text-brandGold font-bold">Interiors & Traders</p>
           </div>
         </a>
 
-        <!-- Desktop Nav Links -->
+        <!-- Desktop Links -->
         <div class="hidden lg:flex items-center space-x-1">
-          <button onclick="switchPage('home')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-white hover:text-brandGold" data-page="home">Home</button>
+          <button onclick="switchPage('home')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-brandGold font-bold" data-page="home">Home</button>
           <button onclick="switchPage('about')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="about">About Us</button>
           <button onclick="switchPage('services')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="services">Services</button>
           <button onclick="switchPage('process')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="process">Our Process</button>
@@ -138,14 +152,12 @@
           <button onclick="switchPage('contact')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="contact">Contact</button>
         </div>
 
-        <!-- CTA Action -->
         <div class="hidden sm:flex items-center gap-3">
-          <button onclick="openEnquiryModal('Free Site Visit')" class="bg-gradient-to-r from-brandGold to-amber-500 hover:from-amber-400 hover:to-brandGold text-brandDark font-bold px-5 py-2.5 rounded-xl shadow-lg gold-glow hover:scale-105 active:scale-95 transition transform text-sm flex items-center gap-2">
+          <button onclick="openEnquiryModal('Free Site Visit')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-5 py-2.5 rounded-xl shadow-lg gold-glow hover:scale-105 active:scale-95 transition text-sm flex items-center gap-2">
             <i class="fa-solid fa-compass-drafting"></i> Free Site Visit
           </button>
         </div>
 
-        <!-- Mobile Menu Hamburger -->
         <div class="lg:hidden flex items-center">
           <button id="mobile-menu-btn" class="text-white hover:text-brandGold p-2">
             <i class="fa-solid fa-bars text-xl"></i>
@@ -154,7 +166,7 @@
       </div>
     </div>
 
-    <!-- Mobile Navigation Dropdown -->
+    <!-- Mobile Nav -->
     <div id="mobile-menu" class="hidden lg:hidden bg-brandDarker border-b border-brandGold/30 px-4 pt-2 pb-6 space-y-2">
       <button onclick="switchPage('home')" class="block w-full text-left px-3 py-2 text-base font-medium text-white hover:bg-brandPurple rounded-lg">Home</button>
       <button onclick="switchPage('about')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:bg-brandPurple rounded-lg">About Us</button>
@@ -166,25 +178,19 @@
     </div>
   </nav>
 
-  <!-- ================= 3D CANVAS BACKGROUND ================= -->
-  <div class="fixed inset-0 pointer-events-none z-0 opacity-80" id="three-canvas-container">
-    <canvas id="webgl-canvas" class="w-full h-full"></canvas>
-  </div>
-
-  <!-- Content Holder -->
+  <!-- MAIN CONTAINER -->
   <main class="relative z-10 min-h-screen">
 
-    <!-- ============================================================= -->
-    <!-- PAGE 1: HOME -->
-    <!-- ============================================================= -->
+    <!-- ================= PAGE 1: HOME ================= -->
     <section id="page-home" class="page-section active">
       
-      <!-- HERO SECTION -->
-      <div class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <!-- HERO -->
+      <div class="pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div class="lg:col-span-7 space-y-6">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brandGold/40 bg-brandDark/80 backdrop-blur-md">
+          <!-- Text Col -->
+          <div class="lg:col-span-6 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brandGold/40 bg-brandDark/80">
               <span class="w-2 h-2 rounded-full bg-brandGold animate-pulse"></span>
               <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Constructions & Interiors</span>
             </div>
@@ -193,58 +199,54 @@
               From Planning to <span class="text-brandGold text-glow">Construction</span> to Interior Complete Project
             </h1>
 
-            <p class="text-lg sm:text-xl text-gray-300 font-normal max-w-2xl leading-relaxed">
+            <p class="text-lg text-gray-300 font-normal leading-relaxed">
               We design, plan and build beautiful and functional spaces for homes and commercial spaces across Telangana.
             </p>
 
             <div class="flex flex-wrap gap-4 pt-2">
-              <button onclick="openEnquiryModal('Hero Enquiry')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-4 rounded-xl text-base shadow-xl gold-glow hover:scale-105 active:scale-95 transition transform flex items-center gap-3">
+              <button onclick="openEnquiryModal('Hero Enquiry')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-4 rounded-xl text-base shadow-xl gold-glow hover:scale-105 active:scale-95 transition flex items-center gap-3">
                 <i class="fa-solid fa-paper-plane"></i> Enquiry Now
               </button>
-              <button onclick="switchPage('projects')" class="bg-brandDark/80 hover:bg-brandPurple border border-brandGold/40 text-white font-semibold px-8 py-4 rounded-xl text-base hover:border-brandGold transition flex items-center gap-2 backdrop-blur-sm">
+              <button onclick="switchPage('projects')" class="bg-white/5 hover:bg-white/10 border border-brandGold/40 text-white font-semibold px-8 py-4 rounded-xl text-base hover:border-brandGold transition flex items-center gap-2">
                 <i class="fa-solid fa-eye text-brandGold"></i> View Our Projects
               </button>
             </div>
 
-            <div class="pt-4 flex items-center gap-6 text-sm text-gray-400">
-              <div class="flex items-center gap-2">
-                <i class="fa-solid fa-check-circle text-brandGold"></i> No Multiple Contractors
-              </div>
-              <div class="flex items-center gap-2">
-                <i class="fa-solid fa-check-circle text-brandGold"></i> 100% uPVC Mastery
-              </div>
-              <div class="flex items-center gap-2">
-                <i class="fa-solid fa-check-circle text-brandGold"></i> Transparent Quotes
-              </div>
+            <div class="pt-4 flex flex-wrap items-center gap-6 text-sm text-gray-400">
+              <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-brandGold"></i> Single Turnkey Team</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-brandGold"></i> 100% uPVC Mastery</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-brandGold"></i> Clear Pricing</div>
             </div>
           </div>
 
-          <!-- 3D Interactive Helper Box -->
-          <div class="lg:col-span-5 relative flex justify-center">
-            <div class="glass-card p-6 rounded-3xl w-full max-w-md relative overflow-hidden border border-brandGold/30">
-              <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-                <div class="flex items-center gap-2">
-                  <i class="fa-solid fa-cube text-brandGold text-lg animate-spin" style="animation-duration: 8s;"></i>
-                  <span class="text-xs uppercase font-bold tracking-wider text-white">Live 3D Architectural Scene</span>
-                </div>
-                <span class="text-[11px] bg-brandGold/20 text-brandGold px-2 py-0.5 rounded font-mono">Interactive</span>
+          <!-- REALISTIC 3D VIEWPORT -->
+          <div class="lg:col-span-6">
+            <div id="canvas3d-wrapper" class="relative shadow-2xl">
+              
+              <!-- WebGL Canvas -->
+              <canvas id="webgl-canvas"></canvas>
+
+              <!-- Loading Indicator -->
+              <div id="model-loader" class="absolute inset-0 bg-brandDark/90 flex flex-col items-center justify-center gap-3 z-20 transition-opacity duration-500">
+                <div class="w-12 h-12 border-4 border-brandGold/30 border-t-brandGold rounded-full animate-spin"></div>
+                <span class="text-xs font-semibold text-brandGold tracking-wider uppercase font-mono">Loading Realistic 3D Furniture...</span>
               </div>
-              <p class="text-xs text-gray-300 mb-4 leading-relaxed">
-                Mouse ని move చేయండి లేదా touch చేసి డ్రాగ్ చేయండి. మన వెబ్‌సైట్ వెనుక ఉన్న 3D లగ్జరీ ఇంటీరియర్ ఆర్మ్‌చైర్ మరియు లైట్ రియల్-టైమ్‌లో రెస్పాండ్ అవుతాయి!
-              </p>
-              <div class="grid grid-cols-2 gap-2 text-center text-xs font-semibold">
-                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                  <i class="fa-solid fa-arrows-up-down-left-right text-brandGold block mb-1"></i>
-                  Rotate & Pan Camera
-                </div>
-                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                  <i class="fa-solid fa-lightbulb text-brandGold block mb-1"></i>
-                  Dynamic Spotlight
-                </div>
+
+              <!-- Interactive Floating Guide Tag -->
+              <div class="absolute top-4 left-4 z-10 glass-card px-3 py-1.5 rounded-full flex items-center gap-2 border border-brandGold/30 text-xs">
+                <i class="fa-solid fa-hand-pointer text-brandGold animate-bounce"></i>
+                <span class="text-gray-200 font-medium">360° Drag & Zoom Model</span>
               </div>
-              <button onclick="toggle3DAnimationState()" id="anim-toggle-btn" class="mt-4 w-full py-2 rounded-lg bg-brandPurple hover:bg-brandPurple/80 text-xs font-semibold text-brandGold border border-brandGold/30 transition">
-                <i class="fa-solid fa-pause mr-1"></i> Pause 3D Gentle Orbit
-              </button>
+
+              <div class="absolute bottom-4 right-4 z-10 flex gap-2">
+                <button onclick="resetCameraView()" class="px-3 py-1.5 bg-black/60 hover:bg-black/80 text-white rounded-lg border border-white/20 text-xs font-semibold backdrop-blur-md transition">
+                  <i class="fa-solid fa-rotate-left mr-1"></i> Reset View
+                </button>
+                <button onclick="toggleAutoRotate()" id="rotate-toggle-btn" class="px-3 py-1.5 bg-brandGold text-brandDark rounded-lg font-bold text-xs shadow-md transition">
+                  <i class="fa-solid fa-pause mr-1"></i> Auto-Rotate
+                </button>
+              </div>
+
             </div>
           </div>
 
@@ -252,16 +254,16 @@
       </div>
 
       <!-- QUICK STRIP -->
-      <div class="border-y border-brandGold/20 bg-brandDarker/80 backdrop-blur-md py-6">
+      <div class="border-y border-brandGold/20 bg-brandDarker py-6">
         <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
-          <div class="flex justify-between items-center min-w-[750px] gap-4 text-center">
+          <div class="flex justify-between items-center min-w-[720px] gap-4 text-center">
             <div class="flex-1 p-2 border-r border-white/10">
               <span class="block text-brandGold font-bold text-sm">2D Plans</span>
               <span class="text-xs text-gray-400">Accurate & Detailed</span>
             </div>
             <div class="flex-1 p-2 border-r border-white/10">
               <span class="block text-brandGold font-bold text-sm">3D Design</span>
-              <span class="text-xs text-gray-400">Realistic Visuals</span>
+              <span class="text-xs text-gray-400">Photorealistic Visuals</span>
             </div>
             <div class="flex-1 p-2 border-r border-white/10">
               <span class="block text-brandGold font-bold text-sm">Elevations</span>
@@ -284,186 +286,82 @@
         <div class="text-center max-w-3xl mx-auto mb-16">
           <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/20">All Under One Roof</span>
           <h2 class="text-3xl sm:text-4xl font-extrabold font-display mt-4">Complete Solutions for Your Space</h2>
-          <p class="text-gray-300 mt-4 leading-relaxed">
-            Whether you are building a new home, renovating a space or designing the interiors of an office, you do not need to deal with many different contractors. Dream Interiors & Traders brings planning, construction and interiors under one roof, so your project stays coordinated from the first sketch to the final handover.
+          <p class="text-gray-300 mt-4 leading-relaxed text-sm sm:text-base">
+            Whether you are building a new home, renovating a space or designing the interiors of an office, you do not need to deal with many different contractors. Dream Interiors & Traders brings planning, construction and interiors under one roof.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Card 1 -->
-          <div class="glass-card rounded-2xl p-8 transition transform hover:-translate-y-2 relative overflow-hidden group">
-            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6 group-hover:bg-brandGold group-hover:text-brandDark transition duration-300">
+          <div class="glass-card rounded-2xl p-8 hover:-translate-y-2 transition duration-300">
+            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6">
               <i class="fa-solid fa-pen-ruler"></i>
             </div>
             <h3 class="text-2xl font-bold mb-3 font-display">Planning & Design</h3>
             <p class="text-sm text-gray-300 leading-relaxed mb-6">
               2D accurate floor plans, structural layouts, photorealistic 3D elevations, space planning and interior walkthrough animations.
             </p>
-            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition">
+            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 hover:translate-x-1 transition">
               View Details <i class="fa-solid fa-arrow-right text-xs"></i>
             </button>
           </div>
 
-          <!-- Card 2 -->
-          <div class="glass-card rounded-2xl p-8 transition transform hover:-translate-y-2 relative overflow-hidden group border-brandGold/50">
-            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6 group-hover:bg-brandGold group-hover:text-brandDark transition duration-300">
+          <div class="glass-card rounded-2xl p-8 hover:-translate-y-2 transition duration-300 border-brandGold/50">
+            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6">
               <i class="fa-solid fa-trowel-bricks"></i>
             </div>
             <h3 class="text-2xl font-bold mb-3 font-display">Construction</h3>
             <p class="text-sm text-gray-300 leading-relaxed mb-6">
-              Independent luxury houses, gated villas, apartments, structural modifications, civil works and high-durability commercial building executions.
+              Independent houses, luxury villas, apartments, commercial buildings, structural works and complete renovations.
             </p>
-            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition">
+            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 hover:translate-x-1 transition">
               View Details <i class="fa-solid fa-arrow-right text-xs"></i>
             </button>
           </div>
 
-          <!-- Card 3 -->
-          <div class="glass-card rounded-2xl p-8 transition transform hover:-translate-y-2 relative overflow-hidden group">
-            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6 group-hover:bg-brandGold group-hover:text-brandDark transition duration-300">
+          <div class="glass-card rounded-2xl p-8 hover:-translate-y-2 transition duration-300">
+            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6">
               <i class="fa-solid fa-couch"></i>
             </div>
             <h3 class="text-2xl font-bold mb-3 font-display">Interiors</h3>
             <p class="text-sm text-gray-300 leading-relaxed mb-6">
-              Complete turnkey home & office interiors featuring water-resistant, termite-proof uPVC modular kitchens, stylish wardrobes and false ceilings.
+              Turnkey interior works specializing in water-resistant, termite-proof uPVC modular kitchens, wardrobes and false ceilings.
             </p>
-            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition">
+            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 hover:translate-x-1 transition">
               View Details <i class="fa-solid fa-arrow-right text-xs"></i>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- WHY CHOOSE US SUMMARY -->
-      <div class="py-20 bg-brandDarker/70 border-y border-white/5">
+      <!-- UPVC HIGHLIGHT -->
+      <div class="py-20 bg-gradient-to-r from-brandPurple to-brandDarker border-y border-brandGold/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-2xl mx-auto mb-14">
-            <h2 class="text-3xl font-extrabold font-display">Why Choose Dream Interiors & Traders?</h2>
-            <p class="text-gray-400 mt-2 text-sm">Bringing honesty, craft, and precision to your dream spaces.</p>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div class="glass-card p-5 rounded-xl text-center">
-              <i class="fa-solid fa-diagram-project text-2xl text-brandGold mb-3"></i>
-              <h4 class="font-bold text-sm mb-1">Complete Solutions</h4>
-              <p class="text-xs text-gray-400">Design to handover under one roof.</p>
-            </div>
-            <div class="glass-card p-5 rounded-xl text-center">
-              <i class="fa-solid fa-receipt text-2xl text-brandGold mb-3"></i>
-              <h4 class="font-bold text-sm mb-1">Transparent Pricing</h4>
-              <p class="text-xs text-gray-400">Clear BOQ with no hidden costs.</p>
-            </div>
-            <div class="glass-card p-5 rounded-xl text-center">
-              <i class="fa-solid fa-shield-halved text-2xl text-brandGold mb-3"></i>
-              <h4 class="font-bold text-sm mb-1">Quality Materials</h4>
-              <p class="text-xs text-gray-400">Premium uPVC & certified construction.</p>
-            </div>
-            <div class="glass-card p-5 rounded-xl text-center">
-              <i class="fa-solid fa-sliders text-2xl text-brandGold mb-3"></i>
-              <h4 class="font-bold text-sm mb-1">100% Customized</h4>
-              <p class="text-xs text-gray-400">Crafted exclusively for your lifestyle.</p>
-            </div>
-            <div class="glass-card p-5 rounded-xl text-center">
-              <i class="fa-solid fa-clock-rotate-left text-2xl text-brandGold mb-3"></i>
-              <h4 class="font-bold text-sm mb-1">On-Time Handover</h4>
-              <p class="text-xs text-gray-400">Strict stage-wise schedule adherence.</p>
-            </div>
-          </div>
-
-          <div class="text-center mt-12">
-            <button onclick="openEnquiryModal('Free Site Visit - Why Choose Us')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3.5 rounded-xl shadow-lg gold-glow hover:scale-105 transition transform">
-              Book a Free Site Visit Today
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- HOW WE WORK SUMMARY -->
-      <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div>
-            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Seamless Journey</span>
-            <h2 class="text-3xl font-extrabold font-display mt-2">How We Work</h2>
-          </div>
-          <button onclick="switchPage('process')" class="text-brandGold font-semibold text-sm hover:underline mt-4 md:mt-0">
-            View All Process Details <i class="fa-solid fa-arrow-right ml-1"></i>
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
-          <div class="glass-card p-6 rounded-2xl relative">
-            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">01</div>
-            <h4 class="font-bold text-base mb-1">Site Visit</h4>
-            <p class="text-xs text-gray-400">Free measurement & requirements gathering.</p>
-          </div>
-          <div class="glass-card p-6 rounded-2xl relative">
-            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">02</div>
-            <h4 class="font-bold text-base mb-1">Planning & Design</h4>
-            <p class="text-xs text-gray-400">2D floor plans & photorealistic 3D renders.</p>
-          </div>
-          <div class="glass-card p-6 rounded-2xl relative">
-            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">03</div>
-            <h4 class="font-bold text-base mb-1">Quotation</h4>
-            <p class="text-xs text-gray-400">Itemized transparent pricing and timeline.</p>
-          </div>
-          <div class="glass-card p-6 rounded-2xl relative">
-            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">04</div>
-            <h4 class="font-bold text-base mb-1">Execution</h4>
-            <p class="text-xs text-gray-400">Precision manufacturing and on-site building.</p>
-          </div>
-          <div class="glass-card p-6 rounded-2xl relative">
-            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">05</div>
-            <h4 class="font-bold text-base mb-1">Final Handover</h4>
-            <p class="text-xs text-gray-400">Thorough quality check and key delivery.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- UPVC HIGHLIGHT SECTION -->
-      <div class="py-20 bg-gradient-to-r from-brandPurple to-brandDarker border-y border-brandGold/30 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <div class="lg:col-span-6 space-y-6">
+            <div class="lg:col-span-7 space-y-6">
               <span class="px-3 py-1 bg-brandGold text-brandDark text-xs font-black uppercase rounded tracking-wider">Premium Interior Material</span>
-              <h2 class="text-3xl sm:text-4xl font-extrabold font-display leading-tight">Interiors Built with High-Grade uPVC</h2>
+              <h2 class="text-3xl sm:text-4xl font-extrabold font-display">Interiors Built with High-Grade uPVC</h2>
               <p class="text-gray-300 text-sm leading-relaxed">
                 We use uPVC as our primary material for modular kitchens, wardrobes, storage units and other customized interiors. It resists water, moisture and termites, needs very little maintenance and gives a modern, premium finish.
               </p>
               
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
-                  <i class="fa-solid fa-droplet-slash text-brandGold"></i> Waterproof
-                </div>
-                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
-                  <i class="fa-solid fa-bug-slash text-brandGold"></i> Termite Proof
-                </div>
-                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
-                  <i class="fa-solid fa-wallet text-brandGold"></i> Budget Friendly
-                </div>
-                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
-                  <i class="fa-solid fa-recycle text-brandGold"></i> 100% Recyclable
-                </div>
-                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
-                  <i class="fa-solid fa-leaf text-brandGold"></i> Eco-Friendly
-                </div>
-                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
-                  <i class="fa-solid fa-fire-extinguisher text-brandGold"></i> Fire-Retardant
-                </div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 text-xs font-medium"><i class="fa-solid fa-droplet-slash text-brandGold mr-2"></i> Waterproof</div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 text-xs font-medium"><i class="fa-solid fa-bug-slash text-brandGold mr-2"></i> Termite Proof</div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 text-xs font-medium"><i class="fa-solid fa-wallet text-brandGold mr-2"></i> Budget Friendly</div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 text-xs font-medium"><i class="fa-solid fa-recycle text-brandGold mr-2"></i> Recyclable</div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 text-xs font-medium"><i class="fa-solid fa-leaf text-brandGold mr-2"></i> Eco-Friendly</div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 text-xs font-medium"><i class="fa-solid fa-fire-extinguisher text-brandGold mr-2"></i> Fire-Retardant</div>
               </div>
             </div>
 
-            <div class="lg:col-span-6 flex justify-center">
-              <div class="glass-card p-8 rounded-3xl border border-brandGold/40 text-center max-w-md w-full relative">
-                <div class="w-20 h-20 mx-auto rounded-2xl bg-brandGold/20 border-2 border-brandGold flex items-center justify-center text-brandGold text-3xl mb-4">
-                  <i class="fa-solid fa-kitchen-set"></i>
-                </div>
-                <h3 class="text-xl font-bold font-display text-white mb-2">Modern Modular Living</h3>
-                <p class="text-xs text-gray-300 leading-relaxed mb-6">
-                  మీ ఇంటికి చెదలు, నీటి తేమ వల్ల కలిగే నష్టాలను పూర్తిగా నివారించి, దీర్ఘకాలిక మన్నికనిచ్చే అధునాతన uPVC ఇంటీరియర్ సొల్యూషన్స్.
-                </p>
-                <button onclick="openEnquiryModal('uPVC Modular Solutions')" class="w-full py-3 rounded-xl bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold text-sm shadow-lg gold-glow transition">
-                  Explore uPVC Modular Interiors
+            <div class="lg:col-span-5 text-center">
+              <div class="glass-card p-8 rounded-3xl border border-brandGold/40">
+                <i class="fa-solid fa-kitchen-set text-5xl text-brandGold mb-4 block"></i>
+                <h3 class="text-xl font-bold font-display mb-2">Modern Modular Living</h3>
+                <p class="text-xs text-gray-300 mb-6">జీవితాంతం చెదలు, నీటి తేమ సమస్య లేకుండా సరికొత్త లుక్ ఇచ్చే ప్రీమియం uPVC ఇంటీరియర్స్.</p>
+                <button onclick="openEnquiryModal('uPVC Modular Solutions')" class="w-full py-3.5 bg-brandGold text-brandDark font-bold rounded-xl text-sm gold-glow">
+                  Enquire About uPVC
                 </button>
               </div>
             </div>
@@ -474,146 +372,94 @@
 
       <!-- RECENT PROJECTS PREVIEW -->
       <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:flex-row justify-between items-end mb-12">
+        <div class="flex justify-between items-end mb-12">
           <div>
-            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Portfolio</span>
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Our Portfolio</span>
             <h2 class="text-3xl font-extrabold font-display mt-2">Recent Projects</h2>
           </div>
-          <button onclick="switchPage('projects')" class="mt-4 sm:mt-0 text-brandGold hover:text-white font-semibold text-sm flex items-center gap-2">
-            View All Projects <i class="fa-solid fa-arrow-right"></i>
+          <button onclick="switchPage('projects')" class="text-brandGold hover:underline text-sm font-semibold">
+            View All <i class="fa-solid fa-arrow-right ml-1"></i>
           </button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
-            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
-              <i class="fa-solid fa-house-chimney-window text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
-            </div>
-            <div class="p-5">
-              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Hyderabad</span>
-              <h4 class="font-bold text-base mt-2">Modern Villa</h4>
-              <p class="text-xs text-gray-400 mt-1">Full Civil Construction & 3D Exterior Elevation.</p>
-            </div>
+          <div class="glass-card rounded-2xl overflow-hidden p-5">
+            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Hyderabad</span>
+            <h4 class="font-bold text-lg mt-3">Modern Villa</h4>
+            <p class="text-xs text-gray-400 mt-1">Full civil construction and modern 3D exterior elevation.</p>
           </div>
-
-          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
-            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
-              <i class="fa-solid fa-kitchen-set text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
-            </div>
-            <div class="p-5">
-              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Karimnagar</span>
-              <h4 class="font-bold text-base mt-2">Modular Kitchen</h4>
-              <p class="text-xs text-gray-400 mt-1">Waterproof uPVC Modular Cabinets & Quartz Counter.</p>
-            </div>
+          <div class="glass-card rounded-2xl overflow-hidden p-5">
+            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Karimnagar</span>
+            <h4 class="font-bold text-lg mt-3">Modular Kitchen</h4>
+            <p class="text-xs text-gray-400 mt-1">Complete waterproof uPVC cabinetry with quartz counter.</p>
           </div>
-
-          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
-            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
-              <i class="fa-solid fa-bed text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
-            </div>
-            <div class="p-5">
-              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Sircilla</span>
-              <h4 class="font-bold text-base mt-2">Bedroom Interior</h4>
-              <p class="text-xs text-gray-400 mt-1">Custom Sliding Wardrobe & Warm LED Profile Lighting.</p>
-            </div>
+          <div class="glass-card rounded-2xl overflow-hidden p-5">
+            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Sircilla</span>
+            <h4 class="font-bold text-lg mt-3">Bedroom Interior</h4>
+            <p class="text-xs text-gray-400 mt-1">Floor-to-ceiling sliding wardrobe and warm LED lighting.</p>
           </div>
-
-          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
-            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
-              <i class="fa-solid fa-tv text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
-            </div>
-            <div class="p-5">
-              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Hyderabad</span>
-              <h4 class="font-bold text-base mt-2">Luxury TV Unit</h4>
-              <p class="text-xs text-gray-400 mt-1">Acoustic Fluted Wall Panels & Floating Drawers.</p>
-            </div>
+          <div class="glass-card rounded-2xl overflow-hidden p-5">
+            <span class="text-[10px] font-bold text-brandGold bg-brandGold/10 px-2.5 py-1 rounded">Hyderabad</span>
+            <h4 class="font-bold text-lg mt-3">Luxury TV Unit</h4>
+            <p class="text-xs text-gray-400 mt-1">Acoustic louvers with backlit marble composite backboard.</p>
           </div>
         </div>
       </div>
 
-      <!-- CUSTOMER REVIEWS -->
-      <div class="py-20 bg-brandDarker/70 border-t border-white/5">
+      <!-- TESTIMONIALS -->
+      <div class="py-20 bg-brandDarker border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-2xl mx-auto mb-14">
-            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Testimonials</span>
-            <h2 class="text-3xl font-extrabold font-display mt-2">What Our Clients Say</h2>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 class="text-3xl font-extrabold font-display text-center mb-12">Customer Reviews</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="glass-card p-6 rounded-2xl">
               <div class="flex text-brandGold text-sm mb-3">
                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
-              <p class="text-xs text-gray-300 italic leading-relaxed mb-4">
+              <p class="text-xs text-gray-300 italic mb-4 leading-relaxed">
                 "The entire project was handled professionally from planning to completion. The team understood our requirements clearly and delivered the work with good finishing."
               </p>
-              <div class="border-t border-white/10 pt-3">
-                <h5 class="font-bold text-sm text-white">Mamesh Kumar</h5>
-                <span class="text-[11px] text-gray-400">Karimnagar</span>
-              </div>
+              <h5 class="font-bold text-sm text-white">Mamesh Kumar</h5>
+              <span class="text-[11px] text-gray-400">Karimnagar</span>
             </div>
 
             <div class="glass-card p-6 rounded-2xl border-brandGold/30">
               <div class="flex text-brandGold text-sm mb-3">
                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
-              <p class="text-xs text-gray-300 italic leading-relaxed mb-4">
+              <p class="text-xs text-gray-300 italic mb-4 leading-relaxed">
                 "We are very happy with the interior work. The design, material selection and execution were well coordinated and the final result matched our expectations."
               </p>
-              <div class="border-t border-white/10 pt-3">
-                <h5 class="font-bold text-sm text-white">Sandeep Reddy</h5>
-                <span class="text-[11px] text-gray-400">Hyderabad</span>
-              </div>
+              <h5 class="font-bold text-sm text-white">Sandeep Reddy</h5>
+              <span class="text-[11px] text-gray-400">Hyderabad</span>
             </div>
 
             <div class="glass-card p-6 rounded-2xl">
               <div class="flex text-brandGold text-sm mb-3">
                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
-              <p class="text-xs text-gray-300 italic leading-relaxed mb-4">
+              <p class="text-xs text-gray-300 italic mb-4 leading-relaxed">
                 "Good experience working with Dream Interiors & Traders. The team maintained clear communication throughout the project and completed the work on time."
               </p>
-              <div class="border-t border-white/10 pt-3">
-                <h5 class="font-bold text-sm text-white">Anil Kumar</h5>
-                <span class="text-[11px] text-gray-400">Sircilla</span>
-              </div>
+              <h5 class="font-bold text-sm text-white">Anil Kumar</h5>
+              <span class="text-[11px] text-gray-400">Sircilla</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SERVICE ACROSS TELANGANA BANNER -->
-      <div class="py-16 bg-brandPurple/60 border-y border-brandGold/30">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-          <i class="fa-solid fa-map-location-dot text-4xl text-brandGold mb-4"></i>
-          <h2 class="text-3xl font-extrabold font-display">Have a Project in Your Location?</h2>
-          <p class="text-gray-300 max-w-xl mx-auto mt-2 text-sm leading-relaxed">
-            Our team is ready to understand your requirements and complete the project. We proudly accept projects across Telangana.
-          </p>
-          <div class="flex flex-wrap justify-center gap-3 mt-6">
-            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Karimnagar</span>
-            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Hyderabad</span>
-            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Sircilla</span>
-            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Gangadhara</span>
-            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Warangal</span>
-            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Nizamabad</span>
           </div>
         </div>
       </div>
 
       <!-- FINAL CTA -->
-      <div class="py-24 max-w-5xl mx-auto px-4 text-center">
-        <div class="glass-card p-10 sm:p-14 rounded-3xl border-2 border-brandGold/40 gold-glow">
-          <h2 class="text-3xl sm:text-4xl font-extrabold font-display">Ready to Start Your Project?</h2>
-          <p class="text-gray-300 max-w-xl mx-auto mt-4 text-sm sm:text-base leading-relaxed">
+      <div class="py-20 max-w-5xl mx-auto px-4 text-center">
+        <div class="glass-card p-10 rounded-3xl border border-brandGold/40 gold-glow">
+          <h2 class="text-3xl font-extrabold font-display">Ready to Start Your Project?</h2>
+          <p class="text-gray-300 mt-3 text-sm max-w-xl mx-auto">
             Book a free site visit and tell us about your space. We will visit, understand your requirements and share a clear quotation.
           </p>
-          <div class="flex flex-wrap justify-center gap-4 mt-8">
-            <button onclick="openEnquiryModal('Free Site Visit Final CTA')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3.5 rounded-xl shadow-lg hover:scale-105 transition">
-              <i class="fa-solid fa-calendar-check mr-2"></i> Free Site Visit
+          <div class="flex justify-center gap-4 mt-8">
+            <button onclick="openEnquiryModal('Free Site Visit Final')" class="bg-brandGold text-brandDark font-bold px-8 py-3.5 rounded-xl">
+              Free Site Visit
             </button>
-            <a href="tel:9603219786" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-8 py-3.5 rounded-xl transition flex items-center gap-2">
-              <i class="fa-solid fa-phone text-brandGold"></i> Call 96032 19786
+            <a href="tel:9603219786" class="bg-white/10 text-white font-bold px-8 py-3.5 rounded-xl border border-white/20">
+              Call 96032 19786
             </a>
           </div>
         </div>
@@ -621,1019 +467,329 @@
 
     </section>
 
-
-    <!-- ============================================================= -->
-    <!-- PAGE 2: ABOUT US -->
-    <!-- ============================================================= -->
+    <!-- ================= PAGE 2: ABOUT US ================= -->
     <section id="page-about" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
-      <!-- Banner -->
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">About Dream Interiors & Traders</span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">We Make Your Dreams Come True</h1>
-        <p class="text-gray-300 mt-4 leading-relaxed">
-          Planning, Construction & Interiors in Telangana handled with transparency, craft, and punctuality.
-        </p>
+        <h1 class="text-4xl font-extrabold font-display mt-4">We Make Your Dreams Come True</h1>
+        <p class="text-gray-300 mt-3 leading-relaxed">Planning, Construction & Interiors in Telangana.</p>
       </div>
 
-      <!-- Who We Are -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
-        <div class="lg:col-span-7 space-y-6">
-          <h2 class="text-3xl font-extrabold font-display text-brandGold">Who We Are</h2>
-          <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+        <div class="lg:col-span-7 space-y-4">
+          <h2 class="text-2xl font-bold font-display text-brandGold">Who We Are</h2>
+          <p class="text-gray-300 text-sm leading-relaxed">
             Dream Interiors & Traders is a construction and interior company based in Karimnagar, Telangana. We help families and businesses turn an idea into a finished space. Our work covers planning and design, construction, and complete interiors, and we handle every stage with a coordinated approach so that you deal with one team from start to finish.
           </p>
-          <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+          <p class="text-gray-300 text-sm leading-relaxed">
             We work on independent houses, villas, apartments, commercial buildings and offices. Every project is planned around the client’s space, requirements, preferences and budget, and not around a fixed template.
           </p>
         </div>
-
         <div class="lg:col-span-5">
-          <div class="glass-card p-8 rounded-3xl border border-brandGold/30">
-            <h3 class="text-xl font-bold font-display text-white mb-4"><i class="fa-solid fa-bullseye text-brandGold mr-2"></i> What We Believe</h3>
+          <div class="glass-card p-6 rounded-2xl border border-brandGold/30">
+            <h3 class="font-bold text-lg mb-2 text-white">What We Believe</h3>
             <p class="text-xs text-gray-300 leading-relaxed">
-              Your project deserves the right planning, quality execution and attention to detail. Too many projects become stressful because design, construction and interiors are handled by different people who do not talk to each other. We bring every stage together with a clear and coordinated approach, making the journey from an idea to a completed space simpler and more reliable.
+              Your project deserves the right planning, quality execution and attention to detail. Too many projects become stressful because design, construction and interiors are handled by different people who do not talk to each other. We bring every stage together with a clear and coordinated approach.
             </p>
           </div>
         </div>
       </div>
-
-      <!-- Why Choose Us Pillars -->
-      <div class="mb-24">
-        <h2 class="text-3xl font-extrabold font-display text-center mb-12">Our Core Principles</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          <div class="glass-card p-6 rounded-2xl">
-            <i class="fa-solid fa-layer-group text-2xl text-brandGold mb-3"></i>
-            <h4 class="font-bold text-base mb-2">Complete Project Solutions</h4>
-            <p class="text-xs text-gray-300 leading-relaxed">From planning and design to construction, interiors and final handover, we manage every stage with a coordinated approach.</p>
-          </div>
-
-          <div class="glass-card p-6 rounded-2xl">
-            <i class="fa-solid fa-file-invoice-dollar text-2xl text-brandGold mb-3"></i>
-            <h4 class="font-bold text-base mb-2">Clear & Transparent Pricing</h4>
-            <p class="text-xs text-gray-300 leading-relaxed">We provide detailed quotations with a clearly defined scope of work, helping you understand what is included in your project.</p>
-          </div>
-
-          <div class="glass-card p-6 rounded-2xl">
-            <i class="fa-solid fa-award text-2xl text-brandGold mb-3"></i>
-            <h4 class="font-bold text-base mb-2">Quality Materials & Workmanship</h4>
-            <p class="text-xs text-gray-300 leading-relaxed">We focus on suitable materials, skilled execution and attention to detail at every stage of the project.</p>
-          </div>
-
-          <div class="glass-card p-6 rounded-2xl">
-            <i class="fa-solid fa-compass-drafting text-2xl text-brandGold mb-3"></i>
-            <h4 class="font-bold text-base mb-2">Customized to Your Requirements</h4>
-            <p class="text-xs text-gray-300 leading-relaxed">Every project is planned and executed according to the client’s space, requirements, preferences and budget.</p>
-          </div>
-
-          <div class="glass-card p-6 rounded-2xl">
-            <i class="fa-solid fa-calendar-check text-2xl text-brandGold mb-3"></i>
-            <h4 class="font-bold text-base mb-2">On-Time Project Handover</h4>
-            <p class="text-xs text-gray-300 leading-relaxed">We follow a structured work process with a focus on completing each stage efficiently and handing over within agreed timelines.</p>
-          </div>
-
-          <div class="glass-card p-6 rounded-2xl border-brandGold/40 bg-brandGold/5">
-            <i class="fa-solid fa-city text-2xl text-brandGold mb-3"></i>
-            <h4 class="font-bold text-base mb-2">Telangana Wide Footprint</h4>
-            <p class="text-xs text-gray-300 leading-relaxed">Headquartered in Karimnagar with branches in Gangadhara, Sircilla and Hyderabad delivering end-to-end satisfaction.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Call to Action -->
-      <div class="glass-card p-10 rounded-3xl text-center max-w-3xl mx-auto border border-brandGold/30">
-        <h3 class="text-2xl font-bold font-display">Let’s Plan Your Space Together</h3>
-        <p class="text-gray-300 text-xs sm:text-sm mt-2 mb-6">Our senior architects and interior designers are just one call away.</p>
-        <button onclick="openEnquiryModal('About Us CTA')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3 rounded-xl transition">
-          Enquiry Now
-        </button>
-      </div>
-
     </section>
 
-
-    <!-- ============================================================= -->
-    <!-- PAGE 3: SERVICES -->
-    <!-- ============================================================= -->
+    <!-- ================= PAGE 3: SERVICES ================= -->
     <section id="page-services" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">End-To-End Capabilities</span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">Complete Solutions for Your Space</h1>
-        <p class="text-gray-300 mt-4 leading-relaxed">
-          Planning, construction and interiors, handled with complete mastery by one team.
-        </p>
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full">Our Capabilities</span>
+        <h1 class="text-4xl font-extrabold font-display mt-4">Complete Solutions for Your Space</h1>
+        <p class="text-gray-300 mt-2">Planning, construction and interiors, handled by one team.</p>
       </div>
 
-      <!-- SERVICE 1: PLANNING & DESIGN -->
-      <div class="glass-card p-8 sm:p-10 rounded-3xl mb-12 border-brandGold/30">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 rounded-xl bg-brandGold text-brandDark flex items-center justify-center text-xl font-bold">1</div>
-          <div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold font-display">Planning & Design</h2>
-            <p class="text-xs text-brandGold font-semibold">Good construction starts with a good plan.</p>
+      <div class="space-y-8">
+        <div class="glass-card p-8 rounded-2xl">
+          <h2 class="text-2xl font-bold text-brandGold mb-3">1. Planning & Design</h2>
+          <p class="text-xs text-gray-300 mb-4">Good construction starts with a good plan. Before any work begins, we help you decide how your space should look, flow and function.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 bg-white/5 rounded-lg border border-white/10"><strong>2D Floor Plans:</strong> Accurate layout & room sizes.</div>
+            <div class="p-3 bg-white/5 rounded-lg border border-white/10"><strong>3D Elevations:</strong> Modern and elegant exterior views.</div>
+            <div class="p-3 bg-white/5 rounded-lg border border-white/10"><strong>3D Interior Designs:</strong> Realistic visuals of rooms & materials.</div>
+            <div class="p-3 bg-white/5 rounded-lg border border-white/10"><strong>Walkthrough & Animation:</strong> Interior & exterior walkthroughs.</div>
+            <div class="p-3 bg-white/5 rounded-lg border border-white/10"><strong>Space Planning:</strong> Best use of every square foot.</div>
+            <div class="p-3 bg-white/5 rounded-lg border border-white/10"><strong>Material Consultation:</strong> Honest budget advice.</div>
           </div>
         </div>
-        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
-          Before any work begins, we help you decide how your space should look, flow and function with accurate engineering and realistic 3D representations.
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-            <span class="font-bold text-brandGold block mb-1">2D Floor Plans</span>
-            Accurate and detailed layouts showing room sizes, placement and circulation.
+
+        <div class="glass-card p-8 rounded-2xl">
+          <h2 class="text-2xl font-bold text-brandGold mb-3">2. Construction</h2>
+          <p class="text-xs text-gray-300 mb-4">We build homes and commercial spaces with attention to structure, finishing and timelines.</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="px-3 py-2 bg-white/5 rounded border border-white/10">Independent Houses</span>
+            <span class="px-3 py-2 bg-white/5 rounded border border-white/10">Villas</span>
+            <span class="px-3 py-2 bg-white/5 rounded border border-white/10">Apartments</span>
+            <span class="px-3 py-2 bg-white/5 rounded border border-white/10">Commercial Buildings</span>
+            <span class="px-3 py-2 bg-white/5 rounded border border-white/10">Renovation</span>
+            <span class="px-3 py-2 bg-white/5 rounded border border-white/10">Structural Works</span>
           </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-            <span class="font-bold text-brandGold block mb-1">3D Elevations</span>
-            Modern and elegant exterior views so you can see your building before it is built.
-          </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-            <span class="font-bold text-brandGold block mb-1">3D Interior Designs</span>
-            Realistic visuals of your rooms with actual materials, textures and finishes.
-          </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-            <span class="font-bold text-brandGold block mb-1">Walkthrough & Animation</span>
-            Interactive interior and exterior animated video walkthrough presentations.
-          </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-            <span class="font-bold text-brandGold block mb-1">Space Planning</span>
-            Scientific layouts making the best ergonomic use of every square foot.
-          </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-            <span class="font-bold text-brandGold block mb-1">Project Consultation</span>
-            Honest material guidance and structural advice before financial commitment.
+        </div>
+
+        <div class="glass-card p-8 rounded-2xl">
+          <h2 class="text-2xl font-bold text-brandGold mb-3">3. Interiors (Primary Material: uPVC)</h2>
+          <p class="text-xs text-gray-300 mb-4">Waterproof, termite-proof modular kitchens, wardrobes, and living room interiors.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <span class="p-2.5 bg-white/5 rounded">Modular Kitchens</span>
+            <span class="p-2.5 bg-white/5 rounded">Wardrobes</span>
+            <span class="p-2.5 bg-white/5 rounded">False Ceilings</span>
+            <span class="p-2.5 bg-white/5 rounded">Wall Panels & TV Units</span>
           </div>
         </div>
       </div>
-
-      <!-- SERVICE 2: CONSTRUCTION -->
-      <div class="glass-card p-8 sm:p-10 rounded-3xl mb-12">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 rounded-xl bg-brandGold text-brandDark flex items-center justify-center text-xl font-bold">2</div>
-          <div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold font-display">Construction</h2>
-            <p class="text-xs text-brandGold font-semibold">Strong Foundations, Elegant Finishes</p>
-          </div>
-        </div>
-        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
-          We build homes and commercial spaces with strict attention to structural integrity, safety standards, premium finishing and guaranteed timelines.
-        </p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-semibold">
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-house text-brandGold block mb-1"></i> Independent Houses</div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-tree-city text-brandGold block mb-1"></i> Luxury Villas</div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-building text-brandGold block mb-1"></i> Modern Apartments</div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-briefcase text-brandGold block mb-1"></i> Commercial Buildings</div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-hammer text-brandGold block mb-1"></i> Complete Renovation</div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-cubes-stacked text-brandGold block mb-1"></i> Structural Works</div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-hard-hat text-brandGold block mb-1"></i> Civil Works</div>
-          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-hand-holding-hand text-brandGold block mb-1"></i> Turnkey Handover</div>
-        </div>
-      </div>
-
-      <!-- SERVICE 3: INTERIORS & UPVC -->
-      <div class="glass-card p-8 sm:p-10 rounded-3xl mb-12 border-brandGold/40 bg-gradient-to-br from-brandCard to-brandPurple/30">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 rounded-xl bg-brandGold text-brandDark flex items-center justify-center text-xl font-bold">3</div>
-          <div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold font-display">Interiors & uPVC Mastery</h2>
-            <p class="text-xs text-brandGold font-semibold">Designed around how you actually live and work.</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <p class="text-sm text-gray-300 leading-relaxed mb-4">
-              At Dream Interiors & Traders, we use **uPVC as our primary material for modular kitchens, wardrobes, and living storage units**.
-            </p>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Modular Kitchens</span>
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Designer Wardrobes</span>
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> False Ceilings</span>
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Wall Panels & TV Units</span>
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Living Room Interiors</span>
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Bedroom Interiors</span>
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Commercial / Office Furniture</span>
-              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Full Home Interiors</span>
-            </div>
-          </div>
-
-          <div class="bg-brandDarker/90 p-6 rounded-2xl border border-brandGold/30 space-y-3">
-            <h4 class="font-bold text-sm text-brandGold">Why uPVC is Superior:</h4>
-            <ul class="text-xs text-gray-300 space-y-2">
-              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Waterproof:</strong> Resistant to heavy water exposure, steam and moisture.</li>
-              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Termite Proof:</strong> Zero threat of pest or termite damage forever.</li>
-              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Budget Friendly:</strong> Cost-effective compared to traditional wood maintenance.</li>
-              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Eco-Friendly & Recyclable:</strong> Sustainable green interior building material.</li>
-              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Fire-Retardant:</strong> Natural flame-retarding characteristics.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="text-center">
-        <h3 class="text-xl font-bold font-display">Not sure which service you need?</h3>
-        <p class="text-xs text-gray-400 mt-1 mb-4">Tell us about your project and we will guide you. The site visit is completely free.</p>
-        <button onclick="openEnquiryModal('Services Consultation')" class="bg-brandGold text-brandDark font-bold px-8 py-3 rounded-xl shadow-lg gold-glow hover:scale-105 transition">
-          Book Free Site Visit
-        </button>
-      </div>
-
     </section>
 
-
-    <!-- ============================================================= -->
-    <!-- PAGE 4: OUR PROCESS -->
-    <!-- ============================================================= -->
+    <!-- ================= PAGE 4: PROCESS ================= -->
     <section id="page-process" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">Structured Methodology</span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">From Idea to Handover</h1>
-        <p class="text-gray-300 mt-4 leading-relaxed">
-          A clear, structured 5-step process so you always know what happens next.
-        </p>
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full">Structured Flow</span>
+        <h1 class="text-4xl font-extrabold font-display mt-4">From Idea to Handover</h1>
+        <p class="text-gray-300 mt-2">A clear, structured process so you always know what happens next.</p>
       </div>
 
-      <!-- 5-Step Detailed Process Cards -->
-      <div class="space-y-6 max-w-4xl mx-auto mb-20">
-        
-        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
-          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">01</div>
-          <div>
-            <h3 class="text-xl font-bold font-display">Step 1: Site Visit</h3>
-            <p class="text-xs text-brandGold font-semibold mb-2">Completely Free across Telangana</p>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              Our engineering team visits your site location, measures exact dimensions, examines lighting/ventilation and listens to your functional requirements, budget and timeline.
-            </p>
-          </div>
+      <div class="space-y-4 max-w-3xl mx-auto">
+        <div class="glass-card p-5 rounded-xl border-l-4 border-l-brandGold">
+          <h4 class="font-bold text-base">Step 1: Free Site Visit</h4>
+          <p class="text-xs text-gray-400 mt-1">Our team visits your site, measures the space and listens to your requirements, budget and timeline.</p>
         </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
-          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">02</div>
-          <div>
-            <h3 class="text-xl font-bold font-display">Step 2: Planning & Design</h3>
-            <p class="text-xs text-brandGold font-semibold mb-2">Architectural Visuals & 3D Walkthroughs</p>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              We turn your ideas into accurate 2D floor plans, photorealistic 3D room renders and material suggestions. You review, ask for iterations and approve the finalized design.
-            </p>
-          </div>
+        <div class="glass-card p-5 rounded-xl border-l-4 border-l-brandGold">
+          <h4 class="font-bold text-base">Step 2: Planning & Design</h4>
+          <p class="text-xs text-gray-400 mt-1">We turn your requirements into practical 2D floor plans, 3D views and material suggestions.</p>
         </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
-          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">03</div>
-          <div>
-            <h3 class="text-xl font-bold font-display">Step 3: Quotation</h3>
-            <p class="text-xs text-brandGold font-semibold mb-2">Detailed & Transparent BOQ</p>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              We prepare a detailed quotation that defines the scope of work, material specs, brand warranties and exact milestone-based pricing with zero hidden charges.
-            </p>
-          </div>
+        <div class="glass-card p-5 rounded-xl border-l-4 border-l-brandGold">
+          <h4 class="font-bold text-base">Step 3: Quotation</h4>
+          <p class="text-xs text-gray-400 mt-1">We prepare a detailed quotation that defines the scope of work and the project pricing.</p>
         </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
-          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">04</div>
-          <div>
-            <h3 class="text-xl font-bold font-display">Step 4: Execution</h3>
-            <p class="text-xs text-brandGold font-semibold mb-2">On-Site & Factory Fabrication</p>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              Civil construction, structural adjustments and uPVC modular fabrication are carried out strictly according to finalized designs, with daily project supervisor updates.
-            </p>
-          </div>
+        <div class="glass-card p-5 rounded-xl border-l-4 border-l-brandGold">
+          <h4 class="font-bold text-base">Step 4: Execution</h4>
+          <p class="text-xs text-gray-400 mt-1">Construction and interior works are carried out according to the finalized requirements with regular coordination.</p>
         </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
-          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">05</div>
-          <div>
-            <h3 class="text-xl font-bold font-display">Step 5: Final Handover</h3>
-            <p class="text-xs text-brandGold font-semibold mb-2">Quality Inspection & Snag-free Delivery</p>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              We complete a thorough final joint inspection with you, polish and deep-clean the site, clear any pending punch list points and happily hand over your keys.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- FAQS -->
-      <div class="max-w-4xl mx-auto mb-20">
-        <h2 class="text-3xl font-extrabold font-display text-center mb-8">Frequently Asked Questions</h2>
-        
-        <div class="space-y-4">
-          <details class="glass-card rounded-xl p-5 group cursor-pointer">
-            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
-              <span>Do you undertake both construction and interior projects?</span>
-              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
-            </summary>
-            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
-              Yes. We handle complete planning, civil construction and full interiors under one roof. You can choose the full turnkey project or only the specific phase you need.
-            </p>
-          </details>
-
-          <details class="glass-card rounded-xl p-5 group cursor-pointer">
-            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
-              <span>Do you provide a free site visit?</span>
-              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
-            </summary>
-            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
-              Yes. Book a visit and our team will come directly to your site anywhere across Telangana to take measurements and understand your requirements.
-            </p>
-          </details>
-
-          <details class="glass-card rounded-xl p-5 group cursor-pointer">
-            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
-              <span>Do you provide services across Telangana?</span>
-              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
-            </summary>
-            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
-              Yes. We accept projects across the entire state of Telangana, with branch offices located in Karimnagar (Head Office), Gangadhara, Sircilla and Hyderabad.
-            </p>
-          </details>
-
-          <details class="glass-card rounded-xl p-5 group cursor-pointer">
-            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
-              <span>Can I choose only interior services?</span>
-              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
-            </summary>
-            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
-              Absolutely. You can choose only interiors (modular kitchens, wardrobes, false ceilings), only construction, or the complete turnkey package.
-            </p>
-          </details>
-
-          <details class="glass-card rounded-xl p-5 group cursor-pointer">
-            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
-              <span>Which material do you use for interiors?</span>
-              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
-            </summary>
-            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
-              We primarily specialize in high-grade uPVC because it is 100% waterproof, termite-proof, fire-retardant, long-lasting and significantly lower maintenance than wood.
-            </p>
-          </details>
-
-          <details class="glass-card rounded-xl p-5 group cursor-pointer">
-            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
-              <span>How can I get a quotation?</span>
-              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
-            </summary>
-            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
-              Simply book a free site visit or send an enquiry. After understanding your space and design choices, we share an itemized quotation with clear scope and specifications.
-            </p>
-          </details>
+        <div class="glass-card p-5 rounded-xl border-l-4 border-l-brandGold">
+          <h4 class="font-bold text-base">Step 5: Final Handover</h4>
+          <p class="text-xs text-gray-400 mt-1">We complete a final inspection with you, fix any pending points and hand over the finished project.</p>
         </div>
       </div>
-
-      <!-- Action -->
-      <div class="text-center">
-        <h3 class="text-2xl font-bold font-display">Ready for step one?</h3>
-        <button onclick="openEnquiryModal('Step 1 Free Site Visit')" class="mt-4 bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3.5 rounded-xl shadow-lg gold-glow transition">
-          Book Free Site Visit
-        </button>
-      </div>
-
     </section>
 
-
-    <!-- ============================================================= -->
-    <!-- PAGE 5: PROJECTS -->
-    <!-- ============================================================= -->
+    <!-- ================= PAGE 5: PROJECTS ================= -->
     <section id="page-projects" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">Our Portfolio</span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">A Glimpse of Our Work</h1>
-        <p class="text-gray-300 mt-4 leading-relaxed">
-          Recent homes and interiors we have planned, built and handed over across Telangana.
-        </p>
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full">Gallery</span>
+        <h1 class="text-4xl font-extrabold font-display mt-4">A Glimpse of Our Work</h1>
+        <p class="text-gray-300 mt-2">Recent homes and interiors we have planned, built and handed over.</p>
       </div>
 
-      <!-- Filter Buttons -->
-      <div class="flex flex-wrap justify-center gap-2 mb-12">
-        <button onclick="filterProjects('all')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-brandGold text-brandDark" data-filter="all">All</button>
-        <button onclick="filterProjects('construction')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="construction">Construction</button>
-        <button onclick="filterProjects('kitchens')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="kitchens">Kitchens</button>
-        <button onclick="filterProjects('bedrooms')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="bedrooms">Bedrooms</button>
-        <button onclick="filterProjects('living')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="living">Living & TV Units</button>
-        <button onclick="filterProjects('commercial')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="commercial">Commercial</button>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass-card p-6 rounded-2xl">
+          <span class="text-xs font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Hyderabad</span>
+          <h3 class="text-xl font-bold mt-2">Modern Villa</h3>
+          <p class="text-xs text-gray-300 mt-1">Complete construction & 3D exterior architecture.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl">
+          <span class="text-xs font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Karimnagar</span>
+          <h3 class="text-xl font-bold mt-2">Modular Kitchen</h3>
+          <p class="text-xs text-gray-300 mt-1">uPVC waterproof modular kitchen cabinetry.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl">
+          <span class="text-xs font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Sircilla</span>
+          <h3 class="text-xl font-bold mt-2">Bedroom Interior</h3>
+          <p class="text-xs text-gray-300 mt-1">Sliding wardrobe, bedside panels, and false ceiling.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl">
+          <span class="text-xs font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Hyderabad</span>
+          <h3 class="text-xl font-bold mt-2">TV Unit & Living Wall</h3>
+          <p class="text-xs text-gray-300 mt-1">Living room TV unit and acoustic wall panels.</p>
+        </div>
       </div>
-
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20" id="projects-grid">
-        
-        <!-- Project 1 -->
-        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="construction">
-          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
-            <i class="fa-solid fa-house-chimney-window text-6xl text-brandGold/40 mb-2"></i>
-            <span class="text-xs text-brandGold font-mono">Villa Construction & Elevation</span>
-          </div>
-          <div class="p-6">
-            <div class="flex justify-between items-start mb-2">
-              <h3 class="text-2xl font-bold font-display">Modern Villa</h3>
-              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Hyderabad</span>
-            </div>
-            <p class="text-xs text-gray-300 leading-relaxed mb-4">
-              Complete civil construction, modern glass elevation, landscaping and boundary wall architecture for a 4500 sq.ft luxury villa.
-            </p>
-            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
-              <span><strong>Scope:</strong> Turnkey Construction</span>
-              <span><strong>Duration:</strong> 11 Months</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="kitchens">
-          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
-            <i class="fa-solid fa-kitchen-set text-6xl text-brandGold/40 mb-2"></i>
-            <span class="text-xs text-brandGold font-mono">uPVC Waterproof Modular Kitchen</span>
-          </div>
-          <div class="p-6">
-            <div class="flex justify-between items-start mb-2">
-              <h3 class="text-2xl font-bold font-display">Modular Kitchen</h3>
-              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Karimnagar</span>
-            </div>
-            <p class="text-xs text-gray-300 leading-relaxed mb-4">
-              Full waterproof uPVC cabinetry with soft-close tandem boxes, breakfast counter and integrated quartz countertop.
-            </p>
-            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
-              <span><strong>Scope:</strong> uPVC Modular Kitchen</span>
-              <span><strong>Duration:</strong> 18 Days</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="bedrooms">
-          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
-            <i class="fa-solid fa-bed text-6xl text-brandGold/40 mb-2"></i>
-            <span class="text-xs text-brandGold font-mono">Master Bedroom & Wardrobe</span>
-          </div>
-          <div class="p-6">
-            <div class="flex justify-between items-start mb-2">
-              <h3 class="text-2xl font-bold font-display">Bedroom Interior</h3>
-              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Sircilla</span>
-            </div>
-            <p class="text-xs text-gray-300 leading-relaxed mb-4">
-              Floor-to-ceiling uPVC sliding wardrobe with tinted mirror, headboard panelling and warm recessed mood lighting.
-            </p>
-            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
-              <span><strong>Scope:</strong> Complete Master Suite</span>
-              <span><strong>Duration:</strong> 22 Days</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="living">
-          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
-            <i class="fa-solid fa-tv text-6xl text-brandGold/40 mb-2"></i>
-            <span class="text-xs text-brandGold font-mono">Entertainment Wall & Panelling</span>
-          </div>
-          <div class="p-6">
-            <div class="flex justify-between items-start mb-2">
-              <h3 class="text-2xl font-bold font-display">Living Room TV Unit</h3>
-              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Hyderabad</span>
-            </div>
-            <p class="text-xs text-gray-300 leading-relaxed mb-4">
-              Charcoal louvers with backlit marble composite backboard, floating console drawers and concealed cable routing.
-            </p>
-            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
-              <span><strong>Scope:</strong> Living & TV Wall</span>
-              <span><strong>Duration:</strong> 12 Days</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Call to Action -->
-      <div class="glass-card p-10 rounded-3xl text-center max-w-3xl mx-auto border border-brandGold/30">
-        <h3 class="text-2xl font-bold font-display">Want a space like this?</h3>
-        <p class="text-gray-300 text-xs sm:text-sm mt-2 mb-6">Let's design and build your custom sanctuary.</p>
-        <button onclick="openEnquiryModal('Projects Gallery CTA')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3 rounded-xl transition">
-          Enquiry Now
-        </button>
-      </div>
-
     </section>
 
-
-    <!-- ============================================================= -->
-    <!-- PAGE 6: CONTACT -->
-    <!-- ============================================================= -->
+    <!-- ================= PAGE 6: CONTACT ================= -->
     <section id="page-contact" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">Get In Touch</span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">Let’s Talk About Your Project</h1>
-        <p class="text-gray-300 mt-4 leading-relaxed">
-          Tell us about your space and book a free site visit. Our team will get back to you promptly.
-        </p>
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full">Contact</span>
+        <h1 class="text-4xl font-extrabold font-display mt-4">Let’s Talk About Your Project</h1>
+        <p class="text-gray-300 mt-2">Branches across Karimnagar, Gangadhara, Sircilla and Hyderabad.</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
-        <!-- Contact Information -->
-        <div class="lg:col-span-5 space-y-6">
-          
-          <div class="glass-card p-6 rounded-2xl space-y-4">
-            <h3 class="text-xl font-bold font-display text-white border-b border-white/10 pb-3">Contact Details</h3>
-            
-            <a href="tel:9603219786" class="flex items-center gap-4 text-gray-300 hover:text-brandGold transition group">
-              <div class="w-10 h-10 rounded-xl bg-brandGold/10 border border-brandGold/30 flex items-center justify-center text-brandGold group-hover:bg-brandGold group-hover:text-brandDark transition">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 block">Phone Number</span>
-                <span class="font-bold text-sm text-white">96032 19786</span>
-              </div>
-            </a>
-
-            <a href="https://wa.me/919603219786" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-green-400 transition group">
-              <div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition">
-                <i class="fa-brands fa-whatsapp"></i>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 block">WhatsApp Support</span>
-                <span class="font-bold text-sm text-white">96032 19786</span>
-              </div>
-            </a>
-
-            <a href="mailto:dreaminteriorsgroup@gmail.com" class="flex items-center gap-4 text-gray-300 hover:text-brandGold transition group">
-              <div class="w-10 h-10 rounded-xl bg-brandGold/10 border border-brandGold/30 flex items-center justify-center text-brandGold group-hover:bg-brandGold group-hover:text-brandDark transition">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 block">Email Address</span>
-                <span class="font-bold text-sm text-white break-all">dreaminteriorsgroup@gmail.com</span>
-              </div>
-            </a>
-
-            <div class="flex items-start gap-4 text-gray-300 pt-2 border-t border-white/10">
-              <div class="w-10 h-10 rounded-xl bg-brandGold/10 border border-brandGold/30 flex items-center justify-center text-brandGold shrink-0">
-                <i class="fa-solid fa-location-dot"></i>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 block font-semibold text-brandGold">Head Office</span>
-                <span class="font-medium text-xs leading-relaxed text-white">
-                  Opp: PM Convention Hall, Seetharampur, Karimnagar, Telangana - 505001
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Branch Locations -->
-          <div class="glass-card p-6 rounded-2xl">
-            <h4 class="font-bold text-sm text-brandGold mb-3">Our Telangana Branches</h4>
-            <div class="space-y-3 text-xs text-gray-300">
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
-                <span><strong>Karimnagar (Head Office):</strong> Seetharampur</span>
-                <span class="text-brandGold font-mono text-[10px]">Active</span>
-              </div>
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
-                <span><strong>Hyderabad:</strong> Regional Branch Office</span>
-                <span class="text-brandGold font-mono text-[10px]">Active</span>
-              </div>
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
-                <span><strong>Sircilla:</strong> Branch Office</span>
-                <span class="text-brandGold font-mono text-[10px]">Active</span>
-              </div>
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
-                <span><strong>Gangadhara:</strong> Branch Office</span>
-                <span class="text-brandGold font-mono text-[10px]">Active</span>
-              </div>
-            </div>
-          </div>
-
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5 glass-card p-6 rounded-2xl space-y-4">
+          <h3 class="font-bold text-base text-white border-b border-white/10 pb-3">Contact Information</h3>
+          <p class="text-xs text-gray-300"><i class="fa-solid fa-phone text-brandGold mr-2"></i> <strong>Phone:</strong> 96032 19786</p>
+          <p class="text-xs text-gray-300"><i class="fa-brands fa-whatsapp text-brandGold mr-2"></i> <strong>WhatsApp:</strong> 96032 19786</p>
+          <p class="text-xs text-gray-300"><i class="fa-solid fa-envelope text-brandGold mr-2"></i> <strong>Email:</strong> dreaminteriorsgroup@gmail.com</p>
+          <p class="text-xs text-gray-300"><i class="fa-solid fa-location-dot text-brandGold mr-2"></i> <strong>Head Office:</strong> Opp: PM Convention Hall, Seetharampur, Karimnagar, 505001</p>
         </div>
 
-        <!-- Enquiry Form -->
-        <div class="lg:col-span-7">
-          <div class="glass-card p-8 sm:p-10 rounded-3xl border border-brandGold/30">
-            <h3 class="text-2xl font-bold font-display mb-2">Book a Free Site Visit</h3>
-            <p class="text-xs text-gray-300 mb-6">Fill in the details below and our team will get back to you shortly.</p>
-
-            <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-              <div>
-                <label class="block text-xs font-semibold text-gray-300 mb-1">Full Name *</label>
-                <input type="text" required placeholder="మీ పేరు" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-semibold text-gray-300 mb-1">Phone Number *</label>
-                  <input type="tel" required placeholder="ఫోన్ నంబర్" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
-                </div>
-                <div>
-                  <label class="block text-xs font-semibold text-gray-300 mb-1">Email Address (Optional)</label>
-                  <input type="email" placeholder="మీ ఈమెయిల్" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-semibold text-gray-300 mb-1">Project Location *</label>
-                  <input type="text" required placeholder="ఉదా: Karimnagar, Hyderabad..." class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
-                </div>
-                <div>
-                  <label class="block text-xs font-semibold text-gray-300 mb-1">Project Type *</label>
-                  <select required class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
-                    <option value="Both">Complete Project (Construction + Interiors)</option>
-                    <option value="Interiors">Interiors (Modular Kitchen, Wardrobes)</option>
-                    <option value="Construction">Construction Only</option>
-                    <option value="Planning & Design">Planning & 2D/3D Design Only</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold text-gray-300 mb-1">Approximate Budget (Optional)</label>
-                <input type="text" placeholder="ఉదా: ₹10 Lakhs - ₹30 Lakhs" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold text-gray-300 mb-1">Your Requirements / Message</label>
-                <textarea rows="3" placeholder="మీ స్థలం వివరాలు లేదా ప్రత్యేక అవసరాలు ఇక్కడ రాయండి..." class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition"></textarea>
-              </div>
-
-              <button type="submit" class="w-full py-4 rounded-xl bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold text-sm shadow-xl gold-glow hover:scale-[1.01] active:scale-[0.99] transition">
-                <i class="fa-solid fa-paper-plane mr-2"></i> Send Enquiry
-              </button>
-            </form>
-
-            <div id="form-success-banner" class="hidden mt-4 p-4 rounded-xl bg-green-500/20 border border-green-500 text-center text-green-300 text-xs">
-              <i class="fa-solid fa-circle-check text-lg block mb-1"></i>
-              Thank you! Our team has received your enquiry and will contact you shortly.
-            </div>
-
+        <div class="lg:col-span-7 glass-card p-6 rounded-2xl">
+          <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <input type="text" required placeholder="Full Name" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-xs text-white">
+            <input type="tel" required placeholder="Phone Number" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-xs text-white">
+            <input type="text" required placeholder="Project Location" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-xs text-white">
+            <textarea rows="3" placeholder="Message / Project Details" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-xs text-white"></textarea>
+            <button type="submit" class="w-full py-3.5 bg-brandGold text-brandDark font-bold rounded-xl text-xs gold-glow">Send Enquiry</button>
+          </form>
+          <div id="form-success" class="hidden mt-3 p-3 bg-green-500/20 border border-green-500 rounded-lg text-xs text-center text-green-300">
+            Thank you! We will call you shortly.
           </div>
         </div>
-
       </div>
-
     </section>
 
   </main>
 
-
-  <!-- ================= POPUP MODAL (BOOK FREE SITE VISIT) ================= -->
+  <!-- MODAL -->
   <div id="enquiry-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 relative border-2 border-brandGold/40 gold-glow">
-      <button onclick="closeEnquiryModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="text-center mb-6">
-        <div class="w-12 h-12 rounded-xl bg-brandGold/20 border border-brandGold mx-auto flex items-center justify-center text-brandGold text-xl mb-2">
-          <i class="fa-solid fa-calendar-check"></i>
-        </div>
-        <h3 class="text-xl font-bold font-display" id="modal-title">Book a Free Site Visit</h3>
-        <p class="text-xs text-gray-300 mt-1">We will inspect your space and provide exact 3D estimates.</p>
-      </div>
-
-      <form onsubmit="handleModalSubmit(event)" class="space-y-3">
-        <input type="text" required placeholder="Full Name" class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
-        <input type="tel" required placeholder="Phone Number (e.g. 96032 19786)" class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
-        <input type="text" required placeholder="City / District in Telangana" class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
-        <select class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
-          <option>Construction & Interiors (Complete Turnkey)</option>
-          <option>Interiors Only (uPVC Kitchens / Wardrobes)</option>
-          <option>House / Villa Construction Only</option>
-          <option>2D/3D Architecture & Planning</option>
-        </select>
-        <button type="submit" class="w-full py-3 bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold rounded-xl text-xs shadow-md transition">
-          Confirm Free Visit Request
-        </button>
+    <div class="glass-card max-w-md w-full rounded-2xl p-6 relative border border-brandGold">
+      <button onclick="closeEnquiryModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      <h3 class="text-lg font-bold text-center mb-4 text-brandGold">Book Free Site Visit</h3>
+      <form onsubmit="handleModalSubmit(event)" class="space-y-3 text-xs">
+        <input type="text" required placeholder="Full Name" class="w-full bg-brandDarker border border-white/20 rounded-lg p-2.5 text-white">
+        <input type="tel" required placeholder="Phone Number" class="w-full bg-brandDarker border border-white/20 rounded-lg p-2.5 text-white">
+        <input type="text" required placeholder="Location" class="w-full bg-brandDarker border border-white/20 rounded-lg p-2.5 text-white">
+        <button type="submit" class="w-full py-2.5 bg-brandGold text-brandDark font-bold rounded-lg">Confirm</button>
       </form>
     </div>
   </div>
 
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="bg-brandDarker border-t border-brandGold/20 pt-16 pb-12 relative z-10 text-gray-400 text-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
-        <!-- Col 1: Brand Info -->
-        <div class="lg:col-span-2 space-y-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg bg-brandPurple border border-brandGold flex items-center justify-center font-bold text-brandGold font-display">
-              D
-            </div>
-            <div>
-              <span class="text-lg font-black text-white font-display">Dream Interiors & Traders</span>
-              <p class="text-[10px] text-brandGold font-semibold uppercase tracking-wider">We Make Your Dreams Come True</p>
-            </div>
-          </div>
-          <p class="text-xs text-gray-300 leading-relaxed pr-6">
-            Leading planners, constructors, and uPVC interior experts in Telangana. We take pride in transparent pricing, premium materials, and on-time project handovers.
-          </p>
-          <div class="flex gap-3 text-base text-gray-300 pt-1">
-            <a href="https://wa.me/919603219786" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-brandGold hover:text-brandDark flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="tel:9603219786" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-brandGold hover:text-brandDark flex items-center justify-center transition"><i class="fa-solid fa-phone"></i></a>
-            <a href="mailto:dreaminteriorsgroup@gmail.com" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-brandGold hover:text-brandDark flex items-center justify-center transition"><i class="fa-solid fa-envelope"></i></a>
-          </div>
-        </div>
-
-        <!-- Col 2: Quick Links -->
-        <div>
-          <h4 class="font-bold text-white text-sm mb-4">Quick Navigation</h4>
-          <ul class="space-y-2">
-            <li><button onclick="switchPage('home')" class="hover:text-brandGold transition">Home</button></li>
-            <li><button onclick="switchPage('about')" class="hover:text-brandGold transition">About Us</button></li>
-            <li><button onclick="switchPage('services')" class="hover:text-brandGold transition">All Services</button></li>
-            <li><button onclick="switchPage('process')" class="hover:text-brandGold transition">Our 5-Step Process</button></li>
-            <li><button onclick="switchPage('projects')" class="hover:text-brandGold transition">Recent Projects</button></li>
-            <li><button onclick="switchPage('contact')" class="hover:text-brandGold transition">Contact & Branches</button></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Capabilities -->
-        <div>
-          <h4 class="font-bold text-white text-sm mb-4">Our Services</h4>
-          <ul class="space-y-2">
-            <li>2D/3D Architectural Plans</li>
-            <li>House & Villa Construction</li>
-            <li>uPVC Modular Kitchens</li>
-            <li>Modern Bedroom Wardrobes</li>
-            <li>Living & TV Wall Panels</li>
-            <li>Walkthrough 3D Animation</li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Regional Branches -->
-        <div>
-          <h4 class="font-bold text-white text-sm mb-4">Telangana Branches</h4>
-          <p class="mb-2"><strong class="text-white">Karimnagar (HQ):</strong> Seetharampur</p>
-          <p class="mb-2"><strong class="text-white">Hyderabad:</strong> Complete Execution</p>
-          <p class="mb-2"><strong class="text-white">Sircilla:</strong> Regional Branch</p>
-          <p class="mb-2"><strong class="text-white">Gangadhara:</strong> Branch Office</p>
-          <span class="inline-block mt-2 text-brandGold font-semibold">Service across Telangana</span>
-        </div>
-      </div>
-
-      <!-- Bottom Bar -->
-      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] gap-4">
-        <div>
-          © 2026 <strong>Dream Interiors & Traders</strong>. All Rights Reserved. We Make Your Dreams Come True.
-        </div>
-        <div class="flex gap-4">
-          <span>Phone: <strong>96032 19786</strong></span>
-          <span>Email: <strong>dreaminteriorsgroup@gmail.com</strong></span>
-        </div>
-      </div>
-
-    </div>
+  <!-- FOOTER -->
+  <footer class="bg-brandDarker border-t border-brandGold/20 py-8 text-center text-xs text-gray-500">
+    <p>Dream Interiors & Traders | We Make Your Dreams Come True</p>
+    <p class="mt-1">Karimnagar | Gangadhara | Sircilla | Hyderabad</p>
   </footer>
 
-
-  <!-- ================= THREE.JS 3D REALISTIC SCENE SCRIPT ================= -->
+  <!-- ================= REALISTIC 3D ENGINE (GLTF + PBR LIGHTING + ORBIT CONTROLS) ================= -->
   <script>
-    let scene, camera, renderer, armchairGroup, spotlightCone, floorMirror;
-    let isOrbiting = true;
-    let mouseX = 0, mouseY = 0;
-    let targetX = 0, targetY = 0;
+    let scene, camera, renderer, controls, modelGroup;
+    let autoRotate = true;
 
-    function init3DScene() {
+    function initRealistic3D() {
+      const container = document.getElementById('canvas3d-wrapper');
       const canvas = document.getElementById('webgl-canvas');
-      const container = document.getElementById('three-canvas-container');
 
-      // 1. Scene & Camera setup
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      // 1. Scene Setup
       scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x0c051f, 0.045);
 
-      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.set(2.8, 2.2, 5.5);
+      // 2. Camera Setup
+      camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 50);
+      camera.position.set(2.2, 1.4, 2.5);
 
-      // 2. Renderer with soft shadows & antialias
-      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      // 3. Renderer with Tone Mapping & Physical Accurate Lighting
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.25;
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-      // 3. Ambient & Directional Lights
-      const ambientLight = new THREE.AmbientLight(0x28154e, 1.2);
-      scene.add(ambientLight);
+      // 4. Photorealistic Environment Generator (Room Environment for Reflections)
+      const pmremGenerator = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmremGenerator.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
 
-      // Logo-inspired Yellow/Gold Warm Spotlight from above
-      const spotLight = new THREE.SpotLight(0xfdb813, 3.8);
-      spotLight.position.set(0, 4.5, 0);
-      spotLight.angle = Math.PI / 4.5;
-      spotLight.penumbra = 0.6;
-      spotLight.decay = 1.2;
-      spotLight.distance = 12;
-      spotLight.castShadow = true;
-      spotLight.shadow.mapSize.width = 1024;
-      spotLight.shadow.mapSize.height = 1024;
-      scene.add(spotLight);
+      // 5. Studio Directional & Spotlight (Matching your Brand Gold Spotlight!)
+      const goldSpot = new THREE.SpotLight(0xfdb813, 2.5);
+      goldSpot.position.set(0, 4, 1);
+      goldSpot.angle = Math.PI / 4;
+      goldSpot.penumbra = 0.8;
+      goldSpot.castShadow = true;
+      scene.add(goldSpot);
 
-      // Subtle fill light
-      const blueFill = new THREE.DirectionalLight(0x4f2b99, 1.0);
-      blueFill.position.set(-5, 3, 2);
-      scene.add(blueFill);
+      const softFill = new THREE.DirectionalLight(0x9d71ff, 1.2);
+      softFill.position.set(-3, 2, -2);
+      scene.add(softFill);
 
-      // 4. Polished Architectural Floor (Reflective Wood / Marble Look)
-      const floorGeo = new THREE.PlaneGeometry(30, 30);
-      const floorMat = new THREE.MeshStandardMaterial({
-        color: 0x090317,
-        roughness: 0.25,
-        metalness: 0.6
-      });
-      const floor = new THREE.Mesh(floorGeo, floorMat);
-      floor.rotation.x = -Math.PI / 2;
-      floor.position.y = -1;
-      floor.receiveShadow = true;
-      scene.add(floor);
+      // 6. Realistic Orbit Controls (Customer can orbit around 360, pinch zoom, pan)
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 1.8;
+      controls.maxPolarAngle = Math.PI / 2 + 0.05; // don't go below floor
+      controls.minDistance = 1.2;
+      controls.maxDistance = 5;
 
-      // Subtle floor architectural grid
-      const gridHelper = new THREE.GridHelper(24, 24, 0xfdb813, 0x1f0e42);
-      gridHelper.position.y = -0.99;
-      scene.add(gridHelper);
+      // 7. Load Real Photorealistic Furniture Model (Khronos Sheen Luxury Chair .GLB)
+      const loader = new THREE.GLTFLoader();
+      const modelUrl = 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SheenChair/glTF-Binary/SheenChair.glb';
 
-      // 5. Build Designer Armchair matching their Logo Silhouette
-      armchairGroup = new THREE.Group();
+      loader.load(
+        modelUrl,
+        function (gltf) {
+          modelGroup = gltf.scene;
+          modelGroup.scale.set(2.2, 2.2, 2.2);
+          modelGroup.position.set(0, -0.65, 0);
 
-      const chairMat = new THREE.MeshStandardMaterial({
-        color: 0xfdfdfd,
-        roughness: 0.35,
-        metalness: 0.1
-      });
-      const goldLegMat = new THREE.MeshStandardMaterial({
-        color: 0xfdb813,
-        roughness: 0.3,
-        metalness: 0.85
-      });
+          modelGroup.traverse(child => {
+            if (child.isMesh) {
+              child.castShadow = true;
+              child.receiveShadow = true;
+            }
+          });
 
-      // Seat Cushion
-      const seatGeo = new THREE.BoxGeometry(1.4, 0.28, 1.3);
-      const seat = new THREE.Mesh(seatGeo, chairMat);
-      seat.position.y = 0;
-      seat.castShadow = true;
-      seat.receiveShadow = true;
-      armchairGroup.add(seat);
+          scene.add(modelGroup);
 
-      // Backrest (Curved shape)
-      const backGeo = new THREE.BoxGeometry(1.4, 1.1, 0.24);
-      const backrest = new THREE.Mesh(backGeo, chairMat);
-      backrest.position.set(0, 0.55, -0.55);
-      backrest.rotation.x = -0.05;
-      backrest.castShadow = true;
-      armchairGroup.add(backrest);
+          // Hide Loader once model is loaded
+          const loaderElem = document.getElementById('model-loader');
+          if (loaderElem) {
+            loaderElem.style.opacity = '0';
+            setTimeout(() => loaderElem.remove(), 500);
+          }
+        },
+        undefined,
+        function (error) {
+          console.error("Error loading model, fallback rendering:", error);
+          document.getElementById('model-loader').innerHTML = '<span class="text-xs text-red-400">Loading Error. Please refresh.</span>';
+        }
+      );
 
-      // Left Armrest
-      const armGeo = new THREE.BoxGeometry(0.24, 0.65, 1.25);
-      const leftArm = new THREE.Mesh(armGeo, chairMat);
-      leftArm.position.set(-0.75, 0.3, 0);
-      leftArm.castShadow = true;
-      armchairGroup.add(leftArm);
-
-      // Right Armrest
-      const rightArm = new THREE.Mesh(armGeo, chairMat);
-      rightArm.position.set(0.75, 0.3, 0);
-      rightArm.castShadow = true;
-      armchairGroup.add(rightArm);
-
-      // Gold-tipped Tapered Legs
-      const legGeo = new THREE.CylinderGeometry(0.04, 0.025, 0.75, 16);
-      const legPositions = [
-        [-0.6, -0.4, 0.5],
-        [0.6, -0.4, 0.5],
-        [-0.6, -0.4, -0.5],
-        [0.6, -0.4, -0.5]
-      ];
-
-      legPositions.forEach(pos => {
-        const leg = new THREE.Mesh(legGeo, goldLegMat);
-        leg.position.set(pos[0], pos[1], pos[2]);
-        leg.rotation.z = pos[0] > 0 ? -0.12 : 0.12;
-        leg.rotation.x = pos[2] > 0 ? 0.1 : -0.1;
-        leg.castShadow = true;
-        armchairGroup.add(leg);
-      });
-
-      // 6. Suspended Pendant Lamp (Right as drawn in logo over the chair!)
-      const lampCordGeo = new THREE.CylinderGeometry(0.008, 0.008, 2, 8);
-      const cord = new THREE.Mesh(lampCordGeo, goldLegMat);
-      cord.position.set(0, 2.8, 0);
-      armchairGroup.add(cord);
-
-      const lampConeGeo = new THREE.ConeGeometry(0.4, 0.35, 24, 1, true);
-      const lampHead = new THREE.Mesh(lampConeGeo, goldLegMat);
-      lampHead.position.set(0, 1.85, 0);
-      lampHead.rotation.x = Math.PI;
-      armchairGroup.add(lampHead);
-
-      // Translucent volumetric light cone representing the yellow beam in the logo
-      const lightBeamGeo = new THREE.ConeGeometry(1.6, 2.9, 32, 1, true);
-      const lightBeamMat = new THREE.MeshBasicMaterial({
-        color: 0xfdb813,
-        transparent: true,
-        opacity: 0.15,
-        side: THREE.DoubleSide
-      });
-      const lightBeam = new THREE.Mesh(lightBeamGeo, lightBeamMat);
-      lightBeam.position.set(0, 0.45, 0);
-      armchairGroup.add(lightBeam);
-
-      // 7. Ambient Glowing Golden Floating Particles
-      const particlesCount = 80;
-      const particleGeo = new THREE.BufferGeometry();
-      const positions = new Float32Array(particlesCount * 3);
-
-      for (let i = 0; i < particlesCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 8;
-        positions[i + 1] = Math.random() * 4;
-        positions[i + 2] = (Math.random() - 0.5) * 8;
-      }
-      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const particleMat = new THREE.PointsMaterial({
-        color: 0xfdb813,
-        size: 0.045,
-        transparent: true,
-        opacity: 0.7
-      });
-      const particleSystem = new THREE.Points(particleGeo, particleMat);
-      scene.add(particleSystem);
-
-      // Position Armchair in 3D scene
-      armchairGroup.position.set(1.4, -0.3, 0);
-      scene.add(armchairGroup);
-
-      // Event Listeners for Responsive interaction
+      // Resize event
       window.addEventListener('resize', onWindowResize);
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('touchmove', onTouchMove, { passive: true });
 
-      // Animate Loop
-      let clock = new THREE.Clock();
+      // Render Loop
       function animate() {
         requestAnimationFrame(animate);
-        const elapsedTime = clock.getElapsedTime();
-
-        // Subtle gentle breathing/orbiting motion
-        if (isOrbiting) {
-          armchairGroup.rotation.y = Math.sin(elapsedTime * 0.45) * 0.35 + 0.15;
-          armchairGroup.position.y = -0.3 + Math.sin(elapsedTime * 1.2) * 0.04;
-        }
-
-        // Camera smoothly follows cursor parallax
-        targetX = mouseX * 1.5;
-        targetY = mouseY * 1.0;
-        camera.position.x += (targetX + 2.5 - camera.position.x) * 0.04;
-        camera.position.y += (-targetY + 2.0 - camera.position.y) * 0.04;
-        camera.lookAt(0.5, 0.4, 0);
-
-        // Gently float particles
-        particleSystem.rotation.y = elapsedTime * 0.02;
-
+        controls.update();
         renderer.render(scene, camera);
       }
       animate();
     }
 
-    function onMouseMove(event) {
-      mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseY = (event.clientY / window.innerHeight) * 2 - 1;
-    }
-
-    function onTouchMove(event) {
-      if (event.touches.length > 0) {
-        mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-        mouseY = (event.touches[0].clientY / window.innerHeight) * 2 - 1;
-      }
-    }
-
     function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const container = document.getElementById('canvas3d-wrapper');
+      if (!container) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(width, height);
     }
 
-    function toggle3DAnimationState() {
-      isOrbiting = !isOrbiting;
-      const btn = document.getElementById('anim-toggle-btn');
-      if (isOrbiting) {
-        btn.innerHTML = '<i class="fa-solid fa-pause mr-1"></i> Pause 3D Gentle Orbit';
-      } else {
-        btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Resume 3D Gentle Orbit';
-      }
+    function toggleAutoRotate() {
+      autoRotate = !autoRotate;
+      controls.autoRotate = autoRotate;
+      const btn = document.getElementById('rotate-toggle-btn');
+      btn.innerHTML = autoRotate ? '<i class="fa-solid fa-pause mr-1"></i> Auto-Rotate' : '<i class="fa-solid fa-play mr-1"></i> Auto-Rotate';
     }
 
-    // ================= PAGE ROUTING LOGIC =================
+    function resetCameraView() {
+      gsap.to(camera.position, { x: 2.2, y: 1.4, z: 2.5, duration: 1 });
+      controls.target.set(0, 0, 0);
+    }
+
+    // Navigation & Forms
     function switchPage(pageId) {
-      // Hide all page sections
-      document.querySelectorAll('.page-section').forEach(sec => {
-        sec.classList.remove('active');
-      });
+      document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+      const activeP = document.getElementById(`page-${pageId}`);
+      if (activeP) activeP.classList.add('active');
 
-      // Show targeted page
-      const target = document.getElementById(`page-${pageId}`);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      // Update Nav buttons styling
       document.querySelectorAll('.nav-btn').forEach(btn => {
         if (btn.getAttribute('data-page') === pageId) {
           btn.classList.add('text-brandGold', 'font-bold');
@@ -1643,79 +799,32 @@
           btn.classList.add('text-gray-300');
         }
       });
-
-      // Smooth 3D camera adjustment according to page
-      if (camera) {
-        if (pageId === 'home') {
-          gsap.to(camera.position, { z: 5.5, x: 2.8, y: 2.2, duration: 1.2 });
-        } else if (pageId === 'services' || pageId === 'projects') {
-          gsap.to(camera.position, { z: 7.0, x: -1.0, y: 3.5, duration: 1.2 });
-        } else {
-          gsap.to(camera.position, { z: 6.0, x: 0.5, y: 2.5, duration: 1.2 });
-        }
-      }
-
-      // Close mobile drawer if open
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       document.getElementById('mobile-menu').classList.add('hidden');
     }
 
-    // ================= MODAL & FORM LOGIC =================
-    function openEnquiryModal(sourceTitle) {
-      if (sourceTitle) {
-        document.getElementById('modal-title').innerText = sourceTitle;
-      }
+    function openEnquiryModal() {
       document.getElementById('enquiry-modal').classList.remove('hidden');
     }
-
     function closeEnquiryModal() {
       document.getElementById('enquiry-modal').classList.add('hidden');
     }
-
     function handleFormSubmit(e) {
       e.preventDefault();
-      document.getElementById('form-success-banner').classList.remove('hidden');
+      document.getElementById('form-success').classList.remove('hidden');
       e.target.reset();
-      setTimeout(() => {
-        document.getElementById('form-success-banner').classList.add('hidden');
-      }, 7000);
     }
-
     function handleModalSubmit(e) {
       e.preventDefault();
-      alert("ధన్యవాదాలు! మీ విజిట్ రిక్వెస్ట్ మా టీమ్‌కి అందింది. 96032 19786 నుండి మా ఇంజనీర్ మిమ్మల్ని సంప్రదిస్తారు.");
+      alert("ధన్యవాదాలు! మీ వివరాలు మా టీమ్‌కి చేరాయి. 96032 19786 నుండి మిమ్మల్ని సంప్రదిస్తాం.");
       closeEnquiryModal();
-      e.target.reset();
     }
 
-    // ================= PROJECT FILTER LOGIC =================
-    function filterProjects(category) {
-      document.querySelectorAll('.project-filter-btn').forEach(btn => {
-        if (btn.getAttribute('data-filter') === category) {
-          btn.classList.add('bg-brandGold', 'text-brandDark');
-          btn.classList.remove('bg-white/5', 'text-gray-300');
-        } else {
-          btn.classList.remove('bg-brandGold', 'text-brandDark');
-          btn.classList.add('bg-white/5', 'text-gray-300');
-        }
-      });
-
-      document.querySelectorAll('.project-card').forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    // Mobile menu toggle
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
-    // Start 3D Engine on load
-    window.addEventListener('DOMContentLoaded', init3DScene);
+    window.addEventListener('DOMContentLoaded', initRealistic3D);
   </script>
 </body>
 </html>
-```
