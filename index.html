@@ -1,506 +1,1720 @@
+
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#160b2d">
-  <meta name="description" content="Dream Interiors & Traders — interiors, UPVC solutions and construction in Karimnagar.">
-  <title>Dream Interiors &amp; Traders | We Make Your Dreams Come True</title>
-
+  <title>Dream Interiors & Traders | Construction & Interior Designers in Karimnagar, Telangana</title>
+  <meta name="description" content="From planning and design to construction and uPVC interiors, Dream Interiors & Traders delivers complete projects across Telangana. Book a free site visit today.">
+  
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandDark: '#12092b',
+            brandDarker: '#0a0418',
+            brandCard: 'rgba(26, 14, 58, 0.75)',
+            brandGold: '#fdb813',
+            brandGoldHover: '#e5a50b',
+            brandPurple: '#24124e',
+            brandBorder: 'rgba(253, 184, 19, 0.25)'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
 
   <style>
-    :root {
-      --purple: #160b2d;
-      --purple2: #291745;
-      --gold: #ffb300;
-      --cream: #f7f5f1;
-      --ink: #211d27;
-      --muted: #77727e;
+    body {
+      background-color: #0d0520;
+      color: #f1f1f7;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
-    body { margin: 0; background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; }
-    h1, h2, h3 { font-family: "Manrope", sans-serif; }
-    a { color: inherit; text-decoration: none; }
-    .topbar { background: #10091f; color: white; padding: 11px 5%; font-size: 12px; }
-    .topbar-inner { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; }
-    .nav { position: sticky; top: 0; z-index: 10; background: rgba(247,245,241,.95); backdrop-filter: blur(12px); border-bottom: 1px solid #e8e3ec; }
-    .nav-inner { height: 78px; max-width: 1200px; margin: auto; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; }
-    .logo img { width: 190px; max-height: 64px; object-fit: contain; object-position: left center; }
-    .nav-links { display: flex; align-items: center; gap: 25px; font-weight: 700; font-size: 13px; }
-    .nav-links a:hover { color: #a76e00; }
-    .menu { display: none; border: 0; background: none; color: var(--purple); font-size: 26px; }
-    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 9px; padding: 14px 21px; border-radius: 40px; background: var(--gold); color: #21152c; font-size: 13px; font-weight: 800; border: 0; cursor: pointer; transition: .25s; }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px #ffb30044; }
-
-    /* 3D hero scene */
-    .hero { position: relative; min-height: 690px; overflow: hidden; isolation: isolate; display: flex; align-items: center; background: radial-gradient(ellipse at 75% 45%, #493365, #160b2d 67%); color: white; }
-    #room3d { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; }
-    .hero::after { content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(18,8,37,.96) 0%, rgba(18,8,37,.87) 35%, rgba(18,8,37,.18) 76%, rgba(18,8,37,.05)); }
-    .hero-copy { width: min(1200px, 100%); margin: auto; padding: 95px 5%; position: relative; pointer-events: none; }
-    .hero-copy > * { max-width: 560px; }
-    .eyebrow { color: #c28300; text-transform: uppercase; letter-spacing: .18em; font-weight: 800; font-size: 11px; }
-    .hero .eyebrow { color: #ffd36a; }
-    .hero h1 { margin: 20px 0; font-size: clamp(48px, 7vw, 82px); line-height: .98; letter-spacing: -.055em; }
-    .hero h1 span { color: var(--gold); }
-    .hero p { color: #ded8e8; max-width: 480px; line-height: 1.8; font-size: 16px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 27px; pointer-events: auto; }
-    .btn-ghost { color: white; border: 1px solid #ffffff88; background: transparent; }
-    .hero-note { margin-top: 48px; color: #c9c1d3; font-size: 12px; }
-    .hero-note strong { color: white; }
-
-    .section { padding: 90px 5%; }
-    .container { max-width: 1140px; margin: auto; }
-    .heading { max-width: 650px; margin-bottom: 38px; }
-    .heading h2 { color: var(--purple); margin: 12px 0; font-size: clamp(34px, 5vw, 52px); line-height: 1.08; letter-spacing: -.045em; }
-    .heading p, .about-copy p { color: var(--muted); line-height: 1.8; }
-    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .about img { width: 100%; height: 440px; object-fit: cover; border-radius: 22px; box-shadow: 0 25px 65px #160b2d22; }
-    .about-copy h2 { color: var(--purple); font-size: clamp(34px, 4vw, 50px); line-height: 1.1; letter-spacing: -.045em; }
-    .about-copy ul { list-style: none; padding: 0; line-height: 2.2; font-size: 14px; font-weight: 700; }
-    .about-copy li::before { content: "✦"; color: #bd8310; margin-right: 10px; }
-
-    .services-section { background: #eeeaf3; }
-    .services { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .service { background: white; padding: 25px; min-height: 235px; border-radius: 18px; box-shadow: 0 10px 28px #160b2d0d; transition: transform .3s, box-shadow .3s; transform-style: preserve-3d; }
-    .service:hover { transform: perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(-8px); box-shadow: 0 24px 40px #160b2d20; }
-    .service-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: #fff1c9; font-size: 23px; margin-bottom: 23px; }
-    .service h3 { color: var(--purple); font-size: 17px; }
-    .service p { color: var(--muted); font-size: 13px; line-height: 1.7; }
-
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-    .step { border-top: 1px solid #d9d3df; padding-top: 20px; }
-    .step b { color: #bb8100; font: 800 13px "Manrope"; }
-    .step h3 { color: var(--purple); margin-bottom: 8px; }
-    .step p { color: var(--muted); font-size: 13px; line-height: 1.7; }
-
-    .projects-section { background: var(--purple); color: white; }
-    .projects-section .heading h2 { color: white; }
-    .projects-section .heading p { color: #c9c1d3; }
-    .projects { display: grid; grid-template-columns: 1.2fr .8fr .8fr; grid-template-rows: 220px 220px; gap: 15px; }
-    .project { position: relative; overflow: hidden; border-radius: 16px; }
-    .project:first-child { grid-row: span 2; }
-    .project img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
-    .project:hover img { transform: scale(1.08); }
-    .project::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, #10091fdd); }
-    .project-label { position: absolute; z-index: 1; bottom: 18px; left: 18px; }
-    .project-label small { color: #ffd36a; text-transform: uppercase; letter-spacing: .12em; }
-    .project-label h3 { margin: 5px 0 0; }
-    .disclaimer { color: #c9c1d3; font-size: 12px; margin-top: 17px; }
-
-    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 50px; }
-    .contact-card { background: var(--purple); color: white; border-radius: 20px; padding: 30px; }
-    .contact-card p { color: #d4ccdf; line-height: 1.7; }
-    .contact-line { padding: 16px 0; border-top: 1px solid #ffffff24; font-size: 13px; line-height: 1.7; }
-    .contact-line b { display: block; color: #ffd36a; }
-    .form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .field { display: flex; flex-direction: column; gap: 7px; }
-    .field.full { grid-column: 1 / -1; }
-    .field label { color: var(--purple); font-size: 12px; font-weight: 700; }
-    .field input, .field select, .field textarea { border: 1px solid #ded9e4; border-radius: 10px; padding: 13px; font: inherit; font-size: 13px; background: white; }
-    .field textarea { min-height: 110px; resize: vertical; }
-    footer { background: #10091f; color: #d2ccdc; padding: 22px 5%; font-size: 12px; }
-    .footer-inner { max-width: 1140px; margin: auto; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    footer strong { color: #ffd36a; }
-
-    /* Sections reveal as they enter the screen */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media(max-width: 850px) {
-      .nav-links { gap: 13px; }
-      .nav-links a { font-size: 11px; }
-      .services { grid-template-columns: repeat(2, 1fr); }
-      .about { gap: 35px; }
+    .glass-card {
+      background: rgba(22, 10, 48, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(253, 184, 19, 0.18);
     }
-    @media(max-width: 650px) {
-      .topbar-inner { justify-content: center; text-align: center; }
-      .nav-inner { height: 70px; }
-      .logo img { width: 160px; max-height: 55px; }
-      .menu { display: block; }
-      .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 22px 6%; background: var(--cream); box-shadow: 0 15px 25px #160b2d1a; align-items: stretch; flex-direction: column; }
-      .nav-links.open { display: flex; }
-      .hero { min-height: 650px; }
-      .hero::after { background: linear-gradient(90deg, rgba(18,8,37,.95), rgba(18,8,37,.68)); }
-      .hero-copy { padding-top: 75px; padding-bottom: 75px; }
-      .section { padding: 70px 6%; }
-      .about, .contact-grid { grid-template-columns: 1fr; }
-      .about img { height: 320px; }
-      .services { grid-template-columns: 1fr 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; }
-      .projects { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 180px 180px; }
-      .project:first-child { grid-column: 1 / -1; grid-row: auto; }
+    .glass-card:hover {
+      border-color: rgba(253, 184, 19, 0.6);
+      box-shadow: 0 10px 30px -10px rgba(253, 184, 19, 0.25);
     }
-    @media(max-width: 420px) {
-      .services { grid-template-columns: 1fr; }
-      .form { grid-template-columns: 1fr; }
-      .field.full { grid-column: auto; }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(253, 184, 19, 0.45);
     }
-    @media(prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    .text-glow {
+      text-shadow: 0 0 20px rgba(253, 184, 19, 0.4);
     }
+    #three-canvas-container canvas {
+      pointer-events: auto;
+      touch-action: none;
+    }
+    .page-section {
+      display: none;
+      animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .page-section.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0c051f; }
+    ::-webkit-scrollbar-thumb { background: #2f1766; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #fdb813; }
   </style>
+
+  <!-- Three.js & GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 
-<body>
-  <div class="topbar">
-    <div class="topbar-inner">
-      <a href="tel:9603219786">☎ &nbsp;Phone: <strong>96032 19786</strong></a>
-      <a href="mailto:dreaminteriorsgroup@gmail.com">✉ &nbsp;Email: <strong>dreaminteriorsgroup@gmail.com</strong></a>
-      <span>⌖ &nbsp;Head Office: Opp. PM Convention Hall, Seetharampur, Karimnagar – 505001</span>
+<body class="selection:bg-brandGold selection:text-brandDark">
+
+  <!-- ================= TOP CONTACT BAR ================= -->
+  <div class="bg-brandDarker border-b border-white/10 text-xs py-2 px-4 relative z-50">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center space-x-6 text-gray-300">
+        <span><i class="fa-solid fa-location-dot text-brandGold mr-2"></i>Karimnagar | Gangadhara | Sircilla | Hyderabad</span>
+        <span class="hidden md:inline"><i class="fa-solid fa-clock text-brandGold mr-2"></i>Mon - Sun (Free Site Visit across Telangana)</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="tel:9603219786" class="text-white hover:text-brandGold transition font-semibold flex items-center gap-1">
+          <i class="fa-solid fa-phone text-brandGold"></i> 96032 19786
+        </a>
+        <a href="https://wa.me/919603219786" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-2.5 py-0.5 rounded-full flex items-center gap-1 font-medium text-[11px] transition">
+          <i class="fa-brands fa-whatsapp"></i> Chat Now
+        </a>
+      </div>
     </div>
   </div>
 
-  <header class="nav">
-    <nav class="nav-inner">
-      <a class="logo" href="#home"><img src="assets/logo.png" alt="Dream Interiors & Traders"></a>
-      <button class="menu" aria-label="Open menu" aria-expanded="false">☰</button>
-      <div class="nav-links">
-        <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a>
-        <a href="#process">Our Process</a><a href="#projects">Projects</a>
-        <a class="btn" href="#contact">Get in Touch ↗</a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <canvas id="room3d" aria-label="Interactive 3D interior room"></canvas>
-      <div class="hero-copy">
-        <div class="eyebrow">Interiors · UPVC · Construction</div>
-        <h1>Spaces made for the way <span>you dream.</span></h1>
-        <p>Thoughtful interiors and dependable construction, brought together to make your vision feel like home.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#contact">Let’s Discuss Your Project ↗</a>
-          <a class="btn btn-ghost" href="#services">Explore Our Services</a>
-        </div>
-        <div class="hero-note"><strong>Dream Interiors &amp; Traders</strong> · Karimnagar, Telangana</div>
-      </div>
-    </section>
-
-    <section class="section reveal" id="about">
-      <div class="container about">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85" alt="Contemporary interior inspiration" loading="lazy">
-        <div class="about-copy">
-          <div class="eyebrow">About Dream Interiors</div>
-          <h2>We make your dreams come true.</h2>
-          <p>Dream Interiors &amp; Traders helps bring homes and spaces to life with interior solutions, UPVC products and construction services. We work with you from the first conversation through planning and execution.</p>
-          <ul>
-            <li>Interior design and furnishing solutions</li>
-            <li>UPVC doors and windows</li>
-            <li>Construction and project support</li>
-          </ul>
-          <a class="btn" href="#contact">Talk to Our Team ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section services-section reveal" id="services">
-      <div class="container">
-        <div class="heading">
-          <div class="eyebrow">What We Do</div>
-          <h2>Complete solutions for your space.</h2>
-          <p>From interior details to dependable building solutions, let’s plan a result that fits your needs and style.</p>
-        </div>
-        <div class="services">
-          <article class="service"><div class="service-icon">⌂</div><h3>Interior Design</h3><p>Personalized ideas for beautiful, comfortable and functional interiors.</p></article>
-          <article class="service"><div class="service-icon">▦</div><h3>Interior Materials</h3><p>Interior materials and finishing options to help bring your design together.</p></article>
-          <article class="service"><div class="service-icon">▣</div><h3>UPVC Solutions</h3><p>UPVC doors and windows selected for a clean look and everyday use.</p></article>
-          <article class="service"><div class="service-icon">⌂</div><h3>Construction</h3><p>Construction support to help turn your plans into a well-built space.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal" id="process">
-      <div class="container">
-        <div class="heading"><div class="eyebrow">Our Process</div><h2>From first idea to finished space.</h2><p>A clear, collaborative process helps keep your project moving in the right direction.</p></div>
-        <div class="steps">
-          <article class="step"><b>01</b><h3>Let’s Talk</h3><p>Tell us about your space, ideas, needs and budget.</p></article>
-          <article class="step"><b>02</b><h3>Plan &amp; Select</h3><p>Discuss suitable designs, materials and project requirements.</p></article>
-          <article class="step"><b>03</b><h3>Build &amp; Create</h3><p>Move forward with the agreed work and keep communication open.</p></article>
-          <article class="step"><b>04</b><h3>Review Together</h3><p>Review the completed work and discuss the finishing details.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section projects-section reveal" id="projects">
-      <div class="container">
-        <div class="heading"><div class="eyebrow">Project Inspiration</div><h2>Imagine what your space can become.</h2><p>Explore interior styles and ideas that can help shape your own project.</p></div>
-        <div class="projects">
-          <article class="project"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="Living room inspiration" loading="lazy"><div class="project-label"><small>Interior inspiration</small><h3>Warm Modern Living</h3></div></article>
-          <article class="project"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=85" alt="Modern home inspiration" loading="lazy"><div class="project-label"><small>Home inspiration</small><h3>Natural &amp; Refined</h3></div></article>
-          <article class="project"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=85" alt="Interior design inspiration" loading="lazy"><div class="project-label"><small>Interior inspiration</small><h3>Calm Contemporary</h3></div></article>
-          <article class="project"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85" alt="Modern home exterior inspiration" loading="lazy"><div class="project-label"><small>Construction inspiration</small><h3>Modern Home</h3></div></article>
-          <article class="project"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" alt="Bright interior inspiration" loading="lazy"><div class="project-label"><small>Interior inspiration</small><h3>Light &amp; Space</h3></div></article>
-        </div>
-        <p class="disclaimer">These images are for design inspiration only and are not representations of completed company projects.</p>
-      </div>
-    </section>
-
-    <section class="section reveal" id="contact">
-      <div class="container">
-        <div class="heading"><div class="eyebrow">Contact Us</div><h2>Let’s start with your idea.</h2><p>Share a few details about your project. Our team will be happy to hear from you.</p></div>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h2>Get in touch</h2><p>Contact Dream Interiors &amp; Traders to discuss interiors, UPVC or construction.</p>
-            <div class="contact-line"><b>Call us</b><a href="tel:9603219786">96032 19786</a></div>
-            <div class="contact-line"><b>Email us</b><a href="mailto:dreaminteriorsgroup@gmail.com">dreaminteriorsgroup@gmail.com</a></div>
-            <div class="contact-line"><b>Head office</b>Opp. PM Convention Hall,<br>Seetharampur, Karimnagar – 505001</div>
-            <a class="btn" href="https://wa.me/919603219786" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
+  <!-- ================= NAVIGATION ================= -->
+  <nav class="sticky top-0 z-40 bg-brandDark/90 backdrop-blur-md border-b border-brandGold/20 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo Area with Brand Identity -->
+        <a href="#" onclick="switchPage('home')" class="flex items-center gap-3 group">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brandPurple to-brandDarker border border-brandGold flex items-center justify-center shadow-lg group-hover:scale-105 transition transform">
+            <span class="text-2xl font-black text-brandGold font-display">D</span>
+            <i class="fa-solid fa-couch text-white text-xs -ml-1"></i>
           </div>
-          <form class="form" id="contactForm">
-            <div class="field"><label for="name">Your name</label><input id="name" name="name" required placeholder="Enter your name"></div>
-            <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" required placeholder="Enter your phone number"></div>
-            <div class="field full"><label for="service">What are you interested in?</label><select id="service" name="service"><option>Interior Design</option><option>Interior Materials</option><option>UPVC Doors &amp; Windows</option><option>Construction</option><option>Other</option></select></div>
-            <div class="field full"><label for="message">Tell us about your project</label><textarea id="message" name="message" placeholder="A few details about your project..."></textarea></div>
-            <button class="btn" type="submit">Send Enquiry ↗</button>
-          </form>
+          <div>
+            <div class="flex items-baseline">
+              <span class="text-2xl font-black tracking-tight font-display text-white">Dream</span>
+              <span class="text-xs uppercase ml-1.5 px-1.5 py-0.5 rounded bg-brandGold text-brandDark font-extrabold tracking-wider">3D Real</span>
+            </div>
+            <p class="text-[10px] uppercase tracking-widest text-brandGold font-bold">Interiors & Traders</p>
+          </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden lg:flex items-center space-x-1">
+          <button onclick="switchPage('home')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-white hover:text-brandGold" data-page="home">Home</button>
+          <button onclick="switchPage('about')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="about">About Us</button>
+          <button onclick="switchPage('services')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="services">Services</button>
+          <button onclick="switchPage('process')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="process">Our Process</button>
+          <button onclick="switchPage('projects')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="projects">Projects</button>
+          <button onclick="switchPage('contact')" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition text-gray-300 hover:text-brandGold" data-page="contact">Contact</button>
+        </div>
+
+        <!-- CTA Action -->
+        <div class="hidden sm:flex items-center gap-3">
+          <button onclick="openEnquiryModal('Free Site Visit')" class="bg-gradient-to-r from-brandGold to-amber-500 hover:from-amber-400 hover:to-brandGold text-brandDark font-bold px-5 py-2.5 rounded-xl shadow-lg gold-glow hover:scale-105 active:scale-95 transition transform text-sm flex items-center gap-2">
+            <i class="fa-solid fa-compass-drafting"></i> Free Site Visit
+          </button>
+        </div>
+
+        <!-- Mobile Menu Hamburger -->
+        <div class="lg:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-white hover:text-brandGold p-2">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
         </div>
       </div>
+    </div>
+
+    <!-- Mobile Navigation Dropdown -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-brandDarker border-b border-brandGold/30 px-4 pt-2 pb-6 space-y-2">
+      <button onclick="switchPage('home')" class="block w-full text-left px-3 py-2 text-base font-medium text-white hover:bg-brandPurple rounded-lg">Home</button>
+      <button onclick="switchPage('about')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:bg-brandPurple rounded-lg">About Us</button>
+      <button onclick="switchPage('services')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:bg-brandPurple rounded-lg">Services</button>
+      <button onclick="switchPage('process')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:bg-brandPurple rounded-lg">Our Process</button>
+      <button onclick="switchPage('projects')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:bg-brandPurple rounded-lg">Projects</button>
+      <button onclick="switchPage('contact')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:bg-brandPurple rounded-lg">Contact</button>
+      <button onclick="openEnquiryModal('Free Site Visit')" class="w-full mt-3 bg-brandGold text-brandDark font-bold py-2.5 rounded-lg text-center">Book Free Site Visit</button>
+    </div>
+  </nav>
+
+  <!-- ================= 3D CANVAS BACKGROUND ================= -->
+  <div class="fixed inset-0 pointer-events-none z-0 opacity-80" id="three-canvas-container">
+    <canvas id="webgl-canvas" class="w-full h-full"></canvas>
+  </div>
+
+  <!-- Content Holder -->
+  <main class="relative z-10 min-h-screen">
+
+    <!-- ============================================================= -->
+    <!-- PAGE 1: HOME -->
+    <!-- ============================================================= -->
+    <section id="page-home" class="page-section active">
+      
+      <!-- HERO SECTION -->
+      <div class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brandGold/40 bg-brandDark/80 backdrop-blur-md">
+              <span class="w-2 h-2 rounded-full bg-brandGold animate-pulse"></span>
+              <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Constructions & Interiors</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-display leading-tight">
+              From Planning to <span class="text-brandGold text-glow">Construction</span> to Interior Complete Project
+            </h1>
+
+            <p class="text-lg sm:text-xl text-gray-300 font-normal max-w-2xl leading-relaxed">
+              We design, plan and build beautiful and functional spaces for homes and commercial spaces across Telangana.
+            </p>
+
+            <div class="flex flex-wrap gap-4 pt-2">
+              <button onclick="openEnquiryModal('Hero Enquiry')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-4 rounded-xl text-base shadow-xl gold-glow hover:scale-105 active:scale-95 transition transform flex items-center gap-3">
+                <i class="fa-solid fa-paper-plane"></i> Enquiry Now
+              </button>
+              <button onclick="switchPage('projects')" class="bg-brandDark/80 hover:bg-brandPurple border border-brandGold/40 text-white font-semibold px-8 py-4 rounded-xl text-base hover:border-brandGold transition flex items-center gap-2 backdrop-blur-sm">
+                <i class="fa-solid fa-eye text-brandGold"></i> View Our Projects
+              </button>
+            </div>
+
+            <div class="pt-4 flex items-center gap-6 text-sm text-gray-400">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check-circle text-brandGold"></i> No Multiple Contractors
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check-circle text-brandGold"></i> 100% uPVC Mastery
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check-circle text-brandGold"></i> Transparent Quotes
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Interactive Helper Box -->
+          <div class="lg:col-span-5 relative flex justify-center">
+            <div class="glass-card p-6 rounded-3xl w-full max-w-md relative overflow-hidden border border-brandGold/30">
+              <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-cube text-brandGold text-lg animate-spin" style="animation-duration: 8s;"></i>
+                  <span class="text-xs uppercase font-bold tracking-wider text-white">Live 3D Architectural Scene</span>
+                </div>
+                <span class="text-[11px] bg-brandGold/20 text-brandGold px-2 py-0.5 rounded font-mono">Interactive</span>
+              </div>
+              <p class="text-xs text-gray-300 mb-4 leading-relaxed">
+                Mouse ని move చేయండి లేదా touch చేసి డ్రాగ్ చేయండి. మన వెబ్‌సైట్ వెనుక ఉన్న 3D లగ్జరీ ఇంటీరియర్ ఆర్మ్‌చైర్ మరియు లైట్ రియల్-టైమ్‌లో రెస్పాండ్ అవుతాయి!
+              </p>
+              <div class="grid grid-cols-2 gap-2 text-center text-xs font-semibold">
+                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <i class="fa-solid fa-arrows-up-down-left-right text-brandGold block mb-1"></i>
+                  Rotate & Pan Camera
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <i class="fa-solid fa-lightbulb text-brandGold block mb-1"></i>
+                  Dynamic Spotlight
+                </div>
+              </div>
+              <button onclick="toggle3DAnimationState()" id="anim-toggle-btn" class="mt-4 w-full py-2 rounded-lg bg-brandPurple hover:bg-brandPurple/80 text-xs font-semibold text-brandGold border border-brandGold/30 transition">
+                <i class="fa-solid fa-pause mr-1"></i> Pause 3D Gentle Orbit
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- QUICK STRIP -->
+      <div class="border-y border-brandGold/20 bg-brandDarker/80 backdrop-blur-md py-6">
+        <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
+          <div class="flex justify-between items-center min-w-[750px] gap-4 text-center">
+            <div class="flex-1 p-2 border-r border-white/10">
+              <span class="block text-brandGold font-bold text-sm">2D Plans</span>
+              <span class="text-xs text-gray-400">Accurate & Detailed</span>
+            </div>
+            <div class="flex-1 p-2 border-r border-white/10">
+              <span class="block text-brandGold font-bold text-sm">3D Design</span>
+              <span class="text-xs text-gray-400">Realistic Visuals</span>
+            </div>
+            <div class="flex-1 p-2 border-r border-white/10">
+              <span class="block text-brandGold font-bold text-sm">Elevations</span>
+              <span class="text-xs text-gray-400">Modern & Elegant</span>
+            </div>
+            <div class="flex-1 p-2 border-r border-white/10">
+              <span class="block text-brandGold font-bold text-sm">Walkthrough</span>
+              <span class="text-xs text-gray-400">Interior & Exterior</span>
+            </div>
+            <div class="flex-1 p-2">
+              <span class="block text-brandGold font-bold text-sm">Animation</span>
+              <span class="text-xs text-gray-400">Stunning Presentations</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICES OVERVIEW -->
+      <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/20">All Under One Roof</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-display mt-4">Complete Solutions for Your Space</h2>
+          <p class="text-gray-300 mt-4 leading-relaxed">
+            Whether you are building a new home, renovating a space or designing the interiors of an office, you do not need to deal with many different contractors. Dream Interiors & Traders brings planning, construction and interiors under one roof, so your project stays coordinated from the first sketch to the final handover.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="glass-card rounded-2xl p-8 transition transform hover:-translate-y-2 relative overflow-hidden group">
+            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6 group-hover:bg-brandGold group-hover:text-brandDark transition duration-300">
+              <i class="fa-solid fa-pen-ruler"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 font-display">Planning & Design</h3>
+            <p class="text-sm text-gray-300 leading-relaxed mb-6">
+              2D accurate floor plans, structural layouts, photorealistic 3D elevations, space planning and interior walkthrough animations.
+            </p>
+            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition">
+              View Details <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card rounded-2xl p-8 transition transform hover:-translate-y-2 relative overflow-hidden group border-brandGold/50">
+            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6 group-hover:bg-brandGold group-hover:text-brandDark transition duration-300">
+              <i class="fa-solid fa-trowel-bricks"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 font-display">Construction</h3>
+            <p class="text-sm text-gray-300 leading-relaxed mb-6">
+              Independent luxury houses, gated villas, apartments, structural modifications, civil works and high-durability commercial building executions.
+            </p>
+            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition">
+              View Details <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card rounded-2xl p-8 transition transform hover:-translate-y-2 relative overflow-hidden group">
+            <div class="w-14 h-14 rounded-xl bg-brandGold/10 border border-brandGold flex items-center justify-center text-brandGold text-2xl mb-6 group-hover:bg-brandGold group-hover:text-brandDark transition duration-300">
+              <i class="fa-solid fa-couch"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 font-display">Interiors</h3>
+            <p class="text-sm text-gray-300 leading-relaxed mb-6">
+              Complete turnkey home & office interiors featuring water-resistant, termite-proof uPVC modular kitchens, stylish wardrobes and false ceilings.
+            </p>
+            <button onclick="switchPage('services')" class="text-brandGold font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition">
+              View Details <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHY CHOOSE US SUMMARY -->
+      <div class="py-20 bg-brandDarker/70 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-14">
+            <h2 class="text-3xl font-extrabold font-display">Why Choose Dream Interiors & Traders?</h2>
+            <p class="text-gray-400 mt-2 text-sm">Bringing honesty, craft, and precision to your dream spaces.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div class="glass-card p-5 rounded-xl text-center">
+              <i class="fa-solid fa-diagram-project text-2xl text-brandGold mb-3"></i>
+              <h4 class="font-bold text-sm mb-1">Complete Solutions</h4>
+              <p class="text-xs text-gray-400">Design to handover under one roof.</p>
+            </div>
+            <div class="glass-card p-5 rounded-xl text-center">
+              <i class="fa-solid fa-receipt text-2xl text-brandGold mb-3"></i>
+              <h4 class="font-bold text-sm mb-1">Transparent Pricing</h4>
+              <p class="text-xs text-gray-400">Clear BOQ with no hidden costs.</p>
+            </div>
+            <div class="glass-card p-5 rounded-xl text-center">
+              <i class="fa-solid fa-shield-halved text-2xl text-brandGold mb-3"></i>
+              <h4 class="font-bold text-sm mb-1">Quality Materials</h4>
+              <p class="text-xs text-gray-400">Premium uPVC & certified construction.</p>
+            </div>
+            <div class="glass-card p-5 rounded-xl text-center">
+              <i class="fa-solid fa-sliders text-2xl text-brandGold mb-3"></i>
+              <h4 class="font-bold text-sm mb-1">100% Customized</h4>
+              <p class="text-xs text-gray-400">Crafted exclusively for your lifestyle.</p>
+            </div>
+            <div class="glass-card p-5 rounded-xl text-center">
+              <i class="fa-solid fa-clock-rotate-left text-2xl text-brandGold mb-3"></i>
+              <h4 class="font-bold text-sm mb-1">On-Time Handover</h4>
+              <p class="text-xs text-gray-400">Strict stage-wise schedule adherence.</p>
+            </div>
+          </div>
+
+          <div class="text-center mt-12">
+            <button onclick="openEnquiryModal('Free Site Visit - Why Choose Us')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3.5 rounded-xl shadow-lg gold-glow hover:scale-105 transition transform">
+              Book a Free Site Visit Today
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW WE WORK SUMMARY -->
+      <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+          <div>
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Seamless Journey</span>
+            <h2 class="text-3xl font-extrabold font-display mt-2">How We Work</h2>
+          </div>
+          <button onclick="switchPage('process')" class="text-brandGold font-semibold text-sm hover:underline mt-4 md:mt-0">
+            View All Process Details <i class="fa-solid fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">01</div>
+            <h4 class="font-bold text-base mb-1">Site Visit</h4>
+            <p class="text-xs text-gray-400">Free measurement & requirements gathering.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">02</div>
+            <h4 class="font-bold text-base mb-1">Planning & Design</h4>
+            <p class="text-xs text-gray-400">2D floor plans & photorealistic 3D renders.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">03</div>
+            <h4 class="font-bold text-base mb-1">Quotation</h4>
+            <p class="text-xs text-gray-400">Itemized transparent pricing and timeline.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">04</div>
+            <h4 class="font-bold text-base mb-1">Execution</h4>
+            <p class="text-xs text-gray-400">Precision manufacturing and on-site building.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="text-3xl font-black text-brandGold/40 font-mono mb-2">05</div>
+            <h4 class="font-bold text-base mb-1">Final Handover</h4>
+            <p class="text-xs text-gray-400">Thorough quality check and key delivery.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPVC HIGHLIGHT SECTION -->
+      <div class="py-20 bg-gradient-to-r from-brandPurple to-brandDarker border-y border-brandGold/30 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-6 space-y-6">
+              <span class="px-3 py-1 bg-brandGold text-brandDark text-xs font-black uppercase rounded tracking-wider">Premium Interior Material</span>
+              <h2 class="text-3xl sm:text-4xl font-extrabold font-display leading-tight">Interiors Built with High-Grade uPVC</h2>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                We use uPVC as our primary material for modular kitchens, wardrobes, storage units and other customized interiors. It resists water, moisture and termites, needs very little maintenance and gives a modern, premium finish.
+              </p>
+              
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
+                  <i class="fa-solid fa-droplet-slash text-brandGold"></i> Waterproof
+                </div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
+                  <i class="fa-solid fa-bug-slash text-brandGold"></i> Termite Proof
+                </div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
+                  <i class="fa-solid fa-wallet text-brandGold"></i> Budget Friendly
+                </div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
+                  <i class="fa-solid fa-recycle text-brandGold"></i> 100% Recyclable
+                </div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
+                  <i class="fa-solid fa-leaf text-brandGold"></i> Eco-Friendly
+                </div>
+                <div class="p-3 bg-brandDark/80 rounded-xl border border-brandGold/30 flex items-center gap-2 text-xs">
+                  <i class="fa-solid fa-fire-extinguisher text-brandGold"></i> Fire-Retardant
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6 flex justify-center">
+              <div class="glass-card p-8 rounded-3xl border border-brandGold/40 text-center max-w-md w-full relative">
+                <div class="w-20 h-20 mx-auto rounded-2xl bg-brandGold/20 border-2 border-brandGold flex items-center justify-center text-brandGold text-3xl mb-4">
+                  <i class="fa-solid fa-kitchen-set"></i>
+                </div>
+                <h3 class="text-xl font-bold font-display text-white mb-2">Modern Modular Living</h3>
+                <p class="text-xs text-gray-300 leading-relaxed mb-6">
+                  మీ ఇంటికి చెదలు, నీటి తేమ వల్ల కలిగే నష్టాలను పూర్తిగా నివారించి, దీర్ఘకాలిక మన్నికనిచ్చే అధునాతన uPVC ఇంటీరియర్ సొల్యూషన్స్.
+                </p>
+                <button onclick="openEnquiryModal('uPVC Modular Solutions')" class="w-full py-3 rounded-xl bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold text-sm shadow-lg gold-glow transition">
+                  Explore uPVC Modular Interiors
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT PROJECTS PREVIEW -->
+      <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row justify-between items-end mb-12">
+          <div>
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Portfolio</span>
+            <h2 class="text-3xl font-extrabold font-display mt-2">Recent Projects</h2>
+          </div>
+          <button onclick="switchPage('projects')" class="mt-4 sm:mt-0 text-brandGold hover:text-white font-semibold text-sm flex items-center gap-2">
+            View All Projects <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
+            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
+              <i class="fa-solid fa-house-chimney-window text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
+            </div>
+            <div class="p-5">
+              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Hyderabad</span>
+              <h4 class="font-bold text-base mt-2">Modern Villa</h4>
+              <p class="text-xs text-gray-400 mt-1">Full Civil Construction & 3D Exterior Elevation.</p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
+            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
+              <i class="fa-solid fa-kitchen-set text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
+            </div>
+            <div class="p-5">
+              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Karimnagar</span>
+              <h4 class="font-bold text-base mt-2">Modular Kitchen</h4>
+              <p class="text-xs text-gray-400 mt-1">Waterproof uPVC Modular Cabinets & Quartz Counter.</p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
+            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
+              <i class="fa-solid fa-bed text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
+            </div>
+            <div class="p-5">
+              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Sircilla</span>
+              <h4 class="font-bold text-base mt-2">Bedroom Interior</h4>
+              <p class="text-xs text-gray-400 mt-1">Custom Sliding Wardrobe & Warm LED Profile Lighting.</p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer" onclick="switchPage('projects')">
+            <div class="h-48 bg-gradient-to-br from-brandPurple to-brandDark flex items-center justify-center border-b border-brandGold/20 group-hover:scale-105 transition transform duration-500">
+              <i class="fa-solid fa-tv text-4xl text-brandGold/60 group-hover:text-brandGold transition"></i>
+            </div>
+            <div class="p-5">
+              <span class="text-[10px] uppercase font-bold text-brandGold bg-brandGold/10 px-2 py-0.5 rounded">Hyderabad</span>
+              <h4 class="font-bold text-base mt-2">Luxury TV Unit</h4>
+              <p class="text-xs text-gray-400 mt-1">Acoustic Fluted Wall Panels & Floating Drawers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMER REVIEWS -->
+      <div class="py-20 bg-brandDarker/70 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold">Testimonials</span>
+            <h2 class="text-3xl font-extrabold font-display mt-2">What Our Clients Say</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-6 rounded-2xl">
+              <div class="flex text-brandGold text-sm mb-3">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs text-gray-300 italic leading-relaxed mb-4">
+                "The entire project was handled professionally from planning to completion. The team understood our requirements clearly and delivered the work with good finishing."
+              </p>
+              <div class="border-t border-white/10 pt-3">
+                <h5 class="font-bold text-sm text-white">Mamesh Kumar</h5>
+                <span class="text-[11px] text-gray-400">Karimnagar</span>
+              </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl border-brandGold/30">
+              <div class="flex text-brandGold text-sm mb-3">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs text-gray-300 italic leading-relaxed mb-4">
+                "We are very happy with the interior work. The design, material selection and execution were well coordinated and the final result matched our expectations."
+              </p>
+              <div class="border-t border-white/10 pt-3">
+                <h5 class="font-bold text-sm text-white">Sandeep Reddy</h5>
+                <span class="text-[11px] text-gray-400">Hyderabad</span>
+              </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+              <div class="flex text-brandGold text-sm mb-3">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs text-gray-300 italic leading-relaxed mb-4">
+                "Good experience working with Dream Interiors & Traders. The team maintained clear communication throughout the project and completed the work on time."
+              </p>
+              <div class="border-t border-white/10 pt-3">
+                <h5 class="font-bold text-sm text-white">Anil Kumar</h5>
+                <span class="text-[11px] text-gray-400">Sircilla</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE ACROSS TELANGANA BANNER -->
+      <div class="py-16 bg-brandPurple/60 border-y border-brandGold/30">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+          <i class="fa-solid fa-map-location-dot text-4xl text-brandGold mb-4"></i>
+          <h2 class="text-3xl font-extrabold font-display">Have a Project in Your Location?</h2>
+          <p class="text-gray-300 max-w-xl mx-auto mt-2 text-sm leading-relaxed">
+            Our team is ready to understand your requirements and complete the project. We proudly accept projects across Telangana.
+          </p>
+          <div class="flex flex-wrap justify-center gap-3 mt-6">
+            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Karimnagar</span>
+            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Hyderabad</span>
+            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Sircilla</span>
+            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Gangadhara</span>
+            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Warangal</span>
+            <span class="px-3 py-1 bg-brandDark rounded-full text-xs border border-brandGold/30">Nizamabad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL CTA -->
+      <div class="py-24 max-w-5xl mx-auto px-4 text-center">
+        <div class="glass-card p-10 sm:p-14 rounded-3xl border-2 border-brandGold/40 gold-glow">
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-display">Ready to Start Your Project?</h2>
+          <p class="text-gray-300 max-w-xl mx-auto mt-4 text-sm sm:text-base leading-relaxed">
+            Book a free site visit and tell us about your space. We will visit, understand your requirements and share a clear quotation.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <button onclick="openEnquiryModal('Free Site Visit Final CTA')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3.5 rounded-xl shadow-lg hover:scale-105 transition">
+              <i class="fa-solid fa-calendar-check mr-2"></i> Free Site Visit
+            </button>
+            <a href="tel:9603219786" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-8 py-3.5 rounded-xl transition flex items-center gap-2">
+              <i class="fa-solid fa-phone text-brandGold"></i> Call 96032 19786
+            </a>
+          </div>
+        </div>
+      </div>
+
     </section>
+
+
+    <!-- ============================================================= -->
+    <!-- PAGE 2: ABOUT US -->
+    <!-- ============================================================= -->
+    <section id="page-about" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <!-- Banner -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">About Dream Interiors & Traders</span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">We Make Your Dreams Come True</h1>
+        <p class="text-gray-300 mt-4 leading-relaxed">
+          Planning, Construction & Interiors in Telangana handled with transparency, craft, and punctuality.
+        </p>
+      </div>
+
+      <!-- Who We Are -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
+        <div class="lg:col-span-7 space-y-6">
+          <h2 class="text-3xl font-extrabold font-display text-brandGold">Who We Are</h2>
+          <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+            Dream Interiors & Traders is a construction and interior company based in Karimnagar, Telangana. We help families and businesses turn an idea into a finished space. Our work covers planning and design, construction, and complete interiors, and we handle every stage with a coordinated approach so that you deal with one team from start to finish.
+          </p>
+          <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+            We work on independent houses, villas, apartments, commercial buildings and offices. Every project is planned around the client’s space, requirements, preferences and budget, and not around a fixed template.
+          </p>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="glass-card p-8 rounded-3xl border border-brandGold/30">
+            <h3 class="text-xl font-bold font-display text-white mb-4"><i class="fa-solid fa-bullseye text-brandGold mr-2"></i> What We Believe</h3>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Your project deserves the right planning, quality execution and attention to detail. Too many projects become stressful because design, construction and interiors are handled by different people who do not talk to each other. We bring every stage together with a clear and coordinated approach, making the journey from an idea to a completed space simpler and more reliable.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Choose Us Pillars -->
+      <div class="mb-24">
+        <h2 class="text-3xl font-extrabold font-display text-center mb-12">Our Core Principles</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div class="glass-card p-6 rounded-2xl">
+            <i class="fa-solid fa-layer-group text-2xl text-brandGold mb-3"></i>
+            <h4 class="font-bold text-base mb-2">Complete Project Solutions</h4>
+            <p class="text-xs text-gray-300 leading-relaxed">From planning and design to construction, interiors and final handover, we manage every stage with a coordinated approach.</p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl">
+            <i class="fa-solid fa-file-invoice-dollar text-2xl text-brandGold mb-3"></i>
+            <h4 class="font-bold text-base mb-2">Clear & Transparent Pricing</h4>
+            <p class="text-xs text-gray-300 leading-relaxed">We provide detailed quotations with a clearly defined scope of work, helping you understand what is included in your project.</p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl">
+            <i class="fa-solid fa-award text-2xl text-brandGold mb-3"></i>
+            <h4 class="font-bold text-base mb-2">Quality Materials & Workmanship</h4>
+            <p class="text-xs text-gray-300 leading-relaxed">We focus on suitable materials, skilled execution and attention to detail at every stage of the project.</p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl">
+            <i class="fa-solid fa-compass-drafting text-2xl text-brandGold mb-3"></i>
+            <h4 class="font-bold text-base mb-2">Customized to Your Requirements</h4>
+            <p class="text-xs text-gray-300 leading-relaxed">Every project is planned and executed according to the client’s space, requirements, preferences and budget.</p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl">
+            <i class="fa-solid fa-calendar-check text-2xl text-brandGold mb-3"></i>
+            <h4 class="font-bold text-base mb-2">On-Time Project Handover</h4>
+            <p class="text-xs text-gray-300 leading-relaxed">We follow a structured work process with a focus on completing each stage efficiently and handing over within agreed timelines.</p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border-brandGold/40 bg-brandGold/5">
+            <i class="fa-solid fa-city text-2xl text-brandGold mb-3"></i>
+            <h4 class="font-bold text-base mb-2">Telangana Wide Footprint</h4>
+            <p class="text-xs text-gray-300 leading-relaxed">Headquartered in Karimnagar with branches in Gangadhara, Sircilla and Hyderabad delivering end-to-end satisfaction.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="glass-card p-10 rounded-3xl text-center max-w-3xl mx-auto border border-brandGold/30">
+        <h3 class="text-2xl font-bold font-display">Let’s Plan Your Space Together</h3>
+        <p class="text-gray-300 text-xs sm:text-sm mt-2 mb-6">Our senior architects and interior designers are just one call away.</p>
+        <button onclick="openEnquiryModal('About Us CTA')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3 rounded-xl transition">
+          Enquiry Now
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================= -->
+    <!-- PAGE 3: SERVICES -->
+    <!-- ============================================================= -->
+    <section id="page-services" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">End-To-End Capabilities</span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">Complete Solutions for Your Space</h1>
+        <p class="text-gray-300 mt-4 leading-relaxed">
+          Planning, construction and interiors, handled with complete mastery by one team.
+        </p>
+      </div>
+
+      <!-- SERVICE 1: PLANNING & DESIGN -->
+      <div class="glass-card p-8 sm:p-10 rounded-3xl mb-12 border-brandGold/30">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-brandGold text-brandDark flex items-center justify-center text-xl font-bold">1</div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold font-display">Planning & Design</h2>
+            <p class="text-xs text-brandGold font-semibold">Good construction starts with a good plan.</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+          Before any work begins, we help you decide how your space should look, flow and function with accurate engineering and realistic 3D representations.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+            <span class="font-bold text-brandGold block mb-1">2D Floor Plans</span>
+            Accurate and detailed layouts showing room sizes, placement and circulation.
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+            <span class="font-bold text-brandGold block mb-1">3D Elevations</span>
+            Modern and elegant exterior views so you can see your building before it is built.
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+            <span class="font-bold text-brandGold block mb-1">3D Interior Designs</span>
+            Realistic visuals of your rooms with actual materials, textures and finishes.
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+            <span class="font-bold text-brandGold block mb-1">Walkthrough & Animation</span>
+            Interactive interior and exterior animated video walkthrough presentations.
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+            <span class="font-bold text-brandGold block mb-1">Space Planning</span>
+            Scientific layouts making the best ergonomic use of every square foot.
+          </div>
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+            <span class="font-bold text-brandGold block mb-1">Project Consultation</span>
+            Honest material guidance and structural advice before financial commitment.
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE 2: CONSTRUCTION -->
+      <div class="glass-card p-8 sm:p-10 rounded-3xl mb-12">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-brandGold text-brandDark flex items-center justify-center text-xl font-bold">2</div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold font-display">Construction</h2>
+            <p class="text-xs text-brandGold font-semibold">Strong Foundations, Elegant Finishes</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+          We build homes and commercial spaces with strict attention to structural integrity, safety standards, premium finishing and guaranteed timelines.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-semibold">
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-house text-brandGold block mb-1"></i> Independent Houses</div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-tree-city text-brandGold block mb-1"></i> Luxury Villas</div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-building text-brandGold block mb-1"></i> Modern Apartments</div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-briefcase text-brandGold block mb-1"></i> Commercial Buildings</div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-hammer text-brandGold block mb-1"></i> Complete Renovation</div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-cubes-stacked text-brandGold block mb-1"></i> Structural Works</div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-hard-hat text-brandGold block mb-1"></i> Civil Works</div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10"><i class="fa-solid fa-hand-holding-hand text-brandGold block mb-1"></i> Turnkey Handover</div>
+        </div>
+      </div>
+
+      <!-- SERVICE 3: INTERIORS & UPVC -->
+      <div class="glass-card p-8 sm:p-10 rounded-3xl mb-12 border-brandGold/40 bg-gradient-to-br from-brandCard to-brandPurple/30">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-brandGold text-brandDark flex items-center justify-center text-xl font-bold">3</div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold font-display">Interiors & uPVC Mastery</h2>
+            <p class="text-xs text-brandGold font-semibold">Designed around how you actually live and work.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <p class="text-sm text-gray-300 leading-relaxed mb-4">
+              At Dream Interiors & Traders, we use **uPVC as our primary material for modular kitchens, wardrobes, and living storage units**.
+            </p>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Modular Kitchens</span>
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Designer Wardrobes</span>
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> False Ceilings</span>
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Wall Panels & TV Units</span>
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Living Room Interiors</span>
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Bedroom Interiors</span>
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Commercial / Office Furniture</span>
+              <span class="p-2 bg-white/5 rounded"><i class="fa-solid fa-check text-brandGold mr-1"></i> Full Home Interiors</span>
+            </div>
+          </div>
+
+          <div class="bg-brandDarker/90 p-6 rounded-2xl border border-brandGold/30 space-y-3">
+            <h4 class="font-bold text-sm text-brandGold">Why uPVC is Superior:</h4>
+            <ul class="text-xs text-gray-300 space-y-2">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Waterproof:</strong> Resistant to heavy water exposure, steam and moisture.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Termite Proof:</strong> Zero threat of pest or termite damage forever.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Budget Friendly:</strong> Cost-effective compared to traditional wood maintenance.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Eco-Friendly & Recyclable:</strong> Sustainable green interior building material.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-shield text-brandGold mt-0.5"></i> <strong>Fire-Retardant:</strong> Natural flame-retarding characteristics.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <h3 class="text-xl font-bold font-display">Not sure which service you need?</h3>
+        <p class="text-xs text-gray-400 mt-1 mb-4">Tell us about your project and we will guide you. The site visit is completely free.</p>
+        <button onclick="openEnquiryModal('Services Consultation')" class="bg-brandGold text-brandDark font-bold px-8 py-3 rounded-xl shadow-lg gold-glow hover:scale-105 transition">
+          Book Free Site Visit
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================= -->
+    <!-- PAGE 4: OUR PROCESS -->
+    <!-- ============================================================= -->
+    <section id="page-process" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">Structured Methodology</span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">From Idea to Handover</h1>
+        <p class="text-gray-300 mt-4 leading-relaxed">
+          A clear, structured 5-step process so you always know what happens next.
+        </p>
+      </div>
+
+      <!-- 5-Step Detailed Process Cards -->
+      <div class="space-y-6 max-w-4xl mx-auto mb-20">
+        
+        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
+          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">01</div>
+          <div>
+            <h3 class="text-xl font-bold font-display">Step 1: Site Visit</h3>
+            <p class="text-xs text-brandGold font-semibold mb-2">Completely Free across Telangana</p>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Our engineering team visits your site location, measures exact dimensions, examines lighting/ventilation and listens to your functional requirements, budget and timeline.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
+          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">02</div>
+          <div>
+            <h3 class="text-xl font-bold font-display">Step 2: Planning & Design</h3>
+            <p class="text-xs text-brandGold font-semibold mb-2">Architectural Visuals & 3D Walkthroughs</p>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              We turn your ideas into accurate 2D floor plans, photorealistic 3D room renders and material suggestions. You review, ask for iterations and approve the finalized design.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
+          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">03</div>
+          <div>
+            <h3 class="text-xl font-bold font-display">Step 3: Quotation</h3>
+            <p class="text-xs text-brandGold font-semibold mb-2">Detailed & Transparent BOQ</p>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              We prepare a detailed quotation that defines the scope of work, material specs, brand warranties and exact milestone-based pricing with zero hidden charges.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
+          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">04</div>
+          <div>
+            <h3 class="text-xl font-bold font-display">Step 4: Execution</h3>
+            <p class="text-xs text-brandGold font-semibold mb-2">On-Site & Factory Fabrication</p>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Civil construction, structural adjustments and uPVC modular fabrication are carried out strictly according to finalized designs, with daily project supervisor updates.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-start gap-6 border-l-4 border-l-brandGold">
+          <div class="text-3xl font-black text-brandGold font-mono bg-brandGold/10 w-16 h-16 rounded-2xl flex items-center justify-center shrink-0">05</div>
+          <div>
+            <h3 class="text-xl font-bold font-display">Step 5: Final Handover</h3>
+            <p class="text-xs text-brandGold font-semibold mb-2">Quality Inspection & Snag-free Delivery</p>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              We complete a thorough final joint inspection with you, polish and deep-clean the site, clear any pending punch list points and happily hand over your keys.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQS -->
+      <div class="max-w-4xl mx-auto mb-20">
+        <h2 class="text-3xl font-extrabold font-display text-center mb-8">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+          <details class="glass-card rounded-xl p-5 group cursor-pointer">
+            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
+              <span>Do you undertake both construction and interior projects?</span>
+              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
+            </summary>
+            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
+              Yes. We handle complete planning, civil construction and full interiors under one roof. You can choose the full turnkey project or only the specific phase you need.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-5 group cursor-pointer">
+            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
+              <span>Do you provide a free site visit?</span>
+              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
+            </summary>
+            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
+              Yes. Book a visit and our team will come directly to your site anywhere across Telangana to take measurements and understand your requirements.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-5 group cursor-pointer">
+            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
+              <span>Do you provide services across Telangana?</span>
+              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
+            </summary>
+            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
+              Yes. We accept projects across the entire state of Telangana, with branch offices located in Karimnagar (Head Office), Gangadhara, Sircilla and Hyderabad.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-5 group cursor-pointer">
+            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
+              <span>Can I choose only interior services?</span>
+              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
+            </summary>
+            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
+              Absolutely. You can choose only interiors (modular kitchens, wardrobes, false ceilings), only construction, or the complete turnkey package.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-5 group cursor-pointer">
+            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
+              <span>Which material do you use for interiors?</span>
+              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
+            </summary>
+            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
+              We primarily specialize in high-grade uPVC because it is 100% waterproof, termite-proof, fire-retardant, long-lasting and significantly lower maintenance than wood.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-5 group cursor-pointer">
+            <summary class="font-bold text-sm text-white flex justify-between items-center list-none">
+              <span>How can I get a quotation?</span>
+              <i class="fa-solid fa-chevron-down text-brandGold text-xs group-open:rotate-180 transition"></i>
+            </summary>
+            <p class="text-xs text-gray-300 mt-3 pt-3 border-t border-white/10 leading-relaxed">
+              Simply book a free site visit or send an enquiry. After understanding your space and design choices, we share an itemized quotation with clear scope and specifications.
+            </p>
+          </details>
+        </div>
+      </div>
+
+      <!-- Action -->
+      <div class="text-center">
+        <h3 class="text-2xl font-bold font-display">Ready for step one?</h3>
+        <button onclick="openEnquiryModal('Step 1 Free Site Visit')" class="mt-4 bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3.5 rounded-xl shadow-lg gold-glow transition">
+          Book Free Site Visit
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================= -->
+    <!-- PAGE 5: PROJECTS -->
+    <!-- ============================================================= -->
+    <section id="page-projects" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">Our Portfolio</span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">A Glimpse of Our Work</h1>
+        <p class="text-gray-300 mt-4 leading-relaxed">
+          Recent homes and interiors we have planned, built and handed over across Telangana.
+        </p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12">
+        <button onclick="filterProjects('all')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-brandGold text-brandDark" data-filter="all">All</button>
+        <button onclick="filterProjects('construction')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="construction">Construction</button>
+        <button onclick="filterProjects('kitchens')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="kitchens">Kitchens</button>
+        <button onclick="filterProjects('bedrooms')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="bedrooms">Bedrooms</button>
+        <button onclick="filterProjects('living')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="living">Living & TV Units</button>
+        <button onclick="filterProjects('commercial')" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-gray-300 hover:text-white" data-filter="commercial">Commercial</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20" id="projects-grid">
+        
+        <!-- Project 1 -->
+        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="construction">
+          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
+            <i class="fa-solid fa-house-chimney-window text-6xl text-brandGold/40 mb-2"></i>
+            <span class="text-xs text-brandGold font-mono">Villa Construction & Elevation</span>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-2xl font-bold font-display">Modern Villa</h3>
+              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Hyderabad</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+              Complete civil construction, modern glass elevation, landscaping and boundary wall architecture for a 4500 sq.ft luxury villa.
+            </p>
+            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
+              <span><strong>Scope:</strong> Turnkey Construction</span>
+              <span><strong>Duration:</strong> 11 Months</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="kitchens">
+          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
+            <i class="fa-solid fa-kitchen-set text-6xl text-brandGold/40 mb-2"></i>
+            <span class="text-xs text-brandGold font-mono">uPVC Waterproof Modular Kitchen</span>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-2xl font-bold font-display">Modular Kitchen</h3>
+              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Karimnagar</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+              Full waterproof uPVC cabinetry with soft-close tandem boxes, breakfast counter and integrated quartz countertop.
+            </p>
+            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
+              <span><strong>Scope:</strong> uPVC Modular Kitchen</span>
+              <span><strong>Duration:</strong> 18 Days</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="bedrooms">
+          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
+            <i class="fa-solid fa-bed text-6xl text-brandGold/40 mb-2"></i>
+            <span class="text-xs text-brandGold font-mono">Master Bedroom & Wardrobe</span>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-2xl font-bold font-display">Bedroom Interior</h3>
+              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Sircilla</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+              Floor-to-ceiling uPVC sliding wardrobe with tinted mirror, headboard panelling and warm recessed mood lighting.
+            </p>
+            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
+              <span><strong>Scope:</strong> Complete Master Suite</span>
+              <span><strong>Duration:</strong> 22 Days</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="glass-card rounded-3xl overflow-hidden project-card" data-category="living">
+          <div class="h-64 bg-gradient-to-tr from-brandPurple to-brandDarker flex flex-col items-center justify-center relative p-6 border-b border-brandGold/20">
+            <i class="fa-solid fa-tv text-6xl text-brandGold/40 mb-2"></i>
+            <span class="text-xs text-brandGold font-mono">Entertainment Wall & Panelling</span>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-2xl font-bold font-display">Living Room TV Unit</h3>
+              <span class="text-xs font-bold bg-brandGold/20 text-brandGold px-2.5 py-1 rounded">Hyderabad</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+              Charcoal louvers with backlit marble composite backboard, floating console drawers and concealed cable routing.
+            </p>
+            <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
+              <span><strong>Scope:</strong> Living & TV Wall</span>
+              <span><strong>Duration:</strong> 12 Days</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Call to Action -->
+      <div class="glass-card p-10 rounded-3xl text-center max-w-3xl mx-auto border border-brandGold/30">
+        <h3 class="text-2xl font-bold font-display">Want a space like this?</h3>
+        <p class="text-gray-300 text-xs sm:text-sm mt-2 mb-6">Let's design and build your custom sanctuary.</p>
+        <button onclick="openEnquiryModal('Projects Gallery CTA')" class="bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold px-8 py-3 rounded-xl transition">
+          Enquiry Now
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================= -->
+    <!-- PAGE 6: CONTACT -->
+    <!-- ============================================================= -->
+    <section id="page-contact" class="page-section py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brandGold bg-brandGold/10 px-3 py-1 rounded-full border border-brandGold/30">Get In Touch</span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold font-display mt-4">Let’s Talk About Your Project</h1>
+        <p class="text-gray-300 mt-4 leading-relaxed">
+          Tell us about your space and book a free site visit. Our team will get back to you promptly.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Contact Information -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <div class="glass-card p-6 rounded-2xl space-y-4">
+            <h3 class="text-xl font-bold font-display text-white border-b border-white/10 pb-3">Contact Details</h3>
+            
+            <a href="tel:9603219786" class="flex items-center gap-4 text-gray-300 hover:text-brandGold transition group">
+              <div class="w-10 h-10 rounded-xl bg-brandGold/10 border border-brandGold/30 flex items-center justify-center text-brandGold group-hover:bg-brandGold group-hover:text-brandDark transition">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <span class="text-xs text-gray-400 block">Phone Number</span>
+                <span class="font-bold text-sm text-white">96032 19786</span>
+              </div>
+            </a>
+
+            <a href="https://wa.me/919603219786" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-green-400 transition group">
+              <div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <span class="text-xs text-gray-400 block">WhatsApp Support</span>
+                <span class="font-bold text-sm text-white">96032 19786</span>
+              </div>
+            </a>
+
+            <a href="mailto:dreaminteriorsgroup@gmail.com" class="flex items-center gap-4 text-gray-300 hover:text-brandGold transition group">
+              <div class="w-10 h-10 rounded-xl bg-brandGold/10 border border-brandGold/30 flex items-center justify-center text-brandGold group-hover:bg-brandGold group-hover:text-brandDark transition">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <span class="text-xs text-gray-400 block">Email Address</span>
+                <span class="font-bold text-sm text-white break-all">dreaminteriorsgroup@gmail.com</span>
+              </div>
+            </a>
+
+            <div class="flex items-start gap-4 text-gray-300 pt-2 border-t border-white/10">
+              <div class="w-10 h-10 rounded-xl bg-brandGold/10 border border-brandGold/30 flex items-center justify-center text-brandGold shrink-0">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <span class="text-xs text-gray-400 block font-semibold text-brandGold">Head Office</span>
+                <span class="font-medium text-xs leading-relaxed text-white">
+                  Opp: PM Convention Hall, Seetharampur, Karimnagar, Telangana - 505001
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch Locations -->
+          <div class="glass-card p-6 rounded-2xl">
+            <h4 class="font-bold text-sm text-brandGold mb-3">Our Telangana Branches</h4>
+            <div class="space-y-3 text-xs text-gray-300">
+              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
+                <span><strong>Karimnagar (Head Office):</strong> Seetharampur</span>
+                <span class="text-brandGold font-mono text-[10px]">Active</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
+                <span><strong>Hyderabad:</strong> Regional Branch Office</span>
+                <span class="text-brandGold font-mono text-[10px]">Active</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
+                <span><strong>Sircilla:</strong> Branch Office</span>
+                <span class="text-brandGold font-mono text-[10px]">Active</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-white/5 border border-white/5 flex justify-between items-center">
+                <span><strong>Gangadhara:</strong> Branch Office</span>
+                <span class="text-brandGold font-mono text-[10px]">Active</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Enquiry Form -->
+        <div class="lg:col-span-7">
+          <div class="glass-card p-8 sm:p-10 rounded-3xl border border-brandGold/30">
+            <h3 class="text-2xl font-bold font-display mb-2">Book a Free Site Visit</h3>
+            <p class="text-xs text-gray-300 mb-6">Fill in the details below and our team will get back to you shortly.</p>
+
+            <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1">Full Name *</label>
+                <input type="text" required placeholder="మీ పేరు" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-300 mb-1">Phone Number *</label>
+                  <input type="tel" required placeholder="ఫోన్ నంబర్" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-300 mb-1">Email Address (Optional)</label>
+                  <input type="email" placeholder="మీ ఈమెయిల్" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-300 mb-1">Project Location *</label>
+                  <input type="text" required placeholder="ఉదా: Karimnagar, Hyderabad..." class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-300 mb-1">Project Type *</label>
+                  <select required class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
+                    <option value="Both">Complete Project (Construction + Interiors)</option>
+                    <option value="Interiors">Interiors (Modular Kitchen, Wardrobes)</option>
+                    <option value="Construction">Construction Only</option>
+                    <option value="Planning & Design">Planning & 2D/3D Design Only</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1">Approximate Budget (Optional)</label>
+                <input type="text" placeholder="ఉదా: ₹10 Lakhs - ₹30 Lakhs" class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition">
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1">Your Requirements / Message</label>
+                <textarea rows="3" placeholder="మీ స్థలం వివరాలు లేదా ప్రత్యేక అవసరాలు ఇక్కడ రాయండి..." class="w-full bg-brandDarker border border-white/20 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brandGold transition"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 rounded-xl bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold text-sm shadow-xl gold-glow hover:scale-[1.01] active:scale-[0.99] transition">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Send Enquiry
+              </button>
+            </form>
+
+            <div id="form-success-banner" class="hidden mt-4 p-4 rounded-xl bg-green-500/20 border border-green-500 text-center text-green-300 text-xs">
+              <i class="fa-solid fa-circle-check text-lg block mb-1"></i>
+              Thank you! Our team has received your enquiry and will contact you shortly.
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
   </main>
 
-  <footer><div class="footer-inner"><span><strong>Dream Interiors &amp; Traders</strong> · We Make Your Dreams Come True</span><span>© <span id="year"></span> Dream Interiors &amp; Traders</span></div></footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- ================= POPUP MODAL (BOOK FREE SITE VISIT) ================= -->
+  <div id="enquiry-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 relative border-2 border-brandGold/40 gold-glow">
+      <button onclick="closeEnquiryModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-xl bg-brandGold/20 border border-brandGold mx-auto flex items-center justify-center text-brandGold text-xl mb-2">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <h3 class="text-xl font-bold font-display" id="modal-title">Book a Free Site Visit</h3>
+        <p class="text-xs text-gray-300 mt-1">We will inspect your space and provide exact 3D estimates.</p>
+      </div>
+
+      <form onsubmit="handleModalSubmit(event)" class="space-y-3">
+        <input type="text" required placeholder="Full Name" class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
+        <input type="tel" required placeholder="Phone Number (e.g. 96032 19786)" class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
+        <input type="text" required placeholder="City / District in Telangana" class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
+        <select class="w-full bg-brandDarker border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandGold">
+          <option>Construction & Interiors (Complete Turnkey)</option>
+          <option>Interiors Only (uPVC Kitchens / Wardrobes)</option>
+          <option>House / Villa Construction Only</option>
+          <option>2D/3D Architecture & Planning</option>
+        </select>
+        <button type="submit" class="w-full py-3 bg-brandGold hover:bg-brandGoldHover text-brandDark font-bold rounded-xl text-xs shadow-md transition">
+          Confirm Free Visit Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-brandDarker border-t border-brandGold/20 pt-16 pb-12 relative z-10 text-gray-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
+        <!-- Col 1: Brand Info -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-brandPurple border border-brandGold flex items-center justify-center font-bold text-brandGold font-display">
+              D
+            </div>
+            <div>
+              <span class="text-lg font-black text-white font-display">Dream Interiors & Traders</span>
+              <p class="text-[10px] text-brandGold font-semibold uppercase tracking-wider">We Make Your Dreams Come True</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-300 leading-relaxed pr-6">
+            Leading planners, constructors, and uPVC interior experts in Telangana. We take pride in transparent pricing, premium materials, and on-time project handovers.
+          </p>
+          <div class="flex gap-3 text-base text-gray-300 pt-1">
+            <a href="https://wa.me/919603219786" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-brandGold hover:text-brandDark flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="tel:9603219786" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-brandGold hover:text-brandDark flex items-center justify-center transition"><i class="fa-solid fa-phone"></i></a>
+            <a href="mailto:dreaminteriorsgroup@gmail.com" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-brandGold hover:text-brandDark flex items-center justify-center transition"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="font-bold text-white text-sm mb-4">Quick Navigation</h4>
+          <ul class="space-y-2">
+            <li><button onclick="switchPage('home')" class="hover:text-brandGold transition">Home</button></li>
+            <li><button onclick="switchPage('about')" class="hover:text-brandGold transition">About Us</button></li>
+            <li><button onclick="switchPage('services')" class="hover:text-brandGold transition">All Services</button></li>
+            <li><button onclick="switchPage('process')" class="hover:text-brandGold transition">Our 5-Step Process</button></li>
+            <li><button onclick="switchPage('projects')" class="hover:text-brandGold transition">Recent Projects</button></li>
+            <li><button onclick="switchPage('contact')" class="hover:text-brandGold transition">Contact & Branches</button></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Capabilities -->
+        <div>
+          <h4 class="font-bold text-white text-sm mb-4">Our Services</h4>
+          <ul class="space-y-2">
+            <li>2D/3D Architectural Plans</li>
+            <li>House & Villa Construction</li>
+            <li>uPVC Modular Kitchens</li>
+            <li>Modern Bedroom Wardrobes</li>
+            <li>Living & TV Wall Panels</li>
+            <li>Walkthrough 3D Animation</li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Regional Branches -->
+        <div>
+          <h4 class="font-bold text-white text-sm mb-4">Telangana Branches</h4>
+          <p class="mb-2"><strong class="text-white">Karimnagar (HQ):</strong> Seetharampur</p>
+          <p class="mb-2"><strong class="text-white">Hyderabad:</strong> Complete Execution</p>
+          <p class="mb-2"><strong class="text-white">Sircilla:</strong> Regional Branch</p>
+          <p class="mb-2"><strong class="text-white">Gangadhara:</strong> Branch Office</p>
+          <span class="inline-block mt-2 text-brandGold font-semibold">Service across Telangana</span>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] gap-4">
+        <div>
+          © 2026 <strong>Dream Interiors & Traders</strong>. All Rights Reserved. We Make Your Dreams Come True.
+        </div>
+        <div class="flex gap-4">
+          <span>Phone: <strong>96032 19786</strong></span>
+          <span>Email: <strong>dreaminteriorsgroup@gmail.com</strong></span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ================= THREE.JS 3D REALISTIC SCENE SCRIPT ================= -->
   <script>
-    // Interactive 3D room scene (Three.js)
-    (() => {
-      const canvas = document.querySelector("#room3d");
-      if (!window.THREE || !canvas) return;
+    let scene, camera, renderer, armchairGroup, spotlightCone, floorMirror;
+    let isOrbiting = true;
+    let mouseX = 0, mouseY = 0;
+    let targetX = 0, targetY = 0;
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
-      camera.position.set(8, 4.1, 10);
-      camera.lookAt(1.8, 0, 0);
+    function init3DScene() {
+      const canvas = document.getElementById('webgl-canvas');
+      const container = document.getElementById('three-canvas-container');
 
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+      // 1. Scene & Camera setup
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x0c051f, 0.045);
+
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(2.8, 2.2, 5.5);
+
+      // 2. Renderer with soft shadows & antialias
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-      renderer.outputEncoding = THREE.sRGBEncoding;
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.15;
 
-      scene.add(new THREE.HemisphereLight(0xe7e0ff, 0x4b3828, 1.5));
+      // 3. Ambient & Directional Lights
+      const ambientLight = new THREE.AmbientLight(0x28154e, 1.2);
+      scene.add(ambientLight);
 
-      const warmLight = new THREE.PointLight(0xffc66d, 35, 13);
-      warmLight.position.set(2.5, 3.8, 0.2);
-      warmLight.castShadow = true;
-      scene.add(warmLight);
+      // Logo-inspired Yellow/Gold Warm Spotlight from above
+      const spotLight = new THREE.SpotLight(0xfdb813, 3.8);
+      spotLight.position.set(0, 4.5, 0);
+      spotLight.angle = Math.PI / 4.5;
+      spotLight.penumbra = 0.6;
+      spotLight.decay = 1.2;
+      spotLight.distance = 12;
+      spotLight.castShadow = true;
+      spotLight.shadow.mapSize.width = 1024;
+      spotLight.shadow.mapSize.height = 1024;
+      scene.add(spotLight);
 
-      const fill = new THREE.DirectionalLight(0xffffff, 2.4);
-      fill.position.set(4, 7, 5);
-      fill.castShadow = true;
-      fill.shadow.mapSize.set(1024, 1024);
-      scene.add(fill);
+      // Subtle fill light
+      const blueFill = new THREE.DirectionalLight(0x4f2b99, 1.0);
+      blueFill.position.set(-5, 3, 2);
+      scene.add(blueFill);
 
-      const room = new THREE.Group();
-      scene.add(room);
-
-      const mat = (color, roughness = 0.75, metalness = 0) =>
-        new THREE.MeshStandardMaterial({ color, roughness, metalness });
-
-      const floorMat = mat(0x9d8873);
-      const wallMat = mat(0xe8dfd2);
-      const trimMat = mat(0x6d4e39);
-      const sofaMat = mat(0x9b7354);
-      const cushionMat = mat(0xd4b998);
-      const goldMat = mat(0xc78b26, 0.3, 0.65);
-
-      function box(w, h, d, material, x, y, z, parent = room) {
-        const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), material);
-        mesh.position.set(x, y, z);
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-        parent.add(mesh);
-        return mesh;
-      }
-
-      // Room shell
-      box(10, 0.18, 8, floorMat, 2, -1.12, 0);
-      box(10, 5.2, 0.18, wallMat, 2, 1.48, -4);
-      box(0.18, 5.2, 8, wallMat, -3, 1.48, 0);
-
-      // Decorative wall panels
-      for (let i = 0; i < 4; i++) {
-        box(0.035, 3.4, 0.035, trimMat, -1.6 + i * 1.25, 1.45, -3.88);
-      }
-
-      // Window and frame
-      box(2.35, 2.45, 0.07, mat(0x745b48), 3.65, 1.65, -3.84);
-      const glass = new THREE.MeshStandardMaterial({
-        color: 0x9fc5d5, roughness: 0.22, metalness: 0.12,
-        emissive: 0x233e52, emissiveIntensity: 0.25
+      // 4. Polished Architectural Floor (Reflective Wood / Marble Look)
+      const floorGeo = new THREE.PlaneGeometry(30, 30);
+      const floorMat = new THREE.MeshStandardMaterial({
+        color: 0x090317,
+        roughness: 0.25,
+        metalness: 0.6
       });
-      box(2.15, 2.25, 0.05, glass, 3.65, 1.65, -3.77);
-      box(0.045, 2.28, 0.04, mat(0xf1e8dc), 3.65, 1.65, -3.72);
-      box(2.18, 0.045, 0.04, mat(0xf1e8dc), 3.65, 1.65, -3.72);
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = -1;
+      floor.receiveShadow = true;
+      scene.add(floor);
 
-      // Rug
-      const rug = new THREE.Mesh(new THREE.BoxGeometry(4.7, 0.035, 3.1), mat(0xc7ad8e));
-      rug.position.set(1.7, -1.015, 0.35);
-      rug.receiveShadow = true;
-      room.add(rug);
+      // Subtle floor architectural grid
+      const gridHelper = new THREE.GridHelper(24, 24, 0xfdb813, 0x1f0e42);
+      gridHelper.position.y = -0.99;
+      scene.add(gridHelper);
 
-      // Sofa
-      const sofa = new THREE.Group();
-      room.add(sofa);
-      box(3.6, 0.58, 1.15, sofaMat, 1.35, -0.68, 0.65, sofa);
-      box(3.6, 1.2, 0.35, sofaMat, 1.35, -0.1, 1.12, sofa);
-      box(0.35, 0.92, 1.25, sofaMat, -0.48, -0.42, 0.63, sofa);
-      box(0.35, 0.92, 1.25, sofaMat, 3.18, -0.42, 0.63, sofa);
-      for (let i = 0; i < 3; i++) {
-        const pillow = box(0.86, 0.72, 0.22, cushionMat, 0.15 + i * 1.18, -0.06, 0.88, sofa);
-        pillow.rotation.z = -0.07;
+      // 5. Build Designer Armchair matching their Logo Silhouette
+      armchairGroup = new THREE.Group();
+
+      const chairMat = new THREE.MeshStandardMaterial({
+        color: 0xfdfdfd,
+        roughness: 0.35,
+        metalness: 0.1
+      });
+      const goldLegMat = new THREE.MeshStandardMaterial({
+        color: 0xfdb813,
+        roughness: 0.3,
+        metalness: 0.85
+      });
+
+      // Seat Cushion
+      const seatGeo = new THREE.BoxGeometry(1.4, 0.28, 1.3);
+      const seat = new THREE.Mesh(seatGeo, chairMat);
+      seat.position.y = 0;
+      seat.castShadow = true;
+      seat.receiveShadow = true;
+      armchairGroup.add(seat);
+
+      // Backrest (Curved shape)
+      const backGeo = new THREE.BoxGeometry(1.4, 1.1, 0.24);
+      const backrest = new THREE.Mesh(backGeo, chairMat);
+      backrest.position.set(0, 0.55, -0.55);
+      backrest.rotation.x = -0.05;
+      backrest.castShadow = true;
+      armchairGroup.add(backrest);
+
+      // Left Armrest
+      const armGeo = new THREE.BoxGeometry(0.24, 0.65, 1.25);
+      const leftArm = new THREE.Mesh(armGeo, chairMat);
+      leftArm.position.set(-0.75, 0.3, 0);
+      leftArm.castShadow = true;
+      armchairGroup.add(leftArm);
+
+      // Right Armrest
+      const rightArm = new THREE.Mesh(armGeo, chairMat);
+      rightArm.position.set(0.75, 0.3, 0);
+      rightArm.castShadow = true;
+      armchairGroup.add(rightArm);
+
+      // Gold-tipped Tapered Legs
+      const legGeo = new THREE.CylinderGeometry(0.04, 0.025, 0.75, 16);
+      const legPositions = [
+        [-0.6, -0.4, 0.5],
+        [0.6, -0.4, 0.5],
+        [-0.6, -0.4, -0.5],
+        [0.6, -0.4, -0.5]
+      ];
+
+      legPositions.forEach(pos => {
+        const leg = new THREE.Mesh(legGeo, goldLegMat);
+        leg.position.set(pos[0], pos[1], pos[2]);
+        leg.rotation.z = pos[0] > 0 ? -0.12 : 0.12;
+        leg.rotation.x = pos[2] > 0 ? 0.1 : -0.1;
+        leg.castShadow = true;
+        armchairGroup.add(leg);
+      });
+
+      // 6. Suspended Pendant Lamp (Right as drawn in logo over the chair!)
+      const lampCordGeo = new THREE.CylinderGeometry(0.008, 0.008, 2, 8);
+      const cord = new THREE.Mesh(lampCordGeo, goldLegMat);
+      cord.position.set(0, 2.8, 0);
+      armchairGroup.add(cord);
+
+      const lampConeGeo = new THREE.ConeGeometry(0.4, 0.35, 24, 1, true);
+      const lampHead = new THREE.Mesh(lampConeGeo, goldLegMat);
+      lampHead.position.set(0, 1.85, 0);
+      lampHead.rotation.x = Math.PI;
+      armchairGroup.add(lampHead);
+
+      // Translucent volumetric light cone representing the yellow beam in the logo
+      const lightBeamGeo = new THREE.ConeGeometry(1.6, 2.9, 32, 1, true);
+      const lightBeamMat = new THREE.MeshBasicMaterial({
+        color: 0xfdb813,
+        transparent: true,
+        opacity: 0.15,
+        side: THREE.DoubleSide
+      });
+      const lightBeam = new THREE.Mesh(lightBeamGeo, lightBeamMat);
+      lightBeam.position.set(0, 0.45, 0);
+      armchairGroup.add(lightBeam);
+
+      // 7. Ambient Glowing Golden Floating Particles
+      const particlesCount = 80;
+      const particleGeo = new THREE.BufferGeometry();
+      const positions = new Float32Array(particlesCount * 3);
+
+      for (let i = 0; i < particlesCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 8;
+        positions[i + 1] = Math.random() * 4;
+        positions[i + 2] = (Math.random() - 0.5) * 8;
       }
-      // Sofa legs
-      for (const x of [-0.25, 2.95]) for (const z of [0.25, 1.0]) {
-        box(0.09, 0.34, 0.09, trimMat, x, -0.96, z, sofa);
-      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMat = new THREE.PointsMaterial({
+        color: 0xfdb813,
+        size: 0.045,
+        transparent: true,
+        opacity: 0.7
+      });
+      const particleSystem = new THREE.Points(particleGeo, particleMat);
+      scene.add(particleSystem);
 
-      // Coffee table
-      box(1.85, 0.13, 1.05, mat(0x805637, 0.35), 1.55, -0.44, -1.05);
-      for (const x of [0.82, 2.28]) for (const z of [-1.4, -0.72]) {
-        box(0.075, 0.62, 0.075, goldMat, x, -0.78, z);
-      }
-      // Table decor
-      const vase = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.2, 0.38, 24), mat(0xe9dfd1, 0.25));
-      vase.position.set(1.25, -0.18, -1.05);
-      vase.castShadow = true;
-      room.add(vase);
+      // Position Armchair in 3D scene
+      armchairGroup.position.set(1.4, -0.3, 0);
+      scene.add(armchairGroup);
 
-      // Side table
-      const sideTop = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.12, 32), mat(0x684a35));
-      sideTop.position.set(4.15, -0.48, 0.45);
-      sideTop.castShadow = true;
-      room.add(sideTop);
-      const sideLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.12, 0.85, 16), goldMat);
-      sideLeg.position.set(4.15, -0.9, 0.45);
-      room.add(sideLeg);
+      // Event Listeners for Responsive interaction
+      window.addEventListener('resize', onWindowResize);
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('touchmove', onTouchMove, { passive: true });
 
-      // Pendant light
-      const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1.2, 10), mat(0x30253a));
-      cord.position.set(1.7, 3.35, 0.2);
-      room.add(cord);
-      const shade = new THREE.Mesh(new THREE.ConeGeometry(0.48, 0.5, 32, 1, true), goldMat);
-      shade.position.set(1.7, 2.65, 0.2);
-      shade.rotation.x = Math.PI;
-      room.add(shade);
-      const bulb = new THREE.PointLight(0xffbd56, 24, 5);
-      bulb.position.set(1.7, 2.45, 0.2);
-      room.add(bulb);
-
-      // Indoor plant: pot, stems and leaves
-      const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.25, 0.62, 24), mat(0x76523e));
-      pot.position.set(-1.6, -0.78, 0.1);
-      pot.castShadow = true;
-      room.add(pot);
-      const leafMat = mat(0x496747);
-      for (let i = 0; i < 9; i++) {
-        const angle = i * 2.4;
-        const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.17, 12, 10), leafMat);
-        leaf.scale.set(0.65, 2.2, 0.65);
-        leaf.position.set(-1.6 + Math.cos(angle) * 0.32, -0.05 + (i % 3) * 0.25, 0.1 + Math.sin(angle) * 0.32);
-        leaf.rotation.z = Math.cos(angle) * 0.55;
-        leaf.rotation.x = Math.sin(angle) * 0.45;
-        leaf.castShadow = true;
-        room.add(leaf);
-      }
-
-      // Floating gold accent rings
-      const ringMat = new THREE.MeshStandardMaterial({ color: 0xffc34d, metalness: 0.7, roughness: 0.25 });
-      const rings = [];
-      for (let i = 0; i < 3; i++) {
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(0.16 + i * 0.08, 0.012, 8, 40), ringMat);
-        ring.position.set(4.3 + i * 0.18, 2.7 + i * 0.38, -0.3);
-        ring.rotation.set(0.5 + i * 0.4, 0.5, 0);
-        room.add(ring);
-        rings.push(ring);
-      }
-
-      const pointer = { x: 0, y: 0 };
-      window.addEventListener("pointermove", event => {
-        pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
-        pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
-      }, { passive: true });
-
-      function resize() {
-        const w = canvas.clientWidth || window.innerWidth;
-        const h = canvas.clientHeight || 690;
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-      window.addEventListener("resize", resize);
-      resize();
-
-      const clock = new THREE.Clock();
+      // Animate Loop
+      let clock = new THREE.Clock();
       function animate() {
         requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
+        const elapsedTime = clock.getElapsedTime();
 
-        // Gentle camera parallax follows the visitor's pointer.
-        camera.position.x += ((8 + pointer.x * 0.42) - camera.position.x) * 0.025;
-        camera.position.y += ((4.1 - pointer.y * 0.22) - camera.position.y) * 0.025;
-        camera.lookAt(1.8 + pointer.x * 0.12, 0, 0);
+        // Subtle gentle breathing/orbiting motion
+        if (isOrbiting) {
+          armchairGroup.rotation.y = Math.sin(elapsedTime * 0.45) * 0.35 + 0.15;
+          armchairGroup.position.y = -0.3 + Math.sin(elapsedTime * 1.2) * 0.04;
+        }
 
-        // Subtle living motion in the 3D lighting and floating accents.
-        warmLight.intensity = 34 + Math.sin(t * 1.4) * 2.5;
-        rings.forEach((ring, i) => {
-          ring.position.y += Math.sin(t * 1.2 + i) * 0.0008;
-          ring.rotation.y += 0.002 + i * 0.0004;
-        });
+        // Camera smoothly follows cursor parallax
+        targetX = mouseX * 1.5;
+        targetY = mouseY * 1.0;
+        camera.position.x += (targetX + 2.5 - camera.position.x) * 0.04;
+        camera.position.y += (-targetY + 2.0 - camera.position.y) * 0.04;
+        camera.lookAt(0.5, 0.4, 0);
+
+        // Gently float particles
+        particleSystem.rotation.y = elapsedTime * 0.02;
 
         renderer.render(scene, camera);
       }
       animate();
-    })();
+    }
 
-    // Mobile navigation
-    const menuButton = document.querySelector(".menu");
-    const navLinks = document.querySelector(".nav-links");
-    menuButton.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", open);
-      menuButton.textContent = open ? "×" : "☰";
-    });
-    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
-      menuButton.textContent = "☰";
-    }));
+    function onMouseMove(event) {
+      mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+      mouseY = (event.clientY / window.innerHeight) * 2 - 1;
+    }
 
-    // Reveal sections as they enter the screen
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
+    function onTouchMove(event) {
+      if (event.touches.length > 0) {
+        mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+        mouseY = (event.touches[0].clientY / window.innerHeight) * 2 - 1;
+      }
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function toggle3DAnimationState() {
+      isOrbiting = !isOrbiting;
+      const btn = document.getElementById('anim-toggle-btn');
+      if (isOrbiting) {
+        btn.innerHTML = '<i class="fa-solid fa-pause mr-1"></i> Pause 3D Gentle Orbit';
+      } else {
+        btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Resume 3D Gentle Orbit';
+      }
+    }
+
+    // ================= PAGE ROUTING LOGIC =================
+    function switchPage(pageId) {
+      // Hide all page sections
+      document.querySelectorAll('.page-section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+
+      // Show targeted page
+      const target = document.getElementById(`page-${pageId}`);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Update Nav buttons styling
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.getAttribute('data-page') === pageId) {
+          btn.classList.add('text-brandGold', 'font-bold');
+          btn.classList.remove('text-gray-300');
+        } else {
+          btn.classList.remove('text-brandGold', 'font-bold');
+          btn.classList.add('text-gray-300');
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach(section => observer.observe(section));
 
-    // Enquiry form opens an email with the visitor's details
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const data = new FormData(this);
-      const subject = encodeURIComponent("Website enquiry — " + data.get("service"));
-      const body = encodeURIComponent(
-        "Name: " + data.get("name") + "\n" +
-        "Phone: " + data.get("phone") + "\n" +
-        "Service: " + data.get("service") + "\n\n" +
-        "Project details: " + (data.get("message") || "Not provided")
-      );
-      window.location.href = "mailto:dreaminteriorsgroup@gmail.com?subject=" + subject + "&body=" + body;
+      // Smooth 3D camera adjustment according to page
+      if (camera) {
+        if (pageId === 'home') {
+          gsap.to(camera.position, { z: 5.5, x: 2.8, y: 2.2, duration: 1.2 });
+        } else if (pageId === 'services' || pageId === 'projects') {
+          gsap.to(camera.position, { z: 7.0, x: -1.0, y: 3.5, duration: 1.2 });
+        } else {
+          gsap.to(camera.position, { z: 6.0, x: 0.5, y: 2.5, duration: 1.2 });
+        }
+      }
+
+      // Close mobile drawer if open
+      document.getElementById('mobile-menu').classList.add('hidden');
+    }
+
+    // ================= MODAL & FORM LOGIC =================
+    function openEnquiryModal(sourceTitle) {
+      if (sourceTitle) {
+        document.getElementById('modal-title').innerText = sourceTitle;
+      }
+      document.getElementById('enquiry-modal').classList.remove('hidden');
+    }
+
+    function closeEnquiryModal() {
+      document.getElementById('enquiry-modal').classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('form-success-banner').classList.remove('hidden');
+      e.target.reset();
+      setTimeout(() => {
+        document.getElementById('form-success-banner').classList.add('hidden');
+      }, 7000);
+    }
+
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      alert("ధన్యవాదాలు! మీ విజిట్ రిక్వెస్ట్ మా టీమ్‌కి అందింది. 96032 19786 నుండి మా ఇంజనీర్ మిమ్మల్ని సంప్రదిస్తారు.");
+      closeEnquiryModal();
+      e.target.reset();
+    }
+
+    // ================= PROJECT FILTER LOGIC =================
+    function filterProjects(category) {
+      document.querySelectorAll('.project-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.classList.add('bg-brandGold', 'text-brandDark');
+          btn.classList.remove('bg-white/5', 'text-gray-300');
+        } else {
+          btn.classList.remove('bg-brandGold', 'text-brandDark');
+          btn.classList.add('bg-white/5', 'text-gray-300');
+        }
+      });
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Start 3D Engine on load
+    window.addEventListener('DOMContentLoaded', init3DScene);
   </script>
 </body>
 </html>
