@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#160b2d" />
-  <meta name="description" content="Dream Interiors & Traders — interiors, UPVC solutions and construction in Karimnagar." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160b2d">
+  <meta name="description" content="Dream Interiors & Traders — interiors, UPVC solutions and construction in Karimnagar.">
   <title>Dream Interiors &amp; Traders | We Make Your Dreams Come True</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,507 +15,133 @@
   <style>
     :root {
       --purple: #160b2d;
-      --purple-light: #251345;
+      --purple2: #291745;
       --gold: #ffb300;
-      --gold-light: #ffd36a;
       --cream: #f7f5f1;
-      --ink: #201d25;
+      --ink: #211d27;
       --muted: #77727e;
-      --white: #fff;
-      --radius: 22px;
-      --shadow: 0 24px 70px rgba(22, 11, 45, .14);
     }
-
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    body {
-      margin: 0;
-      font-family: "DM Sans", sans-serif;
-      color: var(--ink);
-      background: var(--cream);
-    }
-    h1, h2, h3, p { margin-top: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; }
     h1, h2, h3 { font-family: "Manrope", sans-serif; }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    button { font: inherit; }
+    .topbar { background: #10091f; color: white; padding: 11px 5%; font-size: 12px; }
+    .topbar-inner { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; }
+    .nav { position: sticky; top: 0; z-index: 10; background: rgba(247,245,241,.95); backdrop-filter: blur(12px); border-bottom: 1px solid #e8e3ec; }
+    .nav-inner { height: 78px; max-width: 1200px; margin: auto; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; }
+    .logo img { width: 190px; max-height: 64px; object-fit: contain; object-position: left center; }
+    .nav-links { display: flex; align-items: center; gap: 25px; font-weight: 700; font-size: 13px; }
+    .nav-links a:hover { color: #a76e00; }
+    .menu { display: none; border: 0; background: none; color: var(--purple); font-size: 26px; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 9px; padding: 14px 21px; border-radius: 40px; background: var(--gold); color: #21152c; font-size: 13px; font-weight: 800; border: 0; cursor: pointer; transition: .25s; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px #ffb30044; }
 
-    .topbar {
-      background: #10091f;
-      color: #fff;
-      font-size: 12px;
-      padding: 11px 5%;
-    }
-    .topbar-inner {
-      max-width: 1280px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px 24px;
-      flex-wrap: wrap;
-    }
-    .topbar a:hover { color: var(--gold-light); }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(247, 245, 241, .94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(22, 11, 45, .08);
-    }
-    .nav-inner {
-      max-width: 1280px;
-      height: 82px;
-      margin: auto;
-      padding: 0 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand img {
-      width: 200px;
-      max-height: 66px;
-      object-fit: contain;
-      object-position: left center;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 27px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .nav-links a:not(.button):hover { color: #a76e00; }
-    .menu-toggle {
-      display: none;
-      border: 0;
-      background: transparent;
-      color: var(--purple);
-      font-size: 27px;
-      cursor: pointer;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 14px 21px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--gold);
-      color: #21152c;
-      font-size: 13px;
-      font-weight: 800;
-      transition: transform .25s, box-shadow .25s, background .25s;
-      cursor: pointer;
-    }
-    .button:hover {
-      transform: translateY(-3px);
-      background: var(--gold-light);
-      box-shadow: 0 12px 24px rgba(255, 179, 0, .24);
-    }
-    .button-outline {
-      background: transparent;
-      color: white;
-      border: 1px solid rgba(255,255,255,.55);
-    }
-    .button-outline:hover { color: var(--purple); }
-
-    .hero {
-      min-height: 680px;
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      background: var(--purple);
-      color: white;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background:
-        linear-gradient(90deg, rgba(18, 8, 37, .94) 0%, rgba(18, 8, 37, .78) 43%, rgba(18, 8, 37, .18) 100%),
-        url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=88") center/cover;
-      transform: scale(1.03);
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      width: 540px;
-      height: 540px;
-      right: -140px;
-      bottom: -280px;
-      border: 1px solid rgba(255, 179, 0, .5);
-      border-radius: 50%;
-      box-shadow: 0 0 0 45px rgba(255,179,0,.05), 0 0 0 90px rgba(255,179,0,.04);
-    }
-    .hero-content {
-      width: min(1280px, 100%);
-      margin: auto;
-      padding: 100px 5%;
-    }
-    .eyebrow {
-      color: #bd8310;
-      text-transform: uppercase;
-      letter-spacing: .19em;
-      font-size: 11px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .hero .eyebrow { color: var(--gold-light); }
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: currentColor;
-    }
-    .hero h1 {
-      max-width: 730px;
-      margin: 22px 0;
-      font-size: clamp(46px, 7vw, 86px);
-      line-height: .99;
-      letter-spacing: -.055em;
-    }
+    /* 3D hero scene */
+    .hero { position: relative; min-height: 690px; overflow: hidden; isolation: isolate; display: flex; align-items: center; background: radial-gradient(ellipse at 75% 45%, #493365, #160b2d 67%); color: white; }
+    #room3d { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; }
+    .hero::after { content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(18,8,37,.96) 0%, rgba(18,8,37,.87) 35%, rgba(18,8,37,.18) 76%, rgba(18,8,37,.05)); }
+    .hero-copy { width: min(1200px, 100%); margin: auto; padding: 95px 5%; position: relative; pointer-events: none; }
+    .hero-copy > * { max-width: 560px; }
+    .eyebrow { color: #c28300; text-transform: uppercase; letter-spacing: .18em; font-weight: 800; font-size: 11px; }
+    .hero .eyebrow { color: #ffd36a; }
+    .hero h1 { margin: 20px 0; font-size: clamp(48px, 7vw, 82px); line-height: .98; letter-spacing: -.055em; }
     .hero h1 span { color: var(--gold); }
-    .hero-copy {
-      max-width: 540px;
-      color: rgba(255,255,255,.78);
-      font-size: 16px;
-      line-height: 1.8;
-      margin-bottom: 30px;
-    }
-    .hero-actions { display: flex; gap: 13px; flex-wrap: wrap; }
-    .hero-note {
-      margin-top: 58px;
-      color: rgba(255,255,255,.7);
-      font-size: 12px;
-      letter-spacing: .04em;
-    }
+    .hero p { color: #ded8e8; max-width: 480px; line-height: 1.8; font-size: 16px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 27px; pointer-events: auto; }
+    .btn-ghost { color: white; border: 1px solid #ffffff88; background: transparent; }
+    .hero-note { margin-top: 48px; color: #c9c1d3; font-size: 12px; }
     .hero-note strong { color: white; }
 
-    .section {
-      padding: 105px 5%;
-    }
-    .container { max-width: 1180px; margin: auto; }
-    .section-heading {
-      max-width: 700px;
-      margin-bottom: 45px;
-    }
-    .section-heading h2 {
-      margin: 14px 0;
-      color: var(--purple);
-      font-size: clamp(34px, 5vw, 54px);
-      line-height: 1.08;
-      letter-spacing: -.045em;
-    }
-    .section-heading p {
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 600px;
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
-    }
-    .intro-image-wrap {
-      position: relative;
-      perspective: 1000px;
-    }
-    .intro-image {
-      height: 480px;
-      border-radius: var(--radius);
-      object-fit: cover;
-      width: 100%;
-      box-shadow: var(--shadow);
-      transform: rotateY(5deg) rotateX(1deg);
-    }
-    .floating-badge {
-      position: absolute;
-      right: -22px;
-      bottom: 28px;
-      width: 185px;
-      padding: 21px;
-      border-radius: 18px;
-      background: var(--purple);
-      color: white;
-      box-shadow: 0 20px 50px rgba(22,11,45,.27);
-      transform: rotateY(-8deg) rotateX(3deg);
-    }
-    .floating-badge strong {
-      display: block;
-      color: var(--gold);
-      font: 800 16px "Manrope", sans-serif;
-      margin-bottom: 6px;
-    }
-    .floating-badge span { font-size: 12px; line-height: 1.5; color: #ddd5eb; }
-    .intro-copy h2 {
-      color: var(--purple);
-      font-size: clamp(34px, 4vw, 50px);
-      letter-spacing: -.05em;
-      line-height: 1.1;
-      margin: 16px 0;
-    }
-    .intro-copy p { color: var(--muted); line-height: 1.85; }
-    .check-list { padding: 0; margin: 24px 0 30px; list-style: none; }
-    .check-list li { margin: 13px 0; font-size: 14px; font-weight: 700; }
-    .check-list li::before { content: "✦"; color: #bd8310; margin-right: 10px; }
+    .section { padding: 90px 5%; }
+    .container { max-width: 1140px; margin: auto; }
+    .heading { max-width: 650px; margin-bottom: 38px; }
+    .heading h2 { color: var(--purple); margin: 12px 0; font-size: clamp(34px, 5vw, 52px); line-height: 1.08; letter-spacing: -.045em; }
+    .heading p, .about-copy p { color: var(--muted); line-height: 1.8; }
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about img { width: 100%; height: 440px; object-fit: cover; border-radius: 22px; box-shadow: 0 25px 65px #160b2d22; }
+    .about-copy h2 { color: var(--purple); font-size: clamp(34px, 4vw, 50px); line-height: 1.1; letter-spacing: -.045em; }
+    .about-copy ul { list-style: none; padding: 0; line-height: 2.2; font-size: 14px; font-weight: 700; }
+    .about-copy li::before { content: "✦"; color: #bd8310; margin-right: 10px; }
 
     .services-section { background: #eeeaf3; }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-    .service-card {
-      min-height: 270px;
-      padding: 28px;
-      border-radius: 19px;
-      background: white;
-      box-shadow: 0 10px 30px rgba(22,11,45,.055);
-      transition: transform .3s, box-shadow .3s;
-      transform-style: preserve-3d;
-    }
-    .service-card:hover {
-      transform: perspective(900px) rotateX(3deg) rotateY(-3deg) translateY(-8px);
-      box-shadow: 0 24px 45px rgba(22,11,45,.13);
-    }
-    .service-icon {
-      width: 52px;
-      height: 52px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 28px;
-      border-radius: 16px;
-      color: var(--purple);
-      background: #fff1c9;
-      font-size: 23px;
-    }
-    .service-card h3 { color: var(--purple); font-size: 18px; }
-    .service-card p { color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .services { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .service { background: white; padding: 25px; min-height: 235px; border-radius: 18px; box-shadow: 0 10px 28px #160b2d0d; transition: transform .3s, box-shadow .3s; transform-style: preserve-3d; }
+    .service:hover { transform: perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(-8px); box-shadow: 0 24px 40px #160b2d20; }
+    .service-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: #fff1c9; font-size: 23px; margin-bottom: 23px; }
+    .service h3 { color: var(--purple); font-size: 17px; }
+    .service p { color: var(--muted); font-size: 13px; line-height: 1.7; }
 
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      counter-reset: step;
-    }
-    .process-step {
-      counter-increment: step;
-      position: relative;
-      padding: 25px 25px 25px 0;
-    }
-    .process-step::before {
-      content: "0" counter(step);
-      display: grid;
-      place-items: center;
-      width: 58px;
-      height: 58px;
-      margin-bottom: 22px;
-      border: 1px solid rgba(22,11,45,.17);
-      border-radius: 50%;
-      color: var(--purple);
-      font: 800 15px "Manrope", sans-serif;
-      background: var(--cream);
-      box-shadow: 7px 7px 0 var(--gold);
-    }
-    .process-step h3 { color: var(--purple); font-size: 17px; }
-    .process-step p { color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .step { border-top: 1px solid #d9d3df; padding-top: 20px; }
+    .step b { color: #bb8100; font: 800 13px "Manrope"; }
+    .step h3 { color: var(--purple); margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: 13px; line-height: 1.7; }
 
     .projects-section { background: var(--purple); color: white; }
-    .projects-section .section-heading h2 { color: white; }
-    .projects-section .section-heading p { color: #c9c1d3; }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr .8fr;
-      grid-template-rows: 245px 245px;
-      gap: 17px;
-    }
-    .project-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 18px;
-      background: #34254c;
-      transform: translateZ(0);
-    }
-    .project-card:first-child { grid-row: span 2; }
-    .project-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .6s;
-    }
-    .project-card:hover img { transform: scale(1.07); }
-    .project-card::after {
-      content: "";
-      position: absolute;
-      inset: 35% 0 0;
-      background: linear-gradient(transparent, rgba(12,6,24,.88));
-    }
-    .project-caption {
-      position: absolute;
-      z-index: 1;
-      left: 22px;
-      right: 18px;
-      bottom: 20px;
-    }
-    .project-caption small {
-      color: var(--gold-light);
-      text-transform: uppercase;
-      letter-spacing: .13em;
-      font-weight: 700;
-      font-size: 10px;
-    }
-    .project-caption h3 { margin: 6px 0 0; font-size: 18px; }
-    .project-note {
-      margin-top: 20px;
-      color: #c9c1d3;
-      font-size: 12px;
-    }
+    .projects-section .heading h2 { color: white; }
+    .projects-section .heading p { color: #c9c1d3; }
+    .projects { display: grid; grid-template-columns: 1.2fr .8fr .8fr; grid-template-rows: 220px 220px; gap: 15px; }
+    .project { position: relative; overflow: hidden; border-radius: 16px; }
+    .project:first-child { grid-row: span 2; }
+    .project img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+    .project:hover img { transform: scale(1.08); }
+    .project::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, #10091fdd); }
+    .project-label { position: absolute; z-index: 1; bottom: 18px; left: 18px; }
+    .project-label small { color: #ffd36a; text-transform: uppercase; letter-spacing: .12em; }
+    .project-label h3 { margin: 5px 0 0; }
+    .disclaimer { color: #c9c1d3; font-size: 12px; margin-top: 17px; }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 60px;
-      align-items: start;
-    }
-    .contact-panel {
-      padding: 33px;
-      color: white;
-      background: var(--purple);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .contact-panel h2 { font-size: 32px; margin-bottom: 12px; }
-    .contact-panel > p { color: #d4ccdf; line-height: 1.7; font-size: 14px; }
-    .contact-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      padding: 17px 0;
-      border-top: 1px solid rgba(255,255,255,.13);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    .contact-item b { display: block; color: var(--gold-light); margin-bottom: 3px; }
-    .contact-icon { color: var(--gold); font-size: 19px; width: 22px; }
-    .contact-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .field { display: flex; flex-direction: column; gap: 8px; }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 50px; }
+    .contact-card { background: var(--purple); color: white; border-radius: 20px; padding: 30px; }
+    .contact-card p { color: #d4ccdf; line-height: 1.7; }
+    .contact-line { padding: 16px 0; border-top: 1px solid #ffffff24; font-size: 13px; line-height: 1.7; }
+    .contact-line b { display: block; color: #ffd36a; }
+    .form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
     .field.full { grid-column: 1 / -1; }
-    .field label { font-size: 12px; font-weight: 700; color: var(--purple); }
-    .field input, .field textarea, .field select {
-      width: 100%;
-      border: 1px solid #ded9e4;
-      border-radius: 11px;
-      padding: 14px;
-      background: white;
-      color: var(--ink);
-      font: inherit;
-      font-size: 13px;
-      outline: none;
-    }
-    .field input:focus, .field textarea:focus, .field select:focus {
-      border-color: #9b72c6;
-      box-shadow: 0 0 0 3px rgba(155,114,198,.12);
-    }
-    .field textarea { min-height: 120px; resize: vertical; }
-    .contact-form .button { justify-self: start; }
+    .field label { color: var(--purple); font-size: 12px; font-weight: 700; }
+    .field input, .field select, .field textarea { border: 1px solid #ded9e4; border-radius: 10px; padding: 13px; font: inherit; font-size: 13px; background: white; }
+    .field textarea { min-height: 110px; resize: vertical; }
+    footer { background: #10091f; color: #d2ccdc; padding: 22px 5%; font-size: 12px; }
+    .footer-inner { max-width: 1140px; margin: auto; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    footer strong { color: #ffd36a; }
 
-    footer {
-      background: #10091f;
-      color: #d2ccdc;
-      padding: 25px 5%;
-      font-size: 12px;
-    }
-    .footer-inner {
-      max-width: 1180px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .footer-inner strong { color: var(--gold-light); }
+    /* Sections reveal as they enter the screen */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 900px) {
-      .nav-links { gap: 15px; }
-      .nav-links a { font-size: 12px; }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .intro-grid { gap: 40px; }
-      .projects-grid { grid-template-rows: 220px 220px; }
+    @media(max-width: 850px) {
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: 11px; }
+      .services { grid-template-columns: repeat(2, 1fr); }
+      .about { gap: 35px; }
     }
-    @media (max-width: 700px) {
+    @media(max-width: 650px) {
       .topbar-inner { justify-content: center; text-align: center; }
-      .nav-inner { height: 72px; }
-      .brand img { width: 165px; max-height: 55px; }
-      .menu-toggle { display: block; }
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        right: 0;
-        padding: 20px 5% 25px;
-        background: var(--cream);
-        box-shadow: 0 18px 25px rgba(22,11,45,.1);
-        align-items: stretch;
-        flex-direction: column;
-        gap: 17px;
-      }
+      .nav-inner { height: 70px; }
+      .logo img { width: 160px; max-height: 55px; }
+      .menu { display: block; }
+      .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 22px 6%; background: var(--cream); box-shadow: 0 15px 25px #160b2d1a; align-items: stretch; flex-direction: column; }
       .nav-links.open { display: flex; }
-      .nav-links a { font-size: 14px; }
       .hero { min-height: 650px; }
-      .hero::before {
-        background:
-          linear-gradient(90deg, rgba(18,8,37,.91), rgba(18,8,37,.64)),
-          url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85") center/cover;
-      }
-      .hero-content { padding-top: 80px; padding-bottom: 75px; }
-      .hero-note { margin-top: 42px; }
-      .section { padding: 75px 6%; }
-      .intro-grid, .contact-grid { grid-template-columns: 1fr; gap: 42px; }
-      .intro-image { height: 360px; }
-      .floating-badge { right: -7px; }
-      .services-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .service-card { min-height: 250px; padding: 21px; }
-      .process-grid { grid-template-columns: 1fr 1fr; }
-      .projects-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 260px 190px 190px;
-      }
-      .project-card:first-child { grid-column: 1 / -1; grid-row: auto; }
+      .hero::after { background: linear-gradient(90deg, rgba(18,8,37,.95), rgba(18,8,37,.68)); }
+      .hero-copy { padding-top: 75px; padding-bottom: 75px; }
+      .section { padding: 70px 6%; }
+      .about, .contact-grid { grid-template-columns: 1fr; }
+      .about img { height: 320px; }
+      .services { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .projects { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 180px 180px; }
+      .project:first-child { grid-column: 1 / -1; grid-row: auto; }
     }
-    @media (max-width: 430px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .service-card { min-height: auto; }
-      .contact-form { grid-template-columns: 1fr; }
+    @media(max-width: 420px) {
+      .services { grid-template-columns: 1fr; }
+      .form { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
-      .projects-grid { grid-template-rows: 230px 170px 170px; gap: 10px; }
-      .project-caption { left: 14px; bottom: 14px; }
-      .project-caption h3 { font-size: 15px; }
     }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-        animation-duration: .01ms !important;
-      }
+    @media(prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
@@ -525,264 +151,356 @@
     <div class="topbar-inner">
       <a href="tel:9603219786">☎ &nbsp;Phone: <strong>96032 19786</strong></a>
       <a href="mailto:dreaminteriorsgroup@gmail.com">✉ &nbsp;Email: <strong>dreaminteriorsgroup@gmail.com</strong></a>
-      <span>⌖ &nbsp;Head Office: Opp. PM Convention Hall, Seetharam pur, Karimnagar – 505001</span>
+      <span>⌖ &nbsp;Head Office: Opp. PM Convention Hall, Seetharampur, Karimnagar – 505001</span>
     </div>
   </div>
 
-  <header class="navbar">
-    <nav class="nav-inner" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="Dream Interiors & Traders home">
-        <img src="assets/logo.png" alt="Dream Interiors & Traders — We Make Your Dreams Come True">
-      </a>
-      <button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+  <header class="nav">
+    <nav class="nav-inner">
+      <a class="logo" href="#home"><img src="assets/logo.png" alt="Dream Interiors & Traders"></a>
+      <button class="menu" aria-label="Open menu" aria-expanded="false">☰</button>
       <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#process">Our Process</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact" class="button">Get in Touch <span>↗</span></a>
+        <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a>
+        <a href="#process">Our Process</a><a href="#projects">Projects</a>
+        <a class="btn" href="#contact">Get in Touch ↗</a>
       </div>
     </nav>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-content">
+      <canvas id="room3d" aria-label="Interactive 3D interior room"></canvas>
+      <div class="hero-copy">
         <div class="eyebrow">Interiors · UPVC · Construction</div>
         <h1>Spaces made for the way <span>you dream.</span></h1>
-        <p class="hero-copy">
-          Thoughtful interiors and dependable construction, brought together to make your vision feel like home.
-        </p>
+        <p>Thoughtful interiors and dependable construction, brought together to make your vision feel like home.</p>
         <div class="hero-actions">
-          <a class="button" href="#contact">Let’s Discuss Your Project <span>↗</span></a>
-          <a class="button button-outline" href="#services">Explore Our Services</a>
+          <a class="btn" href="#contact">Let’s Discuss Your Project ↗</a>
+          <a class="btn btn-ghost" href="#services">Explore Our Services</a>
         </div>
-        <div class="hero-note"><strong>Dream Interiors &amp; Traders</strong> &nbsp;·&nbsp; Karimnagar, Telangana</div>
+        <div class="hero-note"><strong>Dream Interiors &amp; Traders</strong> · Karimnagar, Telangana</div>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container intro-grid">
-        <div class="intro-image-wrap">
-          <img class="intro-image"
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85"
-            alt="Bright, contemporary home interior">
-          <div class="floating-badge">
-            <strong>Your vision, thoughtfully built.</strong>
-            <span>Interior solutions, UPVC products and construction in one place.</span>
-          </div>
-        </div>
-        <div class="intro-copy">
+    <section class="section reveal" id="about">
+      <div class="container about">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85" alt="Contemporary interior inspiration" loading="lazy">
+        <div class="about-copy">
           <div class="eyebrow">About Dream Interiors</div>
           <h2>We make your dreams come true.</h2>
-          <p>
-            Dream Interiors &amp; Traders helps bring homes and spaces to life with interior solutions,
-            UPVC products and construction services. We work with you from the first conversation
-            through planning and execution.
-          </p>
-          <p>
-            Our goal is simple: understand what you need, recommend practical solutions and create
-            a space that feels right for you.
-          </p>
-          <ul class="check-list">
+          <p>Dream Interiors &amp; Traders helps bring homes and spaces to life with interior solutions, UPVC products and construction services. We work with you from the first conversation through planning and execution.</p>
+          <ul>
             <li>Interior design and furnishing solutions</li>
             <li>UPVC doors and windows</li>
             <li>Construction and project support</li>
           </ul>
-          <a class="button" href="#contact">Talk to Our Team <span>↗</span></a>
+          <a class="btn" href="#contact">Talk to Our Team ↗</a>
         </div>
       </div>
     </section>
 
-    <section class="section services-section" id="services">
+    <section class="section services-section reveal" id="services">
       <div class="container">
-        <div class="section-heading">
+        <div class="heading">
           <div class="eyebrow">What We Do</div>
           <h2>Complete solutions for your space.</h2>
           <p>From interior details to dependable building solutions, let’s plan a result that fits your needs and style.</p>
         </div>
-        <div class="services-grid">
-          <article class="service-card">
-            <div class="service-icon">⌂</div>
-            <h3>Interior Design</h3>
-            <p>Personalized ideas for beautiful, comfortable and functional interiors.</p>
-          </article>
-          <article class="service-card">
-            <div class="service-icon">▦</div>
-            <h3>Interior Materials</h3>
-            <p>Interior materials and finishing options to help bring your design together.</p>
-          </article>
-          <article class="service-card">
-            <div class="service-icon">▣</div>
-            <h3>UPVC Solutions</h3>
-            <p>UPVC doors and windows selected for a clean look and everyday use.</p>
-          </article>
-          <article class="service-card">
-            <div class="service-icon">⌂</div>
-            <h3>Construction</h3>
-            <p>Construction support to help turn your plans into a well-built space.</p>
-          </article>
+        <div class="services">
+          <article class="service"><div class="service-icon">⌂</div><h3>Interior Design</h3><p>Personalized ideas for beautiful, comfortable and functional interiors.</p></article>
+          <article class="service"><div class="service-icon">▦</div><h3>Interior Materials</h3><p>Interior materials and finishing options to help bring your design together.</p></article>
+          <article class="service"><div class="service-icon">▣</div><h3>UPVC Solutions</h3><p>UPVC doors and windows selected for a clean look and everyday use.</p></article>
+          <article class="service"><div class="service-icon">⌂</div><h3>Construction</h3><p>Construction support to help turn your plans into a well-built space.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="process">
+    <section class="section reveal" id="process">
       <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Our Process</div>
-          <h2>From first idea to finished space.</h2>
-          <p>A clear, collaborative process helps keep your project moving in the right direction.</p>
-        </div>
-        <div class="process-grid">
-          <article class="process-step">
-            <h3>Let’s Talk</h3>
-            <p>Tell us about your space, ideas, needs and budget.</p>
-          </article>
-          <article class="process-step">
-            <h3>Plan &amp; Select</h3>
-            <p>Discuss suitable designs, materials and project requirements.</p>
-          </article>
-          <article class="process-step">
-            <h3>Build &amp; Create</h3>
-            <p>Move forward with the agreed work and keep communication open.</p>
-          </article>
-          <article class="process-step">
-            <h3>Review Together</h3>
-            <p>Review the completed work and discuss the finishing details.</p>
-          </article>
+        <div class="heading"><div class="eyebrow">Our Process</div><h2>From first idea to finished space.</h2><p>A clear, collaborative process helps keep your project moving in the right direction.</p></div>
+        <div class="steps">
+          <article class="step"><b>01</b><h3>Let’s Talk</h3><p>Tell us about your space, ideas, needs and budget.</p></article>
+          <article class="step"><b>02</b><h3>Plan &amp; Select</h3><p>Discuss suitable designs, materials and project requirements.</p></article>
+          <article class="step"><b>03</b><h3>Build &amp; Create</h3><p>Move forward with the agreed work and keep communication open.</p></article>
+          <article class="step"><b>04</b><h3>Review Together</h3><p>Review the completed work and discuss the finishing details.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section projects-section" id="projects">
+    <section class="section projects-section reveal" id="projects">
       <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Project Inspiration</div>
-          <h2>Imagine what your space can become.</h2>
-          <p>Explore interior styles and ideas that can help shape your own project.</p>
+        <div class="heading"><div class="eyebrow">Project Inspiration</div><h2>Imagine what your space can become.</h2><p>Explore interior styles and ideas that can help shape your own project.</p></div>
+        <div class="projects">
+          <article class="project"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="Living room inspiration" loading="lazy"><div class="project-label"><small>Interior inspiration</small><h3>Warm Modern Living</h3></div></article>
+          <article class="project"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=85" alt="Modern home inspiration" loading="lazy"><div class="project-label"><small>Home inspiration</small><h3>Natural &amp; Refined</h3></div></article>
+          <article class="project"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=85" alt="Interior design inspiration" loading="lazy"><div class="project-label"><small>Interior inspiration</small><h3>Calm Contemporary</h3></div></article>
+          <article class="project"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85" alt="Modern home exterior inspiration" loading="lazy"><div class="project-label"><small>Construction inspiration</small><h3>Modern Home</h3></div></article>
+          <article class="project"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" alt="Bright interior inspiration" loading="lazy"><div class="project-label"><small>Interior inspiration</small><h3>Light &amp; Space</h3></div></article>
         </div>
-        <div class="projects-grid">
-          <article class="project-card">
-            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="Modern living room design inspiration" loading="lazy">
-            <div class="project-caption"><small>Interior inspiration</small><h3>Warm Modern Living</h3></div>
-          </article>
-          <article class="project-card">
-            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=85" alt="Contemporary home design inspiration" loading="lazy">
-            <div class="project-caption"><small>Home inspiration</small><h3>Natural &amp; Refined</h3></div>
-          </article>
-          <article class="project-card">
-            <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=85" alt="Elegant interior design inspiration" loading="lazy">
-            <div class="project-caption"><small>Interior inspiration</small><h3>Calm Contemporary</h3></div>
-          </article>
-          <article class="project-card">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85" alt="Modern home exterior inspiration" loading="lazy">
-            <div class="project-caption"><small>Construction inspiration</small><h3>Modern Home</h3></div>
-          </article>
-          <article class="project-card">
-            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" alt="Bright interior design inspiration" loading="lazy">
-            <div class="project-caption"><small>Interior inspiration</small><h3>Light &amp; Space</h3></div>
-          </article>
-        </div>
-        <p class="project-note">These images are for design inspiration only and are not representations of completed company projects.</p>
+        <p class="disclaimer">These images are for design inspiration only and are not representations of completed company projects.</p>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section reveal" id="contact">
       <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Contact Us</div>
-          <h2>Let’s start with your idea.</h2>
-          <p>Share a few details about your project. Our team will be happy to hear from you.</p>
-        </div>
+        <div class="heading"><div class="eyebrow">Contact Us</div><h2>Let’s start with your idea.</h2><p>Share a few details about your project. Our team will be happy to hear from you.</p></div>
         <div class="contact-grid">
-          <div class="contact-panel">
-            <h2>Get in touch</h2>
-            <p>Contact Dream Interiors &amp; Traders to discuss interiors, UPVC or construction.</p>
-            <div class="contact-item">
-              <span class="contact-icon">☎</span>
-              <div><b>Call us</b><a href="tel:9603219786">96032 19786</a></div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">✉</span>
-              <div><b>Email us</b><a href="mailto:dreaminteriorsgroup@gmail.com">dreaminteriorsgroup@gmail.com</a></div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">⌖</span>
-              <div><b>Visit our head office</b>Opp. PM Convention Hall,<br>Seetharam pur, Karimnagar – 505001</div>
-            </div>
-            <a class="button" href="https://wa.me/919603219786" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
+          <div class="contact-card">
+            <h2>Get in touch</h2><p>Contact Dream Interiors &amp; Traders to discuss interiors, UPVC or construction.</p>
+            <div class="contact-line"><b>Call us</b><a href="tel:9603219786">96032 19786</a></div>
+            <div class="contact-line"><b>Email us</b><a href="mailto:dreaminteriorsgroup@gmail.com">dreaminteriorsgroup@gmail.com</a></div>
+            <div class="contact-line"><b>Head office</b>Opp. PM Convention Hall,<br>Seetharampur, Karimnagar – 505001</div>
+            <a class="btn" href="https://wa.me/919603219786" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
           </div>
-
-          <form class="contact-form" id="contactForm">
-            <div class="field">
-              <label for="name">Your name</label>
-              <input id="name" name="name" type="text" placeholder="Enter your name" required>
-            </div>
-            <div class="field">
-              <label for="phone">Phone number</label>
-              <input id="phone" name="phone" type="tel" placeholder="Enter your phone number" required>
-            </div>
-            <div class="field full">
-              <label for="service">What are you interested in?</label>
-              <select id="service" name="service">
-                <option>Interior Design</option>
-                <option>Interior Materials</option>
-                <option>UPVC Doors &amp; Windows</option>
-                <option>Construction</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="field full">
-              <label for="message">Tell us about your project</label>
-              <textarea id="message" name="message" placeholder="A few details about your project..."></textarea>
-            </div>
-            <button class="button" type="submit">Send Enquiry <span>↗</span></button>
+          <form class="form" id="contactForm">
+            <div class="field"><label for="name">Your name</label><input id="name" name="name" required placeholder="Enter your name"></div>
+            <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" required placeholder="Enter your phone number"></div>
+            <div class="field full"><label for="service">What are you interested in?</label><select id="service" name="service"><option>Interior Design</option><option>Interior Materials</option><option>UPVC Doors &amp; Windows</option><option>Construction</option><option>Other</option></select></div>
+            <div class="field full"><label for="message">Tell us about your project</label><textarea id="message" name="message" placeholder="A few details about your project..."></textarea></div>
+            <button class="btn" type="submit">Send Enquiry ↗</button>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-inner">
-      <span><strong>Dream Interiors &amp; Traders</strong> · We Make Your Dreams Come True</span>
-      <span>© <span id="year"></span> Dream Interiors &amp; Traders. All rights reserved.</span>
-    </div>
-  </footer>
+  <footer><div class="footer-inner"><span><strong>Dream Interiors &amp; Traders</strong> · We Make Your Dreams Come True</span><span>© <span id="year"></span> Dream Interiors &amp; Traders</span></div></footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    const menuButton = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
+    // Interactive 3D room scene (Three.js)
+    (() => {
+      const canvas = document.querySelector("#room3d");
+      if (!window.THREE || !canvas) return;
 
-    menuButton.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", isOpen);
-      menuButton.textContent = isOpen ? "×" : "☰";
-    });
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
+      camera.position.set(8, 4.1, 10);
+      camera.lookAt(1.8, 0, 0);
 
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.textContent = "☰";
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+
+      scene.add(new THREE.HemisphereLight(0xe7e0ff, 0x4b3828, 1.5));
+
+      const warmLight = new THREE.PointLight(0xffc66d, 35, 13);
+      warmLight.position.set(2.5, 3.8, 0.2);
+      warmLight.castShadow = true;
+      scene.add(warmLight);
+
+      const fill = new THREE.DirectionalLight(0xffffff, 2.4);
+      fill.position.set(4, 7, 5);
+      fill.castShadow = true;
+      fill.shadow.mapSize.set(1024, 1024);
+      scene.add(fill);
+
+      const room = new THREE.Group();
+      scene.add(room);
+
+      const mat = (color, roughness = 0.75, metalness = 0) =>
+        new THREE.MeshStandardMaterial({ color, roughness, metalness });
+
+      const floorMat = mat(0x9d8873);
+      const wallMat = mat(0xe8dfd2);
+      const trimMat = mat(0x6d4e39);
+      const sofaMat = mat(0x9b7354);
+      const cushionMat = mat(0xd4b998);
+      const goldMat = mat(0xc78b26, 0.3, 0.65);
+
+      function box(w, h, d, material, x, y, z, parent = room) {
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), material);
+        mesh.position.set(x, y, z);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        parent.add(mesh);
+        return mesh;
+      }
+
+      // Room shell
+      box(10, 0.18, 8, floorMat, 2, -1.12, 0);
+      box(10, 5.2, 0.18, wallMat, 2, 1.48, -4);
+      box(0.18, 5.2, 8, wallMat, -3, 1.48, 0);
+
+      // Decorative wall panels
+      for (let i = 0; i < 4; i++) {
+        box(0.035, 3.4, 0.035, trimMat, -1.6 + i * 1.25, 1.45, -3.88);
+      }
+
+      // Window and frame
+      box(2.35, 2.45, 0.07, mat(0x745b48), 3.65, 1.65, -3.84);
+      const glass = new THREE.MeshStandardMaterial({
+        color: 0x9fc5d5, roughness: 0.22, metalness: 0.12,
+        emissive: 0x233e52, emissiveIntensity: 0.25
       });
+      box(2.15, 2.25, 0.05, glass, 3.65, 1.65, -3.77);
+      box(0.045, 2.28, 0.04, mat(0xf1e8dc), 3.65, 1.65, -3.72);
+      box(2.18, 0.045, 0.04, mat(0xf1e8dc), 3.65, 1.65, -3.72);
+
+      // Rug
+      const rug = new THREE.Mesh(new THREE.BoxGeometry(4.7, 0.035, 3.1), mat(0xc7ad8e));
+      rug.position.set(1.7, -1.015, 0.35);
+      rug.receiveShadow = true;
+      room.add(rug);
+
+      // Sofa
+      const sofa = new THREE.Group();
+      room.add(sofa);
+      box(3.6, 0.58, 1.15, sofaMat, 1.35, -0.68, 0.65, sofa);
+      box(3.6, 1.2, 0.35, sofaMat, 1.35, -0.1, 1.12, sofa);
+      box(0.35, 0.92, 1.25, sofaMat, -0.48, -0.42, 0.63, sofa);
+      box(0.35, 0.92, 1.25, sofaMat, 3.18, -0.42, 0.63, sofa);
+      for (let i = 0; i < 3; i++) {
+        const pillow = box(0.86, 0.72, 0.22, cushionMat, 0.15 + i * 1.18, -0.06, 0.88, sofa);
+        pillow.rotation.z = -0.07;
+      }
+      // Sofa legs
+      for (const x of [-0.25, 2.95]) for (const z of [0.25, 1.0]) {
+        box(0.09, 0.34, 0.09, trimMat, x, -0.96, z, sofa);
+      }
+
+      // Coffee table
+      box(1.85, 0.13, 1.05, mat(0x805637, 0.35), 1.55, -0.44, -1.05);
+      for (const x of [0.82, 2.28]) for (const z of [-1.4, -0.72]) {
+        box(0.075, 0.62, 0.075, goldMat, x, -0.78, z);
+      }
+      // Table decor
+      const vase = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.2, 0.38, 24), mat(0xe9dfd1, 0.25));
+      vase.position.set(1.25, -0.18, -1.05);
+      vase.castShadow = true;
+      room.add(vase);
+
+      // Side table
+      const sideTop = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.12, 32), mat(0x684a35));
+      sideTop.position.set(4.15, -0.48, 0.45);
+      sideTop.castShadow = true;
+      room.add(sideTop);
+      const sideLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.12, 0.85, 16), goldMat);
+      sideLeg.position.set(4.15, -0.9, 0.45);
+      room.add(sideLeg);
+
+      // Pendant light
+      const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1.2, 10), mat(0x30253a));
+      cord.position.set(1.7, 3.35, 0.2);
+      room.add(cord);
+      const shade = new THREE.Mesh(new THREE.ConeGeometry(0.48, 0.5, 32, 1, true), goldMat);
+      shade.position.set(1.7, 2.65, 0.2);
+      shade.rotation.x = Math.PI;
+      room.add(shade);
+      const bulb = new THREE.PointLight(0xffbd56, 24, 5);
+      bulb.position.set(1.7, 2.45, 0.2);
+      room.add(bulb);
+
+      // Indoor plant: pot, stems and leaves
+      const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.25, 0.62, 24), mat(0x76523e));
+      pot.position.set(-1.6, -0.78, 0.1);
+      pot.castShadow = true;
+      room.add(pot);
+      const leafMat = mat(0x496747);
+      for (let i = 0; i < 9; i++) {
+        const angle = i * 2.4;
+        const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.17, 12, 10), leafMat);
+        leaf.scale.set(0.65, 2.2, 0.65);
+        leaf.position.set(-1.6 + Math.cos(angle) * 0.32, -0.05 + (i % 3) * 0.25, 0.1 + Math.sin(angle) * 0.32);
+        leaf.rotation.z = Math.cos(angle) * 0.55;
+        leaf.rotation.x = Math.sin(angle) * 0.45;
+        leaf.castShadow = true;
+        room.add(leaf);
+      }
+
+      // Floating gold accent rings
+      const ringMat = new THREE.MeshStandardMaterial({ color: 0xffc34d, metalness: 0.7, roughness: 0.25 });
+      const rings = [];
+      for (let i = 0; i < 3; i++) {
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(0.16 + i * 0.08, 0.012, 8, 40), ringMat);
+        ring.position.set(4.3 + i * 0.18, 2.7 + i * 0.38, -0.3);
+        ring.rotation.set(0.5 + i * 0.4, 0.5, 0);
+        room.add(ring);
+        rings.push(ring);
+      }
+
+      const pointer = { x: 0, y: 0 };
+      window.addEventListener("pointermove", event => {
+        pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
+        pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
+      }, { passive: true });
+
+      function resize() {
+        const w = canvas.clientWidth || window.innerWidth;
+        const h = canvas.clientHeight || 690;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener("resize", resize);
+      resize();
+
+      const clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        // Gentle camera parallax follows the visitor's pointer.
+        camera.position.x += ((8 + pointer.x * 0.42) - camera.position.x) * 0.025;
+        camera.position.y += ((4.1 - pointer.y * 0.22) - camera.position.y) * 0.025;
+        camera.lookAt(1.8 + pointer.x * 0.12, 0, 0);
+
+        // Subtle living motion in the 3D lighting and floating accents.
+        warmLight.intensity = 34 + Math.sin(t * 1.4) * 2.5;
+        rings.forEach((ring, i) => {
+          ring.position.y += Math.sin(t * 1.2 + i) * 0.0008;
+          ring.rotation.y += 0.002 + i * 0.0004;
+        });
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+
+    // Mobile navigation
+    const menuButton = document.querySelector(".menu");
+    const navLinks = document.querySelector(".nav-links");
+    menuButton.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", open);
+      menuButton.textContent = open ? "×" : "☰";
     });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.textContent = "☰";
+    }));
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Reveal sections as they enter the screen
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(section => observer.observe(section));
 
+    // Enquiry form opens an email with the visitor's details
     document.getElementById("contactForm").addEventListener("submit", function(event) {
       event.preventDefault();
       const data = new FormData(this);
       const subject = encodeURIComponent("Website enquiry — " + data.get("service"));
       const body = encodeURIComponent(
-        "Name: " + data.get("name") + "\\n" +
-        "Phone: " + data.get("phone") + "\\n" +
-        "Service: " + data.get("service") + "\\n\\n" +
+        "Name: " + data.get("name") + "\n" +
+        "Phone: " + data.get("phone") + "\n" +
+        "Service: " + data.get("service") + "\n\n" +
         "Project details: " + (data.get("message") || "Not provided")
       );
       window.location.href = "mailto:dreaminteriorsgroup@gmail.com?subject=" + subject + "&body=" + body;
     });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
